@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('patients', function (Blueprint $table) {
             $table->unsignedBigInteger('id', false)->primary();
+            $table->string('name');
             $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });
