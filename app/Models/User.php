@@ -27,8 +27,15 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'phone_number',
+        'address',
+        'role_id',
+        'id',
         'password',
     ];
+
+    protected $table = 'users';
+    protected $primaryKey = 'id';
 
     /**
      * The attributes that should be hidden for serialization.
@@ -62,5 +69,13 @@ class User extends Authenticatable
 
     public function role() {
         return $this->belongsTo(Role::class, 'role_id');
+    }
+
+    public function patients() {
+        return $this->hasMany(Patient::class, 'user_id', 'id');
+    }
+
+    public function dentist() {
+        return $this->hasOne(Dentist::class);
     }
 }

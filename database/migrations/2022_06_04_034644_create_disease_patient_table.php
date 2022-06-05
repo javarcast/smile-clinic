@@ -13,10 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('patient_medicaments', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('patient_id')->constrained('patients');
-            $table->foreignId('medicament_id')->constrained('medicaments');
+        Schema::create('disease_patient', function (Blueprint $table) {
+            $table->foreignId('patient_id')->constrained('patients')->references('id')->onDelete('cascade')->onUpdate('cascade');;
+            $table->foreignId('disease_id')->constrained('diseases')->references('id')->onDelete('cascade')->onUpdate('cascade');;
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('patient_medicaments');
+        Schema::dropIfExists('patient_diseases');
     }
 };

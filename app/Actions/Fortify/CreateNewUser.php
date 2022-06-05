@@ -27,7 +27,6 @@ class CreateNewUser implements CreatesNewUsers
             'id' => ['required', 'numeric', 'unique:users'],
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'role_id'=>['required', 'numeric'],
             'address' => ['required', 'string'],
             'phone_number' => ['required', 'string'],
             'password' => $this->passwordRules(),
@@ -36,7 +35,7 @@ class CreateNewUser implements CreatesNewUsers
 
         DB::beginTransaction();
         try {
-            $role = Role::findOrFail($input['role_id']);
+            $role = Role::findOrFail(3);
             $user = new User();
             $user->id = $input['id'];
             $user->name = $input['name'];
