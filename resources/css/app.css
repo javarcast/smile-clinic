@@ -1,3 +1,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.form-image:before{
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    @apply bg-sc-over;
+}
+.btn-primary{
+    padding:0.6rem 1.2rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    @aply font-bold;
+}
+.btn-blck{
+    @apply bg-sc-black text-sc-white;
+}

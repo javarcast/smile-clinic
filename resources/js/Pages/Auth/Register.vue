@@ -16,12 +16,7 @@ const form = useForm({
     address: '',
     password: '',
     password_confirmation: '',
-    role_id: -1,
     terms: false,
-});
-
-const  props = defineProps({
-    roles: Array
 });
 
 const getIDNumber = () => {
@@ -132,18 +127,6 @@ const  submit = async () => {
                     required
                     autocomplete="new-password"
                 />
-            </div>
-
-            <div class="w-full">
-                <JetLabel for="role_id" value="Role" />
-                <select
-                class="border-gray-300 w-full focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
-                 name="role_id" id="role_id" v-model="form.role_id">
-                <option value="">Seleccione un rol</option>
-                    <option v-for="role in roles" :key="role.id" :value="role.id">
-                        {{role.name}}
-                    </option>
-                </select>
             </div>
 
             <div v-if="$page.props.jetstream.hasTermsAndPrivacyPolicyFeature" class="mt-4">
