@@ -1,5 +1,5 @@
 <script setup>
-import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
+import { Head, Link, useForm,  } from '@inertiajs/inertia-vue3';
 import JetAuthenticationCard from '@/Jetstream/AuthenticationCard.vue';
 import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo.vue';
 import JetButton from '@/Jetstream/Button.vue';
@@ -9,14 +9,28 @@ import JetLabel from '@/Jetstream/Label.vue';
 import JetValidationErrors from '@/Jetstream/ValidationErrors.vue';
 
 const form = useForm({
+    id: '',
     name: '',
     email: '',
+    phone_number: '',
+    address: '',
     password: '',
     password_confirmation: '',
+    role_id: -1,
     terms: false,
 });
 
-const submit = () => {
+const  props = defineProps({
+    roles: Array
+});
+
+const getIDNumber = () => {
+    form.id = parseInt(form.id);
+}
+
+const  submit = async () => {
+    getIDNumber();
+
     form.post(route('register'), {
         onFinish: () => form.reset('password', 'password_confirmation'),
     });
@@ -35,6 +49,18 @@ const submit = () => {
 
         <form @submit.prevent="submit">
             <div>
+                <JetLabel for="id" value="DNI" />
+                <JetInput
+                    id="id"
+                    v-model="form.id"
+                    type="text"
+                    class="mt-1 block w-full"
+                    required
+                    autofocus
+                    autocomplete="DNI"
+                />
+            </div>
+            <div>
                 <JetLabel for="name" value="Name" />
                 <JetInput
                     id="name"
@@ -43,7 +69,7 @@ const submit = () => {
                     class="mt-1 block w-full"
                     required
                     autofocus
-                    autocomplete="name"
+                    autocomplete="Name"
                 />
             </div>
 
@@ -55,6 +81,32 @@ const submit = () => {
                     type="email"
                     class="mt-1 block w-full"
                     required
+                />
+            </div>
+
+            <div>
+                <JetLabel for="phone_number" value="Phone Number" />
+                <JetInput
+                    id="phone_number"
+                    v-model="form.phone_number"
+                    type="text"
+                    class="mt-1 block w-full"
+                    required
+                    autofocus
+                    autocomplete="phone number"
+                />
+            </div>
+
+            <div>
+                <JetLabel for="address" value="Address" />
+                <JetInput
+                    id="address"
+                    v-model="form.address"
+                    type="text"
+                    class="mt-1 block w-full"
+                    required
+                    autofocus
+                    autocomplete="address"
                 />
             </div>
 
@@ -80,6 +132,18 @@ const submit = () => {
                     required
                     autocomplete="new-password"
                 />
+            </div>
+
+            <div class="w-full">
+                <JetLabel for="role_id" value="Role" />
+                <select
+                class="border-gray-300 w-full focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
+                 name="role_id" id="role_id" v-model="form.role_id">
+                <option value="">Seleccione un rol</option>
+                    <option v-for="role in roles" :key="role.id" :value="role.id">
+                        {{role.name}}
+                    </option>
+                </select>
             </div>
 
             <div v-if="$page.props.jetstream.hasTermsAndPrivacyPolicyFeature" class="mt-4">
