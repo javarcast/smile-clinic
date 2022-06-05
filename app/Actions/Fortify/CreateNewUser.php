@@ -50,7 +50,7 @@ class CreateNewUser implements CreatesNewUsers
             return $user;
         } catch( \Exception $e) {
             DB::rollBack();
-            return json_encode( array('status' => 400, $e));
+            return $e;
         }
 
     }
