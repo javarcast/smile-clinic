@@ -13,11 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('appointment_treatments', function (Blueprint $table) {
+        Schema::create('appointment_treatment', function (Blueprint $table) {
             $table->double('price');
             $table->longText('observation');
-            $table->foreignId('appointment_id')->constrained('appointments');
-            $table->foreignId('treatment_id')->constrained('treatments');
+            $table->foreignId('appointment_id')->constrained('appointments')
+                ->references('id')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('treatment_id')->constrained('treatments')
+                ->references('id')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
