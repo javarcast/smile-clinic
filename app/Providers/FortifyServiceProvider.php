@@ -11,6 +11,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Fortify\Fortify;
+use Inertia\Inertia;
+
+use App\Models\Role;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -31,6 +34,12 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
+        Fortify::registerView(function () {
+            $roles = Role::all();
+            return Inertia::render('Auth/Register', compact('roles'));
+        });
+
         Fortify::createUsersUsing(CreateNewUser::class);
         Fortify::updateUserProfileInformationUsing(UpdateUserProfileInformation::class);
         Fortify::updateUserPasswordsUsing(UpdateUserPassword::class);
