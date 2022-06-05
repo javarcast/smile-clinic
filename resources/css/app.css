@@ -18,5 +18,8 @@
     @aply font-bold;
 }
 .btn-blck{
-    @apply bg-sc-black text-sc-white;
+    @apply bg-sc-blue text-sc-white;
+}
+.go-back-to{
+    width: 30px;
 }

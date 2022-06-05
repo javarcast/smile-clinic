@@ -15,7 +15,7 @@ module.exports = {
                 sans: ['Quicksand',  ...defaultTheme.fontFamily.sans],
             },
             colors: {
-                'sc-blue': '#04245E',
+                'sc-blue': '#000a1b',
                 'sc-grey': '#5B5B5B',
                 'sc-black': '#000000',
                 'sc-white': '#ffffff',
