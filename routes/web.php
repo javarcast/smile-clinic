@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\PatientsController;
+use App\Http\Controllers\UserInfoController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -23,6 +25,10 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
+
+
+Route::resource('usuarios', UserInfoController::class)->middleware('auth:sanctum');
+Route::resource('pacientes', PatientsController::class)->middleware('auth:sanctum');
 
 Route::middleware([
     'auth:sanctum',

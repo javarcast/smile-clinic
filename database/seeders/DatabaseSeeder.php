@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\DiseaseType;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -22,5 +23,7 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([RoleSeeder::class]);
+        $this->call([StateSeeder::class]);
+        $this->call([DiseaseTypeSeeder::class]);
     }
 }
