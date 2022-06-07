@@ -24,7 +24,7 @@ class UserInfoController extends Controller
     public function index()
     {
         $users = User::all();
-        foreach ($users as $key => $user) {
+        foreach ($users as $key => &$user) {
             $user['role'] = $user->role();
         }
 
