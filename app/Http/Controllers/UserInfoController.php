@@ -97,10 +97,10 @@ class UserInfoController extends Controller
      */
     public function show($id)
     {
-        $user = User::findOrFail($id);
-        $user['role'] = $user->role();
+        $userShow = User::findOrFail($id);
+        $userShow['role'] = $userShow->role();
 
-        return Inertia::render('Users/Show', compact('user'));
+        return Inertia::render('Users/Show', compact('userShow'));
     }
 
     /**
