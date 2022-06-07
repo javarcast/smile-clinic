@@ -8,14 +8,16 @@ use App\Models\User;
 use Inertia\Inertia;
 use App\Models\Role;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Laravel\Jetstream\Jetstream;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
+use Laravel\Fortify\Rules\Password;
 
 class UserInfoController extends Controller
 {
+
+    use PasswordValidationRules;
     /**
      * Display a listing of the resource.
      *
@@ -51,7 +53,8 @@ class UserInfoController extends Controller
      */
     public function store(Request $request)
     {
-        Validator::make($request, [
+
+        Validator::make($request->all(), [
             'id' => ['required', 'numeric', 'unique:users'],
             'role_id' => ['required', 'numeric'],
             'name' => ['required', 'string', 'max:255'],
@@ -59,9 +62,7 @@ class UserInfoController extends Controller
             'address' => ['required', 'string'],
             'phone_number' => ['required', 'string'],
             'password' => $this->passwordRules(),
-            'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
         ])->validate();
-
 
         DB::beginTransaction();
         try {
@@ -188,5 +189,19 @@ class UserInfoController extends Controller
         $message = "Usuario ".$aux->name." ha sido eliminado";
 
         return redirect()->route('usuarios.index')->with('status', $message);
+    }
+}
+
+
+trait PasswordValidationRules
+{
+    /**
+     * Get the validation rules used to validate passwords.
+     *
+     * @return array
+     */
+    protected function passwordRules()
+    {
+        return ['required', 'string', new Password, 'confirmed'];
     }
 }

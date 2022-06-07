@@ -19,10 +19,16 @@
         role_id: -1,
     });
 
+    const getIDNumber = () => {
+    form.id = parseInt(form.id);
+}
+
     const props = defineProps(["roles"]);
-  
-    
+
+
     const  submit =  () => {
+
+        getIDNumber();
          form.post(route('usuarios.store'), {
             onFinish: () => form.reset('password', 'password_confirmation'),
         });
@@ -33,8 +39,8 @@
   <DashboardLayout>
     <div class="md:col-span-4 mt-1">
       <div class="shadow bg-white md:rounded-md p-4">
-        
-      
+
+
         <form @submit.prevent="submit">
           <div>
             <label class="block font-medium text-sm text-gray-700">DNI</label>
@@ -52,19 +58,19 @@
               >Nombre</label
             >
             <input
-             
+
               id="name"
               type="text"
               v-model="form.name"
               required
               class="form-input w-full rounded-md shadow-sm"
-           
+
             />
           </div>
           <div>
             <label class="block font-medium text-sm text-gray-700">Email</label>
             <input
-              
+
               type="email"
               id="email"
               v-model="form.email"
@@ -121,7 +127,7 @@
             />
           </div>
           <div>
-             
+
             <label class="block text-left w-full">
               <span class="text-gray-700">Rol</span>
               <select
@@ -149,7 +155,7 @@
                 </JetLabel>
             </div>
 
-        
+
 
          <button
               class="
