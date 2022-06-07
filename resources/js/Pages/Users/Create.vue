@@ -33,8 +33,7 @@
   <DashboardLayout>
     <div class="md:col-span-4 mt-1">
       <div class="shadow bg-white md:rounded-md p-4">
-        
-      
+       
         <form @submit.prevent="submit">
           <div>
             <label class="block font-medium text-sm text-gray-700">DNI</label>
@@ -137,20 +136,7 @@
             </label>
           </div>
 
-           <div v-if="$page.props.jetstream.hasTermsAndPrivacyPolicyFeature" class="mt-4">
-                <JetLabel for="terms">
-                    <div class="flex items-center">
-                        <JetCheckbox id="terms" v-model:checked="form.terms" name="terms" />
-
-                        <div class="ml-2">
-                            I agree to the <a target="_blank" :href="route('terms.show')" class="underline text-sm text-gray-600 hover:text-gray-900">Terms of Service</a> and <a target="_blank" :href="route('policy.show')" class="underline text-sm text-gray-600 hover:text-gray-900">Privacy Policy</a>
-                        </div>
-                    </div>
-                </JetLabel>
-            </div>
-
-        
-
+          
          <button
               class="
                 bg-blue-500
