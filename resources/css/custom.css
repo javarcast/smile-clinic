@@ -1,0 +1,60 @@
+#body-login,.body-container-left{
+    background-image: url("../../public/images/smileGirl.jpg");
+    background-position: center;
+    object-fit: contain;
+    background-size: cover;
+    height: 100vh;
+}
+#body-container{
+    background-color: white;
+}
+.title-register{
+    font-size: 23px;
+    text-align: center;
+    width: auto;
+    color: black;
+    font-weight: 600;
+}
+.registro-container div{
+    margin-top: 14px;
+}
+.step-line{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 76px;
+    margin-bottom: 105px;
+   
+}
+.step{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #e3e3ebd2;
+    color: #535151;
+    text-align: center;
+    padding: 3px 10px;
+    font-weight: bold;
+}
+.step-on{
+    background-color: #1c1ca3d2;
+    color: white;
+}
+
+.line{
+    width: 100%;
+    height: 3px;
+    background-color: #e3e3ebd2;
+    color: white;   
+}
+@media (max-width:767px) {
+    .step-line{
+        margin-top: 0px;
+    }
+    #body-container >div:nth-child(1){
+        width: 100%;
+    }
+    #body-container >div:nth-child(2){
+        display: none;
+    }
+}
