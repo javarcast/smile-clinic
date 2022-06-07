@@ -14,12 +14,22 @@
     padding:0.6rem 1.2rem;
     border-radius: 0.25rem;
     font-size: 0.875rem;
-    font-weight: 500;
-    @aply font-bold;
+    @apply font-bold;
 }
 .btn-blck{
     @apply bg-sc-blue text-sc-white;
 }
 .go-back-to{
     width: 30px;
+}
+.logo-dashboard .icon-logo{
+    width: 27px;
+    object-fit: contain;
+}
+.logo-dashboard .text-logo{
+    width: 113px;
+    object-fit: contain;
+}
+.icon-sidebar{
+    width: 26px;
 }

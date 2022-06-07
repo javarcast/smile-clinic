@@ -40,7 +40,7 @@ const submit = () => {
 
           <div class="flex-1">
             <div class="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
-              <!-- Logo -->
+              <!-- button go back to  -->
                 <Link  href="/" >
                     <img class="go-back-to" src="../../../images/go-back-to.png" alt="">
                 </Link>
@@ -48,7 +48,7 @@ const submit = () => {
           </div>          
 
           <div class="max-w-sm mx-auto px-4 py-8">
-           
+            <!-- Logo -->
             <JetAuthenticationCardLogo />
             
             <h1 class="text-3xl text-slate-800 font-bold mb-6 text-center sc-blue">Bienvenido a Smile<span>Clinic</span></h1>
