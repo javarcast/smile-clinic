@@ -1,4 +1,5 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
+const plugin = require('tailwindcss/plugin');
 
 module.exports = {
     content: [
@@ -15,7 +16,7 @@ module.exports = {
                 sans: ['Quicksand',  ...defaultTheme.fontFamily.sans],
             },
             colors: {
-                'sc-blue': '#04245E',
+                'sc-blue': '#00050e',
                 'sc-grey': '#5B5B5B',
                 'sc-black': '#000000',
                 'sc-white': '#ffffff',
@@ -25,5 +26,13 @@ module.exports = {
         
     },
 
-    plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
+    plugins: [
+        require('@tailwindcss/forms'), 
+        require('@tailwindcss/typography'),
+        plugin(({ addVariant, e }) => {
+            addVariant('sidebar-expanded', ({ modifySelectors, separator }) => {
+              modifySelectors(({ className }) => `.sidebar-expanded .${e(`sidebar-expanded${separator}${className}`)}`);
+            });
+          }),
+    ],
 };
