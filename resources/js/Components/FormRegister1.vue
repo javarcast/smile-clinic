@@ -33,7 +33,7 @@
             </div>
             <div>
                 <jet-label for="address" value="Direccion" />
-                <jet-input id="address" type="number" class="mt-1 block w-full" v-model="form.address" required autofocus
+                <jet-input id="address" type="text" class="mt-1 block w-full" v-model="form.address" required autofocus
                     autocomplete="address" />
             </div>
 
@@ -50,7 +50,7 @@
         <div class="container2" v-show="flag == 1">
             <div>
                 <jet-label for="email" value="Email" />
-                <jet-input id="email" type="text" class="mt-1 block w-full" v-model="form.email" required autofocus
+                <jet-input id="email" type="email" class="mt-1 block w-full" v-model="form.email" required autofocus
                     autocomplete="email" />
             </div>
             <div class="mt-4">
@@ -126,7 +126,7 @@ export default defineComponent({
             })
         },
         steps(value) {
-            if (this.form.name !== "" && this.form.lastName !== "" && this.form.dni !== "") {
+            if (this.form.name !== "" && this.form.lastName !== "" && this.form.dni !== "" && this.form.address!="") {
                 this.flag += value;
             }
         }
