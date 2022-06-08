@@ -17,7 +17,7 @@ watch(q, () => {
   <DashboardLayout>
     <div class="md:col-span-4 mt-1">
       <div class="flex justify-between">
-        <h2 class="text-2xl md:text-3xl text-slate-800 font-bold">Usuarios</h2>
+        <h2 class="text-2xl md:text-3xl text-slate-800 font-bold">Pacientes</h2>
         <div class="flex">
           <input
             type="text"
@@ -30,11 +30,11 @@ watch(q, () => {
             :href="route('pacientes.create')"
             class="btn-primary btn-black"
             >
-              <i class="far fa-user mr-2"></i> Crear Usuario
+              <i class="far fa-user mr-2"></i> Crear Paciente
             </Link>
         </div>
       </div>
-      
+
       <div>
         <hr class="my-6" />
         <div class="flex flex-col justify-center mt-4">

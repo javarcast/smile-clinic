@@ -2,6 +2,7 @@
   <table class="bg-white shadow-lg rounded-sm border border-slate-200 relative">
     <thead class="text-xs font-semibold uppercase text-slate-500 bg-slate-50 border-t border-b border-slate-200">
         <tr >
+            <th class="px-2 first:pl-5 last:pr-5 py-4 whitespace-nowrap text-left font-semibold">DNI</th>
             <th class="px-2 first:pl-5 last:pr-5 py-4 whitespace-nowrap text-left font-semibold" >Nombre</th>
             <th class="px-2 first:pl-5 last:pr-5 py-4 whitespace-nowrap text-left font-semibold">Email</th>
             <th class="px-2 first:pl-5 last:pr-5 py-4 whitespace-nowrap text-left font-semibold">Nro. Telefonico</th>
@@ -10,7 +11,10 @@
     </thead>
     <tbody>
 
-    <tr v-for="user in props.users" :key="user.id" class="border-t border-b border-slate-200">
+    <tr v-for="user in props.users.data" :key="user.id" class="border-t border-b border-slate-200">
+      <td class="px-2 first:pl-5 last:pr-5 py-4 whitespace-nowrap text-left">
+        {{ user.id }}
+      </td>
       <td class="px-2 first:pl-5 last:pr-5 py-4 whitespace-nowrap text-left">
         {{ user.name }}
       </td>
@@ -39,7 +43,7 @@ import { defineProps } from "vue";
 import { Head, Link } from "@inertiajs/inertia-vue3";
 import { Inertia} from "@inertiajs/inertia";
 
-  
+
 const props = defineProps(['users'])
 
 const destroy = (id) => {

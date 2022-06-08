@@ -2,15 +2,16 @@
 import { ref, provide, watch } from "vue";
 import DashboardLayout from "@/Layouts/DashboardLayout.vue";
 import { Link } from "@inertiajs/inertia-vue3";
+import { Inertia } from '@inertiajs/inertia';
 import UserTableList from "@/Components/UserTableList.vue";
 
 const title = ref("Usuarios");
 provide("title", title);
 
 const props = defineProps(["users"]);
-const q = "";
+const q = ref('');
 watch(q, () => {
-  this.$inertia.replace(this.route("usuarios.index", { q: value }));
+  Inertia.replace(route("usuarios.index", { q: q.value }));
 });
 </script>
 
@@ -35,7 +36,7 @@ watch(q, () => {
             </Link>
         </div>
       </div>
-      
+
       <div>
         <hr class="my-6" />
         <div class="flex flex-col justify-center mt-4">
