@@ -22,15 +22,15 @@
           {{ treatment.description }}
         </td>
         <td class="px-4  hidden md-table-cell border py-2 text-center">
-          {{ treatment.price }}
+          {{ formatCurrency(treatment.price) }}
         </td>
         <td class="px-4 py-2 border text-center">
           <Link :href="route('tratamientos.show', treatment.id)"><i class="far fa-eye text-green-600"></i> </Link>
         </td>
-        <td v-if="$page.props.user.rol_id === 1" class="px-4 py-2 border">
+        <td  class="px-4 py-2 border">
           <Link :href="route('tratamientos.edit', treatment.id)"><i class="fas fa-edit text-blue-600"></i> </Link>
         </td>
-        <td v-if="$page.props.user.rol_id === 1" class="px-4 py-2 border">
+        <td  class="px-4 py-2 border">
           <a href="#" @click.prevent="destroy(treatment.id)"><i class="fas fa-trash-alt text-red-600"></i></a>
         </td>
       </tr>
@@ -50,6 +50,9 @@ export default defineComponent({
     treatments: Object
   },
   methods: {
+    formatCurrency(price) {
+        return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', currencyDisplay: 'narrowSymbol'}).format(price);
+    }
     /*destroy(id){
       if(confirm('¿Desea ?')){
         this.$inertia.delete(this.route('tratamiento.destroy',id));

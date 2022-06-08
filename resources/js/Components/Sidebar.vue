@@ -13,8 +13,8 @@
       <div class="flex justify-between mb-10 pr-3 sm:px-2 truncate">
         <!-- Logo -->
           <Link :href="'/'" class="flex logo-dashboard">
-            <img src="../../images/logo3.png" alt="icon logo" class="icon-logo">
-            <img src="../../images/logo.png" alt="text logo" class="text-logo lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+            <img src="../../../public/images/logo3.png" alt="icon logo" class="icon-logo">
+            <img src="../../../public/images/logo.png" alt="text logo" class="text-logo lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
         </Link>
       </div>
 
@@ -23,27 +23,27 @@
         <!-- Pages group -->
         <div>
           <ul class="m-0">
-            <li class="flex justify-between pr-3 sm:px-2 mt-6 mb-6 truncate">
+            <li v-if="$page.props.user.role_id===1" class="flex justify-between pr-3 sm:px-2 mt-6 mb-6 truncate">
               <Link :href="route('usuarios.index')" class="flex items-end sidebar-link">
-                <img src="../../images/users.png" alt="icon users" class="icon-sidebar">
+                <img src="../../../public/images/users.png" alt="icon users" class="icon-sidebar">
                 <span class="text-sm text-sc-white font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Usuarios</span>
               </Link>
             </li>
             <li class="flex justify-between pr-3 sm:px-2 mt-6 mb-6 truncate">
-              <Link :href="'/'" class="flex items-end">
-                <img src="../../images/pacientes.png" alt="icon users" class="icon-sidebar">
+              <Link :href="route('pacientes.index')" class="flex items-end">
+                <img src="../../../public/images/pacientes.png" alt="icon users" class="icon-sidebar">
                 <span class="text-sm text-sc-white font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Pacientes</span>
               </Link>
             </li>
-            <li class="flex justify-between pr-3 sm:px-2 mt-6 mb-6 truncate" >
+            <li v-if="$page.props.user.role_id===1" class="flex justify-between pr-3 sm:px-2 mt-6 mb-6 truncate" >
               <Link :href="route('tratamientos.index')" class="flex  items-end">
-                <img src="../../images/tratamientos.png" alt="icon users" class="icon-sidebar">
+                <img src="../../../public/images/tratamientos.png" alt="icon users" class="icon-sidebar">
                 <span class="text-sm text-sc-white font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Tratamientos</span>
               </Link>
             </li>
-            <li class="flex justify-between pr-3 sm:px-2 mt-6 mb-6 truncate">
+            <li v-if="$page.props.user.role_id===1" class="flex justify-between pr-3 sm:px-2 mt-6 mb-6 truncate">
               <Link :href="'/'" class="flex  items-end">
-                <img src="../../images/cita-medica.png" alt="icon users" class="icon-sidebar">
+                <img src="../../../public/images/cita-medica.png" alt="icon users" class="icon-sidebar">
                 <span class="text-sm text-sc-white font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Citas Medicas</span>
               </Link>
             </li>

@@ -1,10 +1,6 @@
 <template>
-  <app-layout title="Tratamiento-Editar">
-    <template #header>
-      <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        <i class="fas fa-users"></i> Módulo de Tratamiento
-      </h2>
-    </template>
+
+    
     <dashboard-layout>
       <div class="md:col-span-4 mt-1">
         <div class="shadow bg-white md:rounded-md p-4">
@@ -74,7 +70,7 @@
         </div>
       </div>
     </dashboard-layout>
-  </app-layout>
+
 </template>
 <script>
 import AppLayout from "@/Layouts/AppLayout.vue";

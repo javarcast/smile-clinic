@@ -28,7 +28,7 @@ Route::get('/', function () {
 });
 
 
-Route::resource('usuarios', UserInfoController::class)->middleware('auth:sanctum');
+Route::resource('usuarios', UserInfoController::class);
 Route::resource('pacientes', PatientsController::class)->middleware('auth:sanctum');
 Route::resource('tratamientos', TreatmentController::class)
     ->middleware('auth:sanctum');

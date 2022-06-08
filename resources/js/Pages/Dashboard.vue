@@ -9,6 +9,9 @@
 
 <template>
     <DashboardLayout>
-       <h1>hola mundo</h1>
+        <div class="flex justify-center">
+            <img src="../../../public/images/smileclinic.jpeg" alt="">
+        </div>
+       
     </DashboardLayout>
 </template>

@@ -11,7 +11,7 @@
               v-model="q"
             />
 
-            <Link v-if="$page.props.user.rol_id===1"
+            <Link 
               :href="route('tratamientos.create')"
               class="bg-blue-500 text-white font-bold p-2 mx-4 rounded"
               ><i class="far fa-user"></i> Crear Tratamiento</Link

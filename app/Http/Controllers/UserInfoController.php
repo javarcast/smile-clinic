@@ -23,9 +23,11 @@ class UserInfoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::all();
+            $users = User::where('name', 'LIKE', "%$request->q%")
+            ->orWhere('id', 'LIKE', "%$request->q%")->paginate(11);
+
         foreach ($users as $key => &$user) {
             $user['role'] = $user->role();
         }
@@ -97,10 +99,10 @@ class UserInfoController extends Controller
      */
     public function show($id)
     {
-        $userShow = User::findOrFail($id);
-        $userShow['role'] = $userShow->role();
+        $UserShow = User::findOrFail($id);
+        $UserShow['role'] = Role::findOrFail($UserShow->role_id);
 
-        return Inertia::render('Users/Show', compact('userShow'));
+        return Inertia::render('Users/Show', compact('UserShow'));
     }
 
     /**
@@ -111,10 +113,10 @@ class UserInfoController extends Controller
      */
     public function edit($id)
     {
-        $user = User::findOrFail($id);
+        $UserShow = User::findOrFail($id);
         $roles = Role::all();
 
-        return Inertia::render('Users/Edit', compact('user', 'roles'));
+        return Inertia::render('Users/Edit', compact('UserShow', 'roles'));
     }
 
     /**
@@ -138,7 +140,7 @@ class UserInfoController extends Controller
                 }
             });
         }
-        Validator::make($request, [
+        Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
             'phone_number' => ['required', 'string'],
@@ -165,13 +167,14 @@ class UserInfoController extends Controller
                 'id' => $request['id'],
                 'name' => $request['name'],
                 'email' => $request['email'],
+                'role_id' => $request['role_id'],
             ])->save();
         }
 
 
         $message = "Usuario ".$user->name." ha sido Actualizado";
 
-        return redirect()->route('usuarios.show', ['id' => $user->id])->with('status', $message);
+        return redirect()->route('usuarios.show', ['usuario' => $user])->with('status', $message);
     }
 
     /**

@@ -2,16 +2,14 @@
 import { ref, provide, watch } from "vue";
 import DashboardLayout from "@/Layouts/DashboardLayout.vue";
 import { Link } from "@inertiajs/inertia-vue3";
-import { Inertia } from '@inertiajs/inertia';
-import UserTableList from "@/Components/UserTableList.vue";
 
-const title = ref("Usuarios");
+const title = ref("Pacientes");
 provide("title", title);
 
-const props = defineProps(["users"]);
-const q = ref('');
+const props = defineProps(["pacientes"]);
+const q = "";
 watch(q, () => {
-  Inertia.replace(route("usuarios.index", { q: q.value }));
+  this.$inertia.replace(this.route("pacientes.index", { q: value }));
 });
 </script>
 
@@ -19,7 +17,7 @@ watch(q, () => {
   <DashboardLayout>
     <div class="md:col-span-4 mt-1">
       <div class="flex justify-between">
-        <h2 class="text-2xl md:text-3xl text-slate-800 font-bold">Usuarios</h2>
+        <h2 class="text-2xl md:text-3xl text-slate-800 font-bold">Pacientes</h2>
         <div class="flex">
           <input
             type="text"
@@ -29,10 +27,10 @@ watch(q, () => {
           />
 
           <Link
-            :href="route('usuarios.create')"
+            :href="route('pacientes.create')"
             class="btn-primary btn-black"
             >
-              <i class="far fa-user mr-2"></i> Crear Usuario
+              <i class="far fa-user mr-2"></i> Crear Paciente
             </Link>
         </div>
       </div>
@@ -40,7 +38,7 @@ watch(q, () => {
       <div>
         <hr class="my-6" />
         <div class="flex flex-col justify-center mt-4">
-          <user-table-list :users="users" />
+         <span>aqui va la tabla de pacientes</span>
         </div>
       </div>
     </div>
