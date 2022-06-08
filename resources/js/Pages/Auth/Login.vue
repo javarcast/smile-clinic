@@ -42,12 +42,12 @@ const submit = () => {
             <div class="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
               <!-- button go back to  -->
                 <Link  href="/" >
-                    <img class="go-back-to" src="../../../images/go-back-to.png" alt="">
+                    <img class="go-back-to" src="../../../../public/images/go-back-to.png" alt="">
                 </Link>
             </div>
           </div>          
 
-          <div class="max-w-sm mx-auto px-4 py-8">
+          <div class="max-w-sm mx-auto px-4 py-0">
             <!-- Logo -->
             <JetAuthenticationCardLogo />
             
@@ -112,7 +112,7 @@ const submit = () => {
 
       <!-- Image -->
       <div class="hidden md:block absolute top-0 bottom-0 right-0 md:w-1/2 form-image" aria-hidden="true">
-        <img class="object-cover object-center w-full h-full" src="../../../images/cover.jpg" width="760" height="1024" alt="Authentication" />
+        <img class="object-cover object-center w-full h-full" src="../../../../public/images/smileGirl.jpg" width="760" height="1024" alt="Authentication" />
         <!-- <img class="absolute top-1/2 left-0 transform -translate-x-1/2 w-3/12 hidden lg:block" src="../../../images/tooth.png" width="218" height="224" alt="Authentication decoration" /> -->
       </div>
 

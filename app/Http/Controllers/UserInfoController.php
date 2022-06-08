@@ -165,6 +165,7 @@ class UserInfoController extends Controller
                 'id' => $request['id'],
                 'name' => $request['name'],
                 'email' => $request['email'],
+                'role_id' => $request['role_id'],
             ])->save();
         }
 

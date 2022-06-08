@@ -23,8 +23,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 76px;
-    margin-bottom: 105px;
+    margin-top: 25px;
+    margin-bottom: 50px;
    
 }
 .step{
@@ -1925,6 +1925,10 @@ select {
   padding-top: 2.5rem;
   padding-bottom: 2.5rem;
 }
+.py-0 {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
 .pt-6 {
   padding-top: 1.5rem;
 }
@@ -2307,6 +2311,9 @@ select {
     align-items: center;
     margin: 0 auto;
     text-align: left;
+}
+.logo-img{
+    width: 23%;
 }
 .after\:flex-1::after {
   content: var(--tw-content);
@@ -2858,4 +2865,3 @@ select {
     opacity: 1;
   }
 }
-
