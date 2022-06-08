@@ -21745,7 +21745,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     steps: function steps(value) {
-      if (this.form.name !== "" && this.form.lastName !== "" && this.form.dni !== "") {
+      if (this.form.name !== "" && this.form.lastName !== "" && this.form.dni !== "" && this.form.address != "") {
         this.flag += value;
       }
     }
@@ -25416,7 +25416,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     value: "Direccion"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
     id: "address",
-    type: "number",
+    type: "text",
     "class": "mt-1 block w-full",
     modelValue: _ctx.form.address,
     "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
@@ -25462,7 +25462,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     value: "Email"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
     id: "email",
-    type: "text",
+    type: "email",
     "class": "mt-1 block w-full",
     modelValue: _ctx.form.email,
     "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
