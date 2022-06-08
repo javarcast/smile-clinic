@@ -1,12 +1,14 @@
 <script setup>
-import { Head, Link, useForm } from "@inertiajs/inertia-vue3";
+import { Link, useForm } from "@inertiajs/inertia-vue3";
+import { ref, provide} from "vue";
 import DashboardLayout from "@/Layouts/DashboardLayout.vue";
-import { ref, provide, watch } from "vue";
 import JetValidationErrors from "@/Jetstream/ValidationErrors.vue";
 import JetButton from "@/Jetstream/Button.vue";
 import JetInput from "@/Jetstream/Input.vue";
 import JetCheckbox from "@/Jetstream/Checkbox.vue";
 import JetLabel from "@/Jetstream/Label.vue";
+const title = ref("Agregar Usuario");
+provide("title", title);
 
 const form = useForm({
   id: "",
@@ -36,20 +38,22 @@ const submit = () => {
 <template>
   <DashboardLayout>
     <div class="md:col-span-4 mt-1">
-      <div class="shadow bg-white md:rounded-md p-4">
-        <form @submit.prevent="submit">
-          <div>
+      <h2 class="text-2xl md:text-3xl text-slate-800 font-bold">Agregar Usuario</h2>
+      <hr class="my-6" />
+      <div class="mt-4 bg-slate-50 shadow-lg rounded-sm border border-slate-200 relative px-4 py-4">
+        <form @submit.prevent="submit" class="create-user">
+          <div class="container-input">
             <label class="block font-medium text-sm text-gray-700">DNI</label>
             <input
               id="id"
               type="text"
               v-model="form.id"
               required
-              class="form-input w-full rounded-md shadow-sm"
+              class="form-input w-full rounded bg-slate-50"
               autocomplete="DNI"
             />
           </div>
-          <div>
+          <div class="container-input">
             <label class="block font-medium text-sm text-gray-700"
               >Nombre</label
             >
@@ -58,20 +62,20 @@ const submit = () => {
               type="text"
               v-model="form.name"
               required
-              class="form-input w-full rounded-md shadow-sm"
+              class="form-input w-full rounded bg-slate-50"
             />
           </div>
-          <div>
+          <div class="container-input">
             <label class="block font-medium text-sm text-gray-700">Email</label>
             <input
               type="email"
               id="email"
               v-model="form.email"
               required
-              class="form-input w-full rounded-md shadow-sm"
+              class="form-input w-full rounded bg-slate-50"
             />
           </div>
-          <div>
+          <div class="container-input">
             <label class="block font-medium text-sm text-gray-700"
               >Nro. Telefonico</label
             >
@@ -80,10 +84,10 @@ const submit = () => {
               id="phone_number"
               v-model="form.phone_number"
               required
-              class="form-input w-full rounded-md shadow-sm"
+              class="form-input w-full rounded bg-slate-50"
             />
           </div>
-          <div>
+          <div class="container-input">
             <label class="block font-medium text-sm text-gray-700"
               >Dirección</label
             >
@@ -92,40 +96,16 @@ const submit = () => {
               id="address"
               v-model="form.address"
               required
-              class="form-input w-full rounded-md shadow-sm"
+              class="form-input w-full rounded bg-slate-50"
             />
           </div>
-          <div>
-            <label class="block font-medium text-sm text-gray-700"
-              >Contraseña</label
-            >
-            <input
-              type="password"
-              id="password"
-              v-model="form.password"
-              required
-              class="form-input w-full rounded-md shadow-sm"
-            />
-          </div>
-          <div>
-            <label class="block font-medium text-sm text-gray-700"
-              >Confirma contraseña</label
-            >
-            <input
-              type="password"
-              v-model="form.password_confirmation"
-              id="password_confirmation"
-              required
-              class="form-input w-full rounded-md shadow-sm"
-            />
-          </div>
-          <div>
+          <div class="container-input">
             <label class="block text-left w-full">
               <span class="text-gray-700">Rol</span>
               <select
                 required
                 v-model="form.role_id"
-                class="form-select block w-full mt-1"
+                class="form-input w-full rounded bg-slate-50"
               >
                 <option selected value="-1">Selecciona un Rol</option>
                 <option v-for="rol in roles" :key="rol.id" :value="rol.id">
@@ -134,6 +114,31 @@ const submit = () => {
               </select>
             </label>
           </div>
+          <div class="container-input">
+            <label class="block font-medium text-sm text-gray-700"
+              >Contraseña</label
+            >
+            <input
+              type="password"
+              id="password"
+              v-model="form.password"
+              required
+              class="form-input w-full rounded bg-slate-50"
+            />
+          </div>
+          <div class="container-input">
+            <label class="block font-medium text-sm text-gray-700"
+              >Confirma contraseña</label
+            >
+            <input
+              type="password"
+              v-model="form.password_confirmation"
+              id="password_confirmation"
+              required
+              class="form-input w-full rounded bg-slate-50"
+            />
+          </div>
+          
 
           <div
             v-if="$page.props.jetstream.hasTermsAndPrivacyPolicyFeature"
@@ -167,36 +172,18 @@ const submit = () => {
             </JetLabel>
           </div>
 
-          <button
-            class="
-              bg-blue-500
-              hover:bg-blue-700
-              rounded-md
-              text-white
-              font-bold
-              mt-2
-              py-2
-              px-4
-            "
-          >
-            Crear
-          </button>
-          <Link
-            class="
-              bg-gray-200
-              w-1/12
-              hover:bg-blue-700 hover:text-white
-              rounded-md
-              text-black
-              mt-2
-              ml-2
-              py-2
-              px-4
-            "
-            :href="route('usuarios.index')"
-          >
-            Cancelar</Link
-          >
+          <div class="btn-opt">
+            <button class="btn-primary btn-black mr-2">
+              Crear
+            </button>
+            <Link 
+              class="btn-primary btn-white shadow-lg ml-2"
+              :href="route('usuarios.index')"
+            >
+              Cancelar</Link
+            >
+          </div>
+          
         </form>
       </div>
     </div>

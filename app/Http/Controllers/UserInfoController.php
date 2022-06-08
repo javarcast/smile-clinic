@@ -97,10 +97,10 @@ class UserInfoController extends Controller
      */
     public function show($id)
     {
-        $user = User::findOrFail($id);
-        $user['role'] = $user->role();
+        $UserShow = User::findOrFail($id);
+        $UserShow['role'] = Role::findOrFail($UserShow->role_id);
 
-        return Inertia::render('Users/Show', compact('user'));
+        return Inertia::render('Users/Show', compact('UserShow'));
     }
 
     /**
@@ -111,10 +111,10 @@ class UserInfoController extends Controller
      */
     public function edit($id)
     {
-        $user = User::findOrFail($id);
+        $UserShow = User::findOrFail($id);
         $roles = Role::all();
 
-        return Inertia::render('Users/Edit', compact('user', 'roles'));
+        return Inertia::render('Users/Edit', compact('UserShow', 'roles'));
     }
 
     /**
@@ -138,7 +138,7 @@ class UserInfoController extends Controller
                 }
             });
         }
-        Validator::make($request, [
+        Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
             'phone_number' => ['required', 'string'],
@@ -171,7 +171,7 @@ class UserInfoController extends Controller
 
         $message = "Usuario ".$user->name." ha sido Actualizado";
 
-        return redirect()->route('usuarios.show', ['id' => $user->id])->with('status', $message);
+        return redirect()->route('usuarios.show', ['usuario' => $user])->with('status', $message);
     }
 
     /**

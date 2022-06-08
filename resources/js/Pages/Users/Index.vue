@@ -2,7 +2,7 @@
 import { ref, provide, watch } from "vue";
 import DashboardLayout from "@/Layouts/DashboardLayout.vue";
 import { Link } from "@inertiajs/inertia-vue3";
-import TableList from "@/Components/TableList.vue";
+import UserTableList from "@/Components/UserTableList.vue";
 
 const title = ref("Usuarios");
 provide("title", title);
@@ -17,25 +17,29 @@ watch(q, () => {
 <template>
   <DashboardLayout>
     <div class="md:col-span-4 mt-1">
-      <div class="shadow bg-white md:rounded-md p-4">
-        <div class="flex justify-between">
+      <div class="flex justify-between">
+        <h2 class="text-2xl md:text-3xl text-slate-800 font-bold">Usuarios</h2>
+        <div class="flex">
           <input
             type="text"
-            class="form-input rounded-md shadow-sm"
+            class="form-input rounded mr-2"
             placeholder="Buscar..."
             v-model="q"
           />
 
           <Link
             :href="route('usuarios.create')"
-            class="bg-blue-500 text-white font-bold p-2 mx-4 rounded"
-            ><i class="far fa-user"></i> Crear Usuario</Link
-          >
+            class="btn-primary btn-black"
+            >
+              <i class="far fa-user mr-2"></i> Crear Usuario
+            </Link>
         </div>
-
+      </div>
+      
+      <div>
         <hr class="my-6" />
-        <div class="flex flex-col justify-center">
-          <table-list :users="users" />
+        <div class="flex flex-col justify-center mt-4">
+          <user-table-list :users="users" />
         </div>
       </div>
     </div>

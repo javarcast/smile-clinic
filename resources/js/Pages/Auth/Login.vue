@@ -51,7 +51,7 @@ const submit = () => {
             <!-- Logo -->
             <JetAuthenticationCardLogo />
             
-            <h1 class="text-3xl text-slate-800 font-bold mb-6 text-center sc-blue">Bienvenido a Smile<span>Clinic</span></h1>
+            <h1 class="text-3xl text-slate-800 font-bold mb-6 text-center sc-black">Bienvenido a Smile<span>Clinic</span></h1>
             <JetValidationErrors class="mb-4" />
             <!-- Form -->
             <form @submit.prevent="submit">
@@ -89,7 +89,7 @@ const submit = () => {
                             ¿Olvidó su contraseña?
                         </Link> -->
 
-                        <button class="btn-primary btn-blck" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                        <button class="btn-primary btn-black" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                             Ingresar
                         </button>
                     </div>

@@ -16,8 +16,11 @@
     font-size: 0.875rem;
     @apply font-bold;
 }
-.btn-blck{
-    @apply bg-sc-blue text-sc-white;
+.btn-black{
+    @apply bg-sc-black text-sc-white;
+}
+.btn-white{
+    @apply bg-sc-white text-sc-black;
 }
 .go-back-to{
     width: 30px;
@@ -32,4 +35,30 @@
 }
 .icon-sidebar{
     width: 26px;
+}
+.main-content{
+
+}
+.create-user{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.create-user .container-input {
+    width: 48%;
+    margin-bottom: 17px;
+}
+.btn-opt{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+.content-table-details{
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    text-align: left;
 }
