@@ -1,6 +1,6 @@
 <template>
   <div>
-   
+
     <!-- Sidebar -->
     <div
       id="sidebar"
@@ -36,7 +36,7 @@
               </Link>
             </li>
             <li class="flex justify-between pr-3 sm:px-2 mt-6 mb-6 truncate" >
-              <Link :href="'/'" class="flex  items-end">
+              <Link :href="route('tratamientos.index')" class="flex  items-end">
                 <img src="../../images/tratamientos.png" alt="icon users" class="icon-sidebar">
                 <span class="text-sm text-sc-white font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Tratamientos</span>
               </Link>
@@ -47,13 +47,13 @@
                 <span class="text-sm text-sc-white font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Citas Medicas</span>
               </Link>
             </li>
-            
+
             <!-- first link -->
-            
+
           </ul>
-        
+
         </div>
-      
+
       </div>
 
       <!-- Expand / collapse button -->
@@ -68,32 +68,32 @@
           </button>
         </div>
       </div>
-           
+
     </div>
 
   </div>
-  
+
 </template>
 <script setup>
   import { ref, watch, onMounted } from 'vue'
   import { Link } from "@inertiajs/inertia-vue3";
 
   const props = defineProps(['sidebarOpen'])
-  
+
   const sidebarExpanded = ref(true);
-  
+
    onMounted(() => {
       document.querySelector('body').classList.add('sidebar-expanded');
     })
 
     watch(sidebarExpanded, () => {
-     
+
       if (sidebarExpanded.value) {
         document.querySelector('body').classList.add('sidebar-expanded')
       } else {
         document.querySelector('body').classList.remove('sidebar-expanded')
       }
-      
+
     })
 
 

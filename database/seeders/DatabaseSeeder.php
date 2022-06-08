@@ -25,5 +25,6 @@ class DatabaseSeeder extends Seeder
         $this->call([RoleSeeder::class]);
         $this->call([StateSeeder::class]);
         $this->call([DiseaseTypeSeeder::class]);
+        $this->call([TreatmentSeeder::class]);
     }
 }
