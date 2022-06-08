@@ -1,7 +1,11 @@
 <script setup>
 
 import { Link, useForm } from "@inertiajs/inertia-vue3";
+import { ref, provide} from "vue";
 import DashboardLayout from "@/Layouts/DashboardLayout.vue";
+    
+    const title = ref("Editar Usuario");
+    provide("title", title);
 
     const props = defineProps(["roles", "UserShow"]);
 

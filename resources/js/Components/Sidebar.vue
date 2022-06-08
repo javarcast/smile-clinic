@@ -30,7 +30,7 @@
               </Link>
             </li>
             <li class="flex justify-between pr-3 sm:px-2 mt-6 mb-6 truncate">
-              <Link :href="'/'" class="flex items-end">
+              <Link :href="route('pacientes.index')" class="flex items-end">
                 <img src="../../../public/images/pacientes.png" alt="icon users" class="icon-sidebar">
                 <span class="text-sm text-sc-white font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Pacientes</span>
               </Link>

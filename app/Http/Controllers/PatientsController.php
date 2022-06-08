@@ -121,7 +121,7 @@ class PatientsController extends Controller
      */
     public function show(Patient $patient)
     {
-        return Inertia::render('Patients/Show', compact('patient'));
+        return Inertia::render('Patient/Show', compact('patient'));
     }
 
     /**
@@ -136,7 +136,7 @@ class PatientsController extends Controller
         $users = User::all();
         $diseases = Disease::all();
         $medicaments = Medicament::all();
-        return Inertia::render('Patients/Edit', compact('patient', 'users', 'diseases', 'medicaments'));
+        return Inertia::render('Patient/Edit', compact('patient', 'users', 'diseases', 'medicaments'));
     }
 
     /**
