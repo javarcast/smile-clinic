@@ -1,13 +1,19 @@
 <template>
 
     <Head title="Register" />
-
+    <div class="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
+        <!-- button go back to  -->
+        <Link href="/">
+        <img class="go-back-to" src="../../../images/go-back-to.png" alt="">
+        </Link>
+    </div>
     <jet-registro-container>
-        
+
         <jet-validation-errors class="mb-4" />
+
         <form-register-1 />
-        
-        <template #imagen >
+
+        <template #imagen>
             <jet-registro-container-imagen />
         </template>
     </jet-registro-container>
@@ -41,12 +47,12 @@ export default defineComponent({
 
     data() {
         return {
-            
+
         }
     },
 
     methods: {
-        
+
     }
 })
 </script>
