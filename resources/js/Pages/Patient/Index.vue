@@ -2,11 +2,12 @@
 import { ref, provide, watch } from "vue";
 import DashboardLayout from "@/Layouts/DashboardLayout.vue";
 import { Link } from "@inertiajs/inertia-vue3";
+import PatientTableList from "@/Components/PatientTableList.vue";
 
 const title = ref("Pacientes");
 provide("title", title);
 
-const props = defineProps(["pacientes"]);
+const props = defineProps(["patients"]);
 const q = "";
 watch(q, () => {
   this.$inertia.replace(this.route("pacientes.index", { q: value }));
@@ -38,7 +39,7 @@ watch(q, () => {
       <div>
         <hr class="my-6" />
         <div class="flex flex-col justify-center mt-4">
-         <span>aqui va la tabla de pacientes</span>
+         <patient-table-list :patients="patients" />
         </div>
       </div>
     </div>

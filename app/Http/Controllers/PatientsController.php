@@ -51,35 +51,38 @@ class PatientsController extends Controller
      */
     public function store(Request $request)
     {
-        Validator::make($request, [
-            'id' => ['required', 'numeric', 'unique:Patients'],
+        Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:255'],
             'user_id' => ['required', 'numeric']
         ])->validate();
 
+        if(isset($request['dni'])){
+            Validator::make($request->all(), [
+                'dni' => ['numeric', 'unique:patients']
+            ])->validate();
+        }
         DB::beginTransaction();
         try {
             $user = User::findOrFail($request['user_id']);
             $patient = new Patient();
-            $patient->id = $request['id'];
+            $patient->dni = $request['dni'];
+
+            if($request['email']) {
+                $patient->email = $request['email'];
+            }
+
+            if($request['phone_number']) {
+                $patient->phone_number = $request['phone_number'];
+            }
             $patient->name = $request['name'];
             $patient->user()->associate($user);
             $patient->save();
 
             if(isset($request['medicaments'])) {
                 foreach ($request['medicaments'] as $key => $item) {
-                    $medicament = Medicament::findOrFail($item->id);
-
-                    if(!isset($medicament)) {
-
-                        $medicament = new Medicament();
-                        $medicament->name = $item->name;
-                        $medicament->save();
-                    }
-
                     $medicament_patient = new PatientMedicament();
                     $medicament_patient->patient_id = $patient->id;
-                    $medicament_patient->medicament_id = $medicament->id;
+                    $medicament_patient->medicament_id = $item;
                     $medicament_patient->save();
                 }
             }
@@ -87,18 +90,9 @@ class PatientsController extends Controller
 
             if(isset($request['diseases'])) {
                 foreach ($request['diseases'] as $key => $item) {
-                    $disease = Disease::findOrFail($item->id);
-
-                    if(!isset($disease)) {
-
-                        $disease = new Disease();
-                        $disease->name = $item->name;
-                        $disease->save();
-                    }
-
                     $disease_patient = new PatientDisease();
                     $disease_patient->patient_id = $patient->id;
-                    $disease_patient->disease_id = $disease->id;
+                    $disease_patient->disease_id = $item;
                     $disease_patient->save();
                 }
             }
@@ -148,16 +142,24 @@ class PatientsController extends Controller
      */
     public function update(Request $request, Patient $patient)
     {
-        Validator::make($request, [
-            'id' => ['required', 'numeric', Rule::unique('patients')->ignore($patient->id)],
+        Validator::make($request->all(), [
+            'dni' => ['required', 'numeric', Rule::unique('patients')->ignore($patient->dni)],
             'name' => ['required', 'string', 'max:255'],
             'user_id' => ['required', 'numeric']
         ])->validate();
 
         DB::beginTransaction();
         try {
-            $patient->id = $request['id'];
+            $patient->dni = $request['dni'];
             $patient->name = $request['name'];
+
+            if($request['email']) {
+                $patient->email = $request['email'];
+            }
+
+            if($request['phone_number']) {
+                $patient->phone_number = $request['phone_number'];
+            }
             if($patient->user_id !== $request['user_id'])  {
                 $user = User::findOrFail($request['user_id']);
                 $patient->user()->associate($user);
@@ -166,39 +168,23 @@ class PatientsController extends Controller
 
             if(isset($request['medicaments'])) {
                 foreach ($request['medicaments'] as $key => $item) {
-                    $medicament = Medicament::findOrFail($item->id);
-                    if(!isset($medicament)) {
-
-                        $medicament = new Medicament();
-                        $medicament->name = $item->name;
-                        $medicament->save();
-                    }
-
                     $medicament_patient = PatientMedicament::where('patient_id',$patient->id)
-                                            ->where('medicament_id', $medicament->id)->first();
+                                            ->where('medicament_id', $item)->first();
                     if(!isset($medicament_patient)) {
                         $medicament_patient = new PatientMedicament();
                         $medicament_patient->patient_id = $patient->id;
-                        $medicament_patient->medicament_id = $medicament->id;
+                        $medicament_patient->medicament_id = $item;
                         $medicament_patient->save();
                     }
                 }
             }
 
-
             if(isset($request['diseases'])) {
                 foreach ($request['diseases'] as $key => $item) {
-                    $disease = Disease::findOrFail($item->id);
-
-                    if(!isset($disease)) {
-
-                        $disease = new Disease();
-                        $disease->name = $item->name;
-                        $disease->save();
-                    }
+                    $disease = Disease::findOrFail($item);
 
                     $disease_patient = PatientDisease::where('patient_id',$patient->id)
-                    ->where('disease_id', $disease->id)->first();
+                    ->where('disease_id', $item)->first();
                     if(!isset($disease_patient)) {
                         $disease_patient = new PatientDisease();
                         $disease_patient->patient_id = $patient->id;
@@ -223,11 +209,12 @@ class PatientsController extends Controller
      * @param  \App\Models\Patient  $patient
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Patient $patient)
+    public function destroy($id)
     {
+        $patient = Patient::findOrFail($id);
         $aux = $patient;
         $patient->delete();
-        $message = "Paciente ".$patient->name." ha sido eliminado";
+        $message = "Paciente ".$aux->name." ha sido eliminado";
 
         return redirect()->route('pacientes.index')->with('status', $message);
     }
