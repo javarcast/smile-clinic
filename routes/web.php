@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PatientsController;
 use App\Http\Controllers\UserInfoController;
+use App\Http\Controllers\TreatmentController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -27,10 +28,12 @@ Route::get('/', function () {
 });
 
 
-Route::resource('usuarios', UserInfoController::class)->middleware('auth:sanctum');
+Route::resource('usuarios', UserInfoController::class);
 Route::resource('pacientes', PatientsController::class)->middleware('auth:sanctum');
-// example middleware 
-Route::resource('historial-medico', MedicalHistoryController::class)->middleware('role:admin');
+
+Route::resource('tratamientos', TreatmentController::class)
+    ->middleware('auth:sanctum');
+
 
 Route::middleware([
     'auth:sanctum',

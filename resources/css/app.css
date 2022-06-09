@@ -1,7 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+@import './custom.css';
+@import './estilos.css';
 
 .form-image:before{
     content: "";
@@ -14,9 +15,54 @@
     padding:0.6rem 1.2rem;
     border-radius: 0.25rem;
     font-size: 0.875rem;
-    font-weight: 500;
-    @aply font-bold;
+    @apply font-bold;
 }
-.btn-blck{
+.btn-black{
     @apply bg-sc-black text-sc-white;
+}
+.btn-white{
+    @apply bg-sc-white text-sc-black;
+}
+.go-back-to{
+    width: 30px;
+}
+.logo-dashboard .icon-logo{
+    width: 27px;
+    object-fit: contain;
+}
+.logo-dashboard .text-logo{
+    width: 113px;
+    object-fit: contain;
+}
+.icon-sidebar{
+    width: 26px;
+}
+.main-content{
+
+}
+.create-user{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.create-user .container-input {
+    width: 48%;
+    margin-bottom: 17px;
+}
+.btn-opt{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+.content-table-details{
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    text-align: left;
+}
+.logo-img{
+    width: 23%;
 }

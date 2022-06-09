@@ -8,14 +8,16 @@ use App\Models\User;
 use Inertia\Inertia;
 use App\Models\Role;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Laravel\Jetstream\Jetstream;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
+use Laravel\Fortify\Rules\Password;
 
 class UserInfoController extends Controller
 {
+
+    use PasswordValidationRules;
     /**
      * Display a listing of the resource.
      *
@@ -24,7 +26,7 @@ class UserInfoController extends Controller
     public function index()
     {
         $users = User::all();
-        foreach ($users as $key => $user) {
+        foreach ($users as $key => &$user) {
             $user['role'] = $user->role();
         }
 
@@ -51,7 +53,8 @@ class UserInfoController extends Controller
      */
     public function store(Request $request)
     {
-        Validator::make($request, [
+
+        Validator::make($request->all(), [
             'id' => ['required', 'numeric', 'unique:users'],
             'role_id' => ['required', 'numeric'],
             'name' => ['required', 'string', 'max:255'],
@@ -59,9 +62,7 @@ class UserInfoController extends Controller
             'address' => ['required', 'string'],
             'phone_number' => ['required', 'string'],
             'password' => $this->passwordRules(),
-            'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
         ])->validate();
-
 
         DB::beginTransaction();
         try {
@@ -96,10 +97,10 @@ class UserInfoController extends Controller
      */
     public function show($id)
     {
-        $user = User::findOrFail($id);
-        $user['role'] = $user->role();
+        $UserShow = User::findOrFail($id);
+        $UserShow['role'] = Role::findOrFail($UserShow->role_id);
 
-        return Inertia::render('Users/Show', compact('user'));
+        return Inertia::render('Users/Show', compact('UserShow'));
     }
 
     /**
@@ -110,10 +111,10 @@ class UserInfoController extends Controller
      */
     public function edit($id)
     {
-        $user = User::findOrFail($id);
+        $UserShow = User::findOrFail($id);
         $roles = Role::all();
 
-        return Inertia::render('Users/Edit', compact('user', 'roles'));
+        return Inertia::render('Users/Edit', compact('UserShow', 'roles'));
     }
 
     /**
@@ -137,7 +138,7 @@ class UserInfoController extends Controller
                 }
             });
         }
-        Validator::make($request, [
+        Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
             'phone_number' => ['required', 'string'],
@@ -164,13 +165,14 @@ class UserInfoController extends Controller
                 'id' => $request['id'],
                 'name' => $request['name'],
                 'email' => $request['email'],
+                'role_id' => $request['role_id'],
             ])->save();
         }
 
 
         $message = "Usuario ".$user->name." ha sido Actualizado";
 
-        return redirect()->route('usuarios.show', ['id' => $user->id])->with('status', $message);
+        return redirect()->route('usuarios.show', ['usuario' => $user])->with('status', $message);
     }
 
     /**
@@ -188,5 +190,19 @@ class UserInfoController extends Controller
         $message = "Usuario ".$aux->name." ha sido eliminado";
 
         return redirect()->route('usuarios.index')->with('status', $message);
+    }
+}
+
+
+trait PasswordValidationRules
+{
+    /**
+     * Get the validation rules used to validate passwords.
+     *
+     * @return array
+     */
+    protected function passwordRules()
+    {
+        return ['required', 'string', new Password, 'confirmed'];
     }
 }
