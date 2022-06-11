@@ -4,6 +4,7 @@
         <tr >
             <th class="px-2 first:pl-5 last:pr-5 py-4 whitespace-nowrap text-left font-semibold">DNI</th>
             <th class="px-2 first:pl-5 last:pr-5 py-4 whitespace-nowrap text-left font-semibold" >Nombre</th>
+            <th class="px-2 first:pl-5 last:pr-5 py-4 whitespace-nowrap text-left font-semibold">Telefono</th>
             <th class="px-2 first:pl-5 last:pr-5 py-4 whitespace-nowrap text-left font-semibold">Email</th>
             <th class="px-2 first:pl-5 last:pr-5 py-4 whitespace-nowrap text-center font-semibold" colspan="3"> Acciones</th>
         </tr>
@@ -12,10 +13,13 @@
 
     <tr v-for="patient in props.patients" :key="patient.id" class="border-t border-b border-slate-200">
       <td class="px-2 first:pl-5 last:pr-5 py-4 whitespace-nowrap text-left">
-        {{ patient.id }}
+        {{ patient.dni }}
       </td>
       <td class="px-2 first:pl-5 last:pr-5 py-4 whitespace-nowrap text-left">
         {{ patient.name }}
+      </td>
+      <td class="px-2 first:pl-5 last:pr-5 py-4 whitespace-nowrap text-left">
+        {{ patient.phone_number }}
       </td>
       <td class="px-2 first:pl-5 last:pr-5 py-4 whitespace-nowrap text-left">
         {{ patient.email }}
