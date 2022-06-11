@@ -113,8 +113,10 @@ class PatientsController extends Controller
      * @param  \App\Models\Patient  $patient
      * @return \Illuminate\Http\Response
      */
-    public function show(Patient $patient)
+    public function show( $id)
     {
+        $patient = Patient::findOrFail($id);
+        $patient['user'] = User::findOrfail($patient->user_id)->name;
         return Inertia::render('Patient/Show', compact('patient'));
     }
 
@@ -124,9 +126,9 @@ class PatientsController extends Controller
      * @param  \App\Models\Patient  $patient
      * @return \Illuminate\Http\Response
      */
-    public function edit(Patient $patient)
+    public function edit($id)
     {
-
+        $patient = Patient::findOrFail($id);
         $users = User::all();
         $diseases = Disease::all();
         $medicaments = Medicament::all();
@@ -140,15 +142,17 @@ class PatientsController extends Controller
      * @param  \App\Models\Patient  $patient
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Patient $patient)
+    public function update(Request $request,  $id)
     {
-        Validator::make($request->all(), [
-            'dni' => ['required', 'numeric', Rule::unique('patients')->ignore($patient->dni)],
-            'name' => ['required', 'string', 'max:255'],
-            'user_id' => ['required', 'numeric']
-        ])->validate();
+        $patient = Patient::findOrFail($id);
 
+            Validator::make($request->all(), [
+                'dni' => ['required', 'numeric', Rule::unique('patients')->ignore($patient->id)],
+                'name' => ['required', 'string', 'max:255'],
+                'user_id' => ['required', 'numeric']
+            ])->validate();
         DB::beginTransaction();
+
         try {
             $patient->dni = $request['dni'];
             $patient->name = $request['name'];
