@@ -23,9 +23,11 @@ class UserInfoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::all();
+            $users = User::where('name', 'LIKE', "%$request->q%")
+            ->orWhere('id', 'LIKE', "%$request->q%")->paginate(11);
+
         foreach ($users as $key => &$user) {
             $user['role'] = $user->role();
         }

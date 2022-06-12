@@ -1,6 +1,6 @@
 <template>
-  <table>
-    <thead>
+  <table class="bg-white shadow-lg rounded-sm border border-slate-200 relative">
+    <thead class="text-xs font-semibold uppercase text-slate-500 bg-slate-50 border-t border-b border-slate-200">
       <tr>
         <th class="border hidden md-table-cell px-4 py-2">ID</th>
         <th class="border px-4 py-2">Nombre</th>
@@ -22,7 +22,7 @@
           {{ treatment.description }}
         </td>
         <td class="px-4  hidden md-table-cell border py-2 text-center">
-          {{ treatment.price }}
+          {{ formatCurrency(treatment.price) }}
         </td>
         <td class="px-4 py-2 border text-center">
           <Link :href="route('tratamientos.show', treatment.id)"><i class="far fa-eye text-green-600"></i> </Link>
@@ -30,9 +30,9 @@
         <td  class="px-4 py-2 border">
           <Link :href="route('tratamientos.edit', treatment.id)"><i class="fas fa-edit text-blue-600"></i> </Link>
         </td>
-        <td  class="px-4 py-2 border">
+        <!--<td  class="px-4 py-2 border">
           <a href="#" @click.prevent="destroy(treatment.id)"><i class="fas fa-trash-alt text-red-600"></i></a>
-        </td>
+        </td>-->
       </tr>
     </tbody>
   </table>
@@ -50,6 +50,9 @@ export default defineComponent({
     treatments: Object
   },
   methods: {
+    formatCurrency(price) {
+        return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', currencyDisplay: 'narrowSymbol'}).format(price);
+    }
     /*destroy(id){
       if(confirm('¿Desea ?')){
         this.$inertia.delete(this.route('tratamiento.destroy',id));
