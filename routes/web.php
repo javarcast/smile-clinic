@@ -28,11 +28,9 @@ Route::get('/', function () {
 });
 
 
-Route::resource('usuarios', UserInfoController::class);
-Route::resource('pacientes', PatientsController::class)->middleware('auth:sanctum');
-
-Route::resource('tratamientos', TreatmentController::class)
-    ->middleware('auth:sanctum');
+Route::resource('usuarios', UserInfoController::class)->middleware(['role:1', 'auth:sanctum']);
+Route::resource('pacientes', PatientsController::class)->middleware(['role:1', 'auth:sanctum']);
+Route::resource('tratamientos', TreatmentController::class)->middleware(['role:1', 'auth:sanctum']);
 
 
 Route::middleware([

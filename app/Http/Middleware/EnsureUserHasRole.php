@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-
+use Inertia\Inertia;
 class EnsureUserHasRole
 {
     /**
@@ -14,12 +14,13 @@ class EnsureUserHasRole
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle($request, $role)
+    public function handle($request, Closure $next, $role)
     {
-        if (!$request->user()->hasRole($role)) {
-            return view('dashboard');
+      
+        if ($request->user()->role_id != $role) {
+            return Inertia::render('Dashboard');
         }
  
-        return view($request);
+        return $next($request);
     }
 }
