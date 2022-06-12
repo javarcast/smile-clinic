@@ -21,19 +21,11 @@ watch(q, () => {
       <div class="flex justify-between">
         <h2 class="text-2xl md:text-3xl text-slate-800 font-bold">Usuarios</h2>
         <div class="flex">
-          <input
-            type="text"
-            class="form-input rounded mr-2"
-            placeholder="Buscar..."
-            v-model="q"
-          />
+          <input type="text" class="form-input rounded mr-2" placeholder="Buscar..." v-model="q" />
 
-          <Link
-            :href="route('usuarios.create')"
-            class="btn-primary btn-black"
-            >
-              <i class="far fa-user mr-2"></i> Crear Usuario
-            </Link>
+          <Link :href="route('usuarios.create')" class="btn-primary btn-black">
+          <i class="far fa-user mr-2"></i> Crear Usuario
+          </Link>
         </div>
       </div>
 
