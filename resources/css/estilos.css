@@ -3,7 +3,7 @@
     display: flex;
 }
 
-.menu {
+.menu, .opcion-perfil {
     height: 100vh;
     width: 250px ;
     background-image: url(/images/gbarra.png);
