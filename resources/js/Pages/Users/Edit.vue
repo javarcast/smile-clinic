@@ -3,7 +3,7 @@
 import { Link, useForm } from "@inertiajs/inertia-vue3";
 import { ref, provide} from "vue";
 import DashboardLayout from "@/Layouts/DashboardLayout.vue";
-    
+
     const title = ref("Editar Usuario");
     provide("title", title);
 
@@ -137,7 +137,7 @@ import DashboardLayout from "@/Layouts/DashboardLayout.vue";
           </form>
         </div>
       </div>
-    </DashboardLayout>  
+    </DashboardLayout>
 
 </template>
 
