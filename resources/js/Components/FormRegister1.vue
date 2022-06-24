@@ -28,8 +28,8 @@
             </div>
             <div>
                 <jet-label for="phone_number" value="N Telefono" />
-                <jet-input id="phone_number" type="number" class="mt-1 block w-full" v-model="form.phone_number" required autofocus
-                    autocomplete="phone_number" />
+                <jet-input id="phone_number" type="number" class="mt-1 block w-full" v-model="form.phone_number"
+                    required autofocus autocomplete="phone_number" />
             </div>
             <div>
                 <jet-label for="address" value="Direccion" />
@@ -126,7 +126,7 @@ export default defineComponent({
             })
         },
         steps(value) {
-            if (this.form.name !== "" && this.form.lastName !== "" && this.form.dni !== "" && this.form.address!="") {
+            if (this.form.name !== "" && this.form.lastName !== "" && this.form.dni !== "" && this.form.address != "") {
                 this.flag += value;
             }
         }
