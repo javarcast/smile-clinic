@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\DiseaseType;
+use App\Models\Specialty;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\User;
@@ -24,7 +25,7 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        $this->call([RoleSeeder::class, StateSeeder::class,
+       /* $this->call([RoleSeeder::class, StateSeeder::class,
                     DiseaseTypeSeeder::class, TreatmentSeeder::class,
                     DiseaseSeeder::class, MedicamentSeeder::class]);
                     User::factory()->create([
@@ -42,6 +43,8 @@ class DatabaseSeeder extends Seeder
                         'phone_number' => '123456789',
                         'role_id' => 2,
                         'id'=> '20624646',
-                    ]);
+                    ]);*/
+
+            $this->call([SpecialtySeeder::class]);
     }
 }
