@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('appointment_requests', function (Blueprint $table) {
             $table->id();
-            $table->fullText('description');
+            $table->longText('description');
             $table->date('date_appointment');
             $table->boolean('status')->default(false);
-            $table->foreignId('client_id')->constrained('clients');
+            $table->foreignId('client_id')->constrained('users');
             $table->timestamps();
         });
     }
