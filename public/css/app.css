@@ -907,6 +907,16 @@ select {
   padding-top: 0;
   padding-bottom: 0;
 }
+.form-select {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 0.5rem center;
+  background-repeat: no-repeat;
+  background-size: 1.5em 1.5em;
+  padding-right: 2.5rem;
+  -webkit-print-color-adjust: exact;
+     color-adjust: exact;
+          print-color-adjust: exact;
+}
 .prose {
   color: var(--tw-prose-body);
   max-width: 65ch;
@@ -1327,13 +1337,13 @@ select {
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
 }
-.my-3 {
-  margin-top: 0.75rem;
-  margin-bottom: 0.75rem;
-}
 .my-2 {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
+}
+.my-3 {
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
 }
 .ml-3 {
   margin-left: 0.75rem;
@@ -1416,6 +1426,12 @@ select {
 .mt-0 {
   margin-top: 0px;
 }
+.mb-0\.5 {
+  margin-bottom: 0.125rem;
+}
+.mb-0 {
+  margin-bottom: 0px;
+}
 .mb-2 {
   margin-bottom: 0.5rem;
 }
@@ -1424,6 +1440,9 @@ select {
 }
 .block {
   display: block;
+}
+.inline-block {
+  display: inline-block;
 }
 .inline {
   display: inline;
@@ -1527,17 +1546,20 @@ select {
 .w-64 {
   width: 16rem;
 }
-.w-2\/4 {
-  width: 50%;
-}
 .w-3\/12 {
   width: 25%;
 }
-.w-3\/5 {
-  width: 60%;
+.w-56 {
+  width: 14rem;
 }
-.w-4\/5 {
-  width: 80%;
+.w-28 {
+  width: 7rem;
+}
+.w-2\/4 {
+  width: 50%;
+}
+.w-1\/12 {
+  width: 8.333333%;
 }
 .w-2\/3 {
   width: 66.666667%;
@@ -1545,8 +1567,11 @@ select {
 .w-1\/3 {
   width: 33.333333%;
 }
-.w-1\/12 {
-  width: 8.333333%;
+.w-3\/5 {
+  width: 60%;
+}
+.w-4\/5 {
+  width: 80%;
 }
 .min-w-0 {
   min-width: 0px;
@@ -1665,6 +1690,9 @@ select {
 .justify-between {
   justify-content: space-between;
 }
+.justify-evenly {
+  justify-content: space-evenly;
+}
 .justify-items-center {
   justify-items: center;
 }
@@ -1679,6 +1707,18 @@ select {
 }
 .gap-2 {
   gap: 0.5rem;
+}
+.gap-x-1 {
+  -moz-column-gap: 0.25rem;
+       column-gap: 0.25rem;
+}
+.gap-x-0\.5 {
+  -moz-column-gap: 0.125rem;
+       column-gap: 0.125rem;
+}
+.gap-x-0 {
+  -moz-column-gap: 0px;
+       column-gap: 0px;
 }
 .space-x-8 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
@@ -1888,13 +1928,13 @@ select {
   --tw-bg-opacity: 1;
   background-color: rgb(241 245 249 / var(--tw-bg-opacity));
 }
-.bg-black {
-  --tw-bg-opacity: 1;
-  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
-}
 .bg-blue-500 {
   --tw-bg-opacity: 1;
   background-color: rgb(59 130 246 / var(--tw-bg-opacity));
+}
+.bg-black {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
 .bg-opacity-25 {
   --tw-bg-opacity: 0.25;
@@ -2030,17 +2070,20 @@ select {
 .pt-3 {
   padding-top: 0.75rem;
 }
-.pb-12 {
-  padding-bottom: 3rem;
-}
-.pt-0 {
-  padding-top: 0px;
+.pr-1 {
+  padding-right: 0.25rem;
 }
 .pr-10 {
   padding-right: 2.5rem;
 }
 .pl-4 {
   padding-left: 1rem;
+}
+.pb-12 {
+  padding-bottom: 3rem;
+}
+.pt-0 {
+  padding-top: 0px;
 }
 .text-left {
   text-align: left;
@@ -2093,6 +2136,9 @@ select {
 }
 .font-bold {
   font-weight: 700;
+}
+.font-black {
+  font-weight: 900;
 }
 .uppercase {
   text-transform: uppercase;
@@ -2210,6 +2256,10 @@ select {
 .text-slate-800 {
   --tw-text-opacity: 1;
   color: rgb(30 41 59 / var(--tw-text-opacity));
+}
+.text-black {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 .underline {
   -webkit-text-decoration-line: underline;
@@ -2423,6 +2473,10 @@ select {
   --tw-bg-opacity: 1;
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
 }
+.hover\:bg-blue-700:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(29 78 216 / var(--tw-bg-opacity));
+}
 .hover\:text-gray-500:hover {
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity));
@@ -2442,6 +2496,10 @@ select {
 .hover\:text-gray-900:hover {
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity));
+}
+.hover\:text-white:hover {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 .focus\:z-10:focus {
   z-index: 10;
@@ -2730,6 +2788,10 @@ select {
     flex-direction: row;
   }
 
+  .sm\:flex-col {
+    flex-direction: column;
+  }
+
   .sm\:items-start {
     align-items: flex-start;
   }
@@ -2850,6 +2912,10 @@ select {
 
   .md\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .md\:flex-row {
+    flex-direction: row;
   }
 
   .md\:gap-6 {

@@ -20,26 +20,18 @@ watch(q, () => {
       <div class="flex justify-between">
         <h2 class="text-2xl md:text-3xl text-slate-800 font-bold">Pacientes</h2>
         <div class="flex">
-          <input
-            type="text"
-            class="form-input rounded mr-2"
-            placeholder="Buscar..."
-            v-model="q"
-          />
+          <input type="text" class="form-input rounded mr-2" placeholder="Buscar..." v-model="q" />
 
-          <Link
-            :href="route('pacientes.create')"
-            class="btn-primary btn-black"
-            >
-              <i class="far fa-user mr-2"></i> Crear Paciente
-            </Link>
+          <Link :href="route('pacientes.create')" class="btn-primary btn-black">
+          <i class="far fa-user mr-2"></i> Crear Paciente
+          </Link>
         </div>
       </div>
 
       <div>
         <hr class="my-6" />
         <div class="flex flex-col justify-center mt-4">
-         <patient-table-list :patients="patients" />
+          <patient-table-list :patients="patients" />
         </div>
       </div>
     </div>

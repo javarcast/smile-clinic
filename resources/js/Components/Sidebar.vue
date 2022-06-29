@@ -42,9 +42,15 @@
               </Link>
             </li>
             <li v-if="$page.props.user.role_id===1" class="flex justify-between pr-3 sm:px-2 mt-6 mb-6 truncate">
-              <Link :href="'/'" class="flex  items-end">
+              <Link :href="route('citas.index')" class="flex  items-end">
                 <img src="../../../public/images/cita-medica.png" alt="icon users" class="icon-sidebar">
                 <span class="text-sm text-sc-white font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Citas Medicas</span>
+              </Link>
+            </li>
+            <li v-if="$page.props.user.role_id===1" class="flex justify-between pr-3 sm:px-2 mt-6 mb-6 truncate">
+              <Link :href="route('historial.index')" class="flex  items-end">
+                <img src="../../../public/images/cita-medica.png" alt="icon users" class="icon-sidebar">
+                <span class="text-sm text-sc-white font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Historias Clínicas</span>
               </Link>
             </li>
 

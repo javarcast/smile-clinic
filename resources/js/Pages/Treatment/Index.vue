@@ -1,6 +1,5 @@
 <template>
   <dashboard-layout>
-    {{ $treatments }}
     <div class="md:col-span-4 mt-1">
         <div class="flex justify-between treatment-options">
           <h2 class="text-2xl md:text-3xl text-slate-800 font-bold">Tratamientos</h2>
