@@ -25,11 +25,12 @@ class AppointmentController extends Controller
     {
         if (auth()->user()->id != 1) {
             //Es doctor
-            $appointments = Appointment::join("users", "users.id", "=", "appointments.user_id")
+            $appointments = Appointment::join("dentists", "dentist.id", "=", "appointments.dentist_id")
                 ->join("patients", "patients.id", "=", "appointments.patient_id")
                 ->where([
                     ['users.id', '=', auth()->user()->id]
                 ])
+                ->join("users", "users.id", "=", "dentists.user_id")
                 ->select('appointments.id', 'date', 'hour', 'users.name as doctor', 'patients.name as paciente')
                 ->paginate(7);
         } else {
@@ -37,7 +38,8 @@ class AppointmentController extends Controller
 
             $appointments = Appointment::join("dentists", "dentists.id", "=", "appointments.dentist_id")
                 ->join("patients", "patients.id", "=", "appointments.patient_id")
-                ->select('appointments.id', 'date', 'hour', 'dentists.id as doctor', 'patients.name as paciente')
+                ->join("users", "users.id", "=", "dentists.user_id")
+                ->select('appointments.id', 'date', 'hour', 'users.name as doctor', 'patients.name as paciente')
                 ->paginate(7);
         }
         return Inertia::render('Appointment/Index', compact("appointments"));
@@ -51,10 +53,12 @@ class AppointmentController extends Controller
     public function create()
     {
         $patients = Patient::get();
-        $dentists = Dentist::get();
+        $dentists = User::join('dentists','dentists.user_id','=','users.id')
+        ->get();
         $treatments = Treatment::get();
         $currentDate = Carbon::now()->toDateString();
 
+        //dd($dentists);
         return Inertia::render('Appointment/Create', compact('patients', 'dentists', 'treatments', 'currentDate'));
     }
 
@@ -83,7 +87,8 @@ class AppointmentController extends Controller
 
         if (count($cita) > 0) {
             $message = "El doctor ya tiene una cita asignada en ese horario";
-            return redirect()->back()->with('status', $message);
+            return("ocupado");
+            //return redirect()->back()->with('status', $message);
         } else {
             $appointment = new Appointment();
             $appointment->date = $request->get('date');
@@ -95,20 +100,21 @@ class AppointmentController extends Controller
             $appointment->save();
 
             if ($request->get('list')) {
+
                 /**si hay tratamientos */
                 $aux = $request->get('list');
 
                 $cont = 0;
 
-                while ($cont < count($aux)) {
 
+
+                while ($cont < count($aux)) {
                     $appointmentTrea = new AppointmentTreatment();
                     $appointmentTrea->appointment_id = $appointment->id;
                     $appointmentTrea->treatment_id = $aux[$cont]['treatment_id'];
                     $appointmentTrea->price = $aux[$cont]['price'];
                     $appointmentTrea->observation = $aux[$cont]['observation'];
                     $appointmentTrea->save();
-
                     $cont++;
                 }
             }
@@ -126,17 +132,22 @@ class AppointmentController extends Controller
      */
     public function show($id)
     {
+        
         $appointment = Appointment::findOrFail($id);
-        $appointment['dentist'] = Dentist::findOrFail($appointment->dentist_id);
+        $doctor=User::join('dentists','dentists.user_id','=','users.id')
+        ->where('dentists.id','=',$appointment->dentist_id)
+        ->get();
+        $appointment['dentist'] = $doctor[0];
         $appointment['patient'] = Patient::findOrFail($appointment->patient_id);
         $appointment['state'] = State::findOrFail($appointment->state_id);
 
         $appTrea =  AppointmentTreatment
             ::join("treatments", "treatments.id", "=", "treatment_id")
-            ->select('treatments.id as treatment_id', 'treatments.name as treatment_name', 'observation', 'price')
+            ->select('treatments.id as treatment_id', 'treatments.name as treatment_name', 'appointment_treatment.observation as observation', 'appointment_treatment.price as price')
             ->where("appointment_id", "=", $id)
             ->get();
 
+        //echo($doctor);
         return Inertia::render('Appointment/Show', compact('appointment', 'appTrea'));
     }
 
@@ -150,7 +161,8 @@ class AppointmentController extends Controller
     {
         $patients = Patient::get();
 
-        $dentists = Dentist::get();
+        $dentists = User::join('dentists','dentists.user_id','=','users.id')
+        ->get();
 
         $treatments = Treatment::get();
         $states = State::get();
@@ -159,7 +171,7 @@ class AppointmentController extends Controller
         $appointment = Appointment::findOrFail($id);
 
         $appTreat = AppointmentTreatment::join("treatments", "treatments.id", "=", "treatment_id")
-            ->select('treatments.id as treatment_id', 'treatments.name as treatment_name', 'observation', 'price')
+            ->select('treatments.id as treatment_id', 'treatments.name as treatment_name', 'appointment_treatment.observation as observation', 'appointment_treatment.price as price')
             ->where("appointment_id", "=", $id)
             ->get();
 
@@ -189,13 +201,15 @@ class AppointmentController extends Controller
         $cita = Appointment::where('dentist_id', '=', $request->get('dentist_id'))
             ->whereDate('date', $request->get('date'))
             ->whereTime('hour', $request->get('time'))
+            ->where('id', '!=', $id)
             ->select('dentist_id')
             ->get();
 
 
         if (count($cita) > 0) {
             $message = "El doctor ya tiene una cita asignada en ese horario";
-            return redirect()->back()->with('status', $message);
+            return("ocupado");
+            //return redirect()->back()->with('status', $message);
         } else {
             $appointment = Appointment::findOrFail($id);
             $appointment->date = $request->get('date');
@@ -217,14 +231,14 @@ class AppointmentController extends Controller
 
                 $cont = 0;
                 while ($cont < count($aux)) {
-                    if ($aux[$cont]['count'] > 0) {
-                        $appointmentTrea = new AppointmentTreatment();
-                        $appointmentTrea->appointment_id = $appointment->id;
-                        $appointmentTrea->treatment_id = $aux[$cont]['treatment_id'];
-                        $appointmentTrea->price = $aux[$cont]['price'];
-                        $appointmentTrea->observation = $aux[$cont]['observation'];
-                        $appointmentTrea->save();
-                    }
+
+                    $appointmentTrea = new AppointmentTreatment();
+                    $appointmentTrea->appointment_id = $appointment->id;
+                    $appointmentTrea->treatment_id = $aux[$cont]['treatment_id'];
+                    $appointmentTrea->price = $aux[$cont]['price'];
+                    $appointmentTrea->observation = $aux[$cont]['observation'];
+                    $appointmentTrea->save();
+
                     $cont++;
                 }
             }

@@ -10,7 +10,7 @@ class AppointmentTreatment extends Model
     use HasFactory;
 
     protected $table="appointment_treatment";
-    protected $primaryKey = ['appointment_id', 'treatment_id'];
+    //protected $primaryKey = ['appointment_id', 'treatment_id'];
 
     protected $fillable = [
         'price',

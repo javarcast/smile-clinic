@@ -10,7 +10,7 @@
             <label class="block text-left w-full">
                 <span class="text-gray-700">Doctor</span>
                 <input type="text" disabled class="form-select block w-full mt-1 rounded-md shadow-sm border-gray-200 "
-                    :value="appointment.dentist.id" />
+                    :value="appointment.dentist.name" />
             </label>
         </div>
         <div class="flex justify-between text-center">
@@ -37,7 +37,7 @@
         <thead>
             <tr>
                 <th class="border px-4 py-2">Tratamiento</th>
-                <th class="border md-table-cell px-4 py-2">Cantidad</th>
+                <th class="border md-table-cell px-4 py-2">Observación</th>
                 <th class="border d-table-cell px-4 py-2">Costo Unitario</th>
             </tr>
         </thead>

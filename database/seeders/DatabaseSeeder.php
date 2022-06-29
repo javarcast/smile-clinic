@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\DiseaseType;
+use App\Models\Specialty;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\User;
@@ -43,5 +44,7 @@ class DatabaseSeeder extends Seeder
                         'role_id' => 2,
                         'id'=> '20624646',
                     ]);
+
+            $this->call([SpecialtySeeder::class]);
     }
 }

@@ -24,7 +24,7 @@
                                 class="form-select block w-full mt-1 rounded-md shadow-sm">
                                 <option selected value="">Selecciona Doctor</option>
                                 <option v-for="dentist in dentists" :key="dentist.id" :value="dentist.id">
-                                    {{ dentist.id }}
+                                    {{ dentist.name }}
                                 </option>
                             </select>
                         </label>
