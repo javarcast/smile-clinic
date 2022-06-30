@@ -18,6 +18,7 @@ const form = useForm({
   address: "",
   password: "",
   password_confirmation: "",
+  specialty_id: -1,
   role_id: -1,
   terms: false,
 });
@@ -26,7 +27,7 @@ const getIDNumber = () => {
   form.id = parseInt(form.id);
 };
 
-const props = defineProps(["roles"]);
+const props = defineProps(["roles", "specialties"]);
 
 const submit = () => {
   getIDNumber();
@@ -138,7 +139,21 @@ const submit = () => {
               class="form-input w-full rounded bg-slate-50"
             />
           </div>
-          
+          <div v-if="form.role_id === 2" class="container-input">
+            <label class="block text-left w-full">
+              <span class="text-gray-700">Especialidad del Odontologo</span>
+              <select
+                required
+                v-model="form.specialty_id"
+                class="form-input w-full rounded bg-slate-50"
+              >
+                <option selected value="-1">Selecciona una Especialidad</option>
+                <option v-for="specialty in specialties" :key="specialty.id" :value="specialty.id">
+                  {{ specialty.name }}
+                </option>
+              </select>
+            </label>
+          </div>
 
           <div
             v-if="$page.props.jetstream.hasTermsAndPrivacyPolicyFeature"
@@ -176,14 +191,14 @@ const submit = () => {
             <button class="btn-primary btn-black mr-2">
               Crear
             </button>
-            <Link 
+            <Link
               class="btn-primary btn-white shadow-lg ml-2"
               :href="route('usuarios.index')"
             >
               Cancelar</Link
             >
           </div>
-          
+
         </form>
       </div>
     </div>

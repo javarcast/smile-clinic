@@ -1,70 +1,34 @@
 <template>
-    <dashboard-layout>
-      <div class="md:col-span-4 mt-1">
-        <div class="shadow bg-white md:rounded-md p-4">
-          <form-errors :errors="errors"></form-errors>
-          <form @submit.prevent="submit">
-            <label class="block font-medium text-sm text-gray-700"
-              >Nombre</label
-            >
-            <input
-              :class="{ error: isActive, 'text-danger': hasError }"
-              type="text"
-              v-model="form.name"
-              required
-              class="form-input w-full rounded-md shadow-sm"
-            />
+  <dashboard-layout>
+    <div class="md:col-span-4 mt-1">
+      <div class="shadow bg-white md:rounded-md p-4">
+        <form-errors :errors="errors"></form-errors>
+        <form @submit.prevent="submit" class="flex flex-col items-center">
+          <label for="name" class="w-3/5 block font-medium text-sm text-gray-700 my-3">Nombre
+            <input :class="{ error: isActive, 'text-danger': hasError }" type="text" v-model="form.name" required
+              class="form-input w-full rounded-md shadow-sm block" id="name" />
+          </label>
 
-            <label class="block font-medium text-sm text-gray-700"
-              >Descripción</label
-            >
-            <input
-              type="text"
-              v-model="form.description"
-              required
-              class="form-input w-full rounded-md shadow-sm"
-            />
-            <label class="block font-medium text-sm text-gray-700">Precio</label>
-            <input
-              type="text"
-              v-model="form.price"
-              required
-              class="form-input w-full rounded-md shadow-sm"
-            />
-            <button
-              class="
-                bg-blue-500
-                hover:bg-blue-700
-                rounded-md
-                text-white
-                font-bold
-                mt-2
-                py-2
-                px-4
-              "
-            >
+          <label for="description" class="w-3/5 block font-medium text-sm text-gray-700 mb-3">Descripción
+            <input type="text" v-model="form.description" required class="form-input w-full rounded-md shadow-sm"
+              id="description" />
+          </label>
+
+          <label for="price" class="w-3/5 block font-medium text-sm text-gray-700 mb-3">Precio
+            <input type="number" v-model="form.price" required class="form-input w-full rounded-md shadow-sm" id="price"/>
+          </label>
+
+          <div class="btn-opt">
+            <button class="btn-primary btn-black mr-2">
               Crear
             </button>
-            <Link
-              class="
-                bg-gray-200
-                w-1/12
-                hover:bg-blue-700 hover:text-white
-                rounded-md
-                text-black
-                mt-2
-                ml-2
-                py-2
-                px-4
-              "
-              :href="route('tratamientos.index')"
-            >
-              Cancelar</Link
-            >
-          </form>
-        </div>
+            <Link class="btn-primary btn-white shadow-lg ml-2" :href="route('tratamientos.index')">
+            Cancelar</Link>
+          </div>
+        </form>
       </div>
-    </dashboard-layout>
+    </div>
+  </dashboard-layout>
 </template>
 
 <script>
