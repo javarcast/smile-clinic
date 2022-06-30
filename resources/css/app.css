@@ -69,3 +69,17 @@
 .title-cal{
     margin-bottom: 50px;
 }
+@media(max-width:767px){
+    .calculator{
+        display: flex;
+        flex-direction: column;
+    }
+    .calculator .calculator-col{
+        width: 100%;
+        padding: 0;
+        margin-bottom: 10px;
+    }
+    .table-col{
+        overflow: scroll;
+    }
+}

@@ -13,6 +13,7 @@
                     uppercase
                     tracking-wider
                     w-9/12
+                    tratamiento
                   "
                 >
                   Tratamiento
@@ -67,12 +68,10 @@
             <tbody class="bg-white divide-y divide-gray-200">
               
               <tr v-for="treatment in treatmentsSelected" :key="treatment.id">
-                <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="ml-4">
-                      <div class="text-sm font-medium text-gray-900">
+                <td class="px-6 py-4 tratamiento">
+                      <div  class="text-sm font-medium text-gray-900">
                         {{treatment.name}}
                       </div>
-                    </div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
                   <input  v-model="treatment.count" min="1" value="1" class="border border-gray-300 w-20 rounded" type="number" name="count">

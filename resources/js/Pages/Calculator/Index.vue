@@ -2,8 +2,8 @@
     <DashboardLayout>
         <div class="md:col-span-4 mt-1">
             <h2 class="text-2xl md:text-3xl text-slate-800 font-bold title-cal">Calculadora</h2>
-            <div class="flex justify-between">
-                <div class="w-1/3 pr-4">
+            <div class="flex justify-between calculator">
+                <div class="w-1/3 pr-4 calculator-col">
                     <div class="flex justify-between">
                       <h3 class="text-2xl md:text-xl text-slate-800 font-bold  mb-4">Tratamientos</h3>
                       <!-- <input
@@ -27,7 +27,7 @@
 
                     </div>
                 </div>
-                <div class="w-2/3 pl-4 ">
+                <div class="w-2/3 pl-4 calculator-col table-col">
                     <h3 class="text-2xl md:text-xl text-slate-800 font-bold text-center">Presupuesto</h3>
                      <facture-table  :treatmentsSelected="getTreatments"></facture-table>
                 </div>
