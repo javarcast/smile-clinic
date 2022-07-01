@@ -151,6 +151,16 @@ p {
     border: 0px solid #000000;
     padding: 15px;
   }
+  .home{
+    display: flex;
+    flex-direction: column;
+    background-image: url("/smile-clinic/resources/images/Home.png");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100%;
+  }
 @media (max-width:350px) {
   .treatment-options{
     display: flex;

@@ -1,14 +1,14 @@
 <template>
 
     <Head title="Register" />
-    <div class="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
+   
+    <jet-registro-container>
+ <div class="flex items-center justify-between -ml-6 h-16 ">
         <!-- button go back to  -->
         <Link href="/">
         <img class="go-back-to" src="../../../images/go-back-to.png" alt="">
         </Link>
     </div>
-    <jet-registro-container>
-
         <jet-validation-errors class="mb-4" />
 
         <form-register-1 />
