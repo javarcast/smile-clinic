@@ -18,7 +18,9 @@ class AppointmentRequestController extends Controller
     public function index()
     {
         $requests = AppointmentRequest::where('status','=', false)->get();
-
+        foreach ($requests as $key => $value) {
+            $value['user'] = User::findOrFail($value->client_id);
+        }
         return Inertia::render('Request/Index', compact('requests'));
     }
 
@@ -56,7 +58,7 @@ class AppointmentRequestController extends Controller
             $appointment_request->save();
             DB::commit();
             $message = "La Solicitud ".$appointment_request->id." ha sido Creado";
-            return redirect()->route('request.index')->with('status', $message);
+            return redirect()->route('solicitudes.index')->with('status', $message);
         }catch(\Exception $e) {
             DB::rollBack();
             return $e;
@@ -72,9 +74,10 @@ class AppointmentRequestController extends Controller
     public function show($id)
     {
         $appointment_request = AppointmentRequest::findOrFail($id);
-
+        $appointment_request['user'] = User::findOrFail($appointment_request->client_id);
         return Inertia::render('Request/Show', compact('appointment_request'));
     }
+  
 
     /**
      * Show the form for editing the specified resource.
@@ -85,7 +88,7 @@ class AppointmentRequestController extends Controller
     public function edit( $id)
     {
         $appointment_request = AppointmentRequest::findOrFail($id);
-
+        $appointment_request['user'] = User::findOrFail($appointment_request->client_id);
         return Inertia::render('Request/Edit', compact('appointment_request'));
     }
 
@@ -120,7 +123,7 @@ class AppointmentRequestController extends Controller
             $appointment_request->save();
             DB::commit();
             $message = "La Solicitud ".$appointment_request->id." ha sido Actualizada";
-            return redirect()->route('request.index')->with('status', $message);
+            return redirect()->route('solicitudes.index')->with('status', $message);
         }catch(\Exception $e) {
             DB::rollBack();
             return $e;

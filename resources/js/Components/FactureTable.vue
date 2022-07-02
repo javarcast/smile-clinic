@@ -1,5 +1,5 @@
 <template>
-          <table class="mt-2 w-11/12 p-5 ml-2 divide-y divide-gray-200">
+          <table class=" w-11/12 p-5  divide-y divide-gray-200">
             <thead class="bg-gray-50">
               <tr>
                 <th
@@ -74,7 +74,7 @@
                       </div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                  <input  v-model="treatment.count" min="1" value="1" class="border border-gray-300 w-20 rounded" type="number" name="count">
+                  <input  v-model="treatment.count" min="1" class="border border-gray-300 w-20 rounded" type="number" name="count">
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
                   <div class="text-sm text-gray-500">${{ treatment.price}}</div>
@@ -115,6 +115,8 @@
 
 <script setup>
   import { defineComponent,  computed, ref} from "vue";
+  import { defineProps } from "vue";
+
   const props = defineProps(["treatmentsSelected"]);
 
   

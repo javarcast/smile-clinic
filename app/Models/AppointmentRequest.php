@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
 class AppointmentRequest extends Model
 {
@@ -17,4 +18,8 @@ class AppointmentRequest extends Model
         'date_appointment',
         'status',
     ];
+
+    public function user() {
+        return $this->belongsTo(User::class, 'client_id');
+    }
 }
