@@ -27,11 +27,11 @@
         <td class="px-4 py-2 border text-center">
           <Link :href="route('historial.show', history.id)"><i class="far fa-eye text-green-600"></i> </Link>
         </td>
-        <td  class="px-4 py-2 border">
-          <Link :href="route('historial.edit', history.id)"><i class="fas fa-edit text-blue-600"></i> </Link>
+        <td v-if="$page.props.user.role_id===1" class="px-4 py-2 border">
+          <Link  :href="route('historial.edit', history.id)"><i class="fas fa-edit text-blue-600"></i> </Link>
         </td>
-        <td  class="px-4 py-2 border">
-          <a href="#" @click.prevent="destroy(history.id)"><i class="fas fa-trash-alt text-red-600"></i></a>
+        <td v-if="$page.props.user.role_id===1" class="px-4 py-2 border">
+          <a  href="#" @click.prevent="destroy(history.id)"><i class="fas fa-trash-alt text-red-600"></i></a>
         </td>
       </tr>
     </tbody>

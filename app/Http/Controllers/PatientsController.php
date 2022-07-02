@@ -23,11 +23,15 @@ class PatientsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $patients = Patient::all();
-
-        return Inertia::render('Patient/Index', compact('patients'));
+        // $patients = Patient::where('name', 'LIKE', "%$request->q%")->paginate(11);
+        if ($request->q) {
+            return "hola";
+        } else {
+            return Inertia::render('Patient/Index', compact('patients'));
+        }
     }
 
     /**

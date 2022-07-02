@@ -21,27 +21,100 @@ class AppointmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        if (auth()->user()->id != 1) {
-            //Es doctor
-            $appointments = Appointment::join("dentists", "dentist.id", "=", "appointments.dentist_id")
-                ->join("patients", "patients.id", "=", "appointments.patient_id")
-                ->where([
-                    ['users.id', '=', auth()->user()->id]
-                ])
-                ->join("users", "users.id", "=", "dentists.user_id")
-                ->select('appointments.id', 'date', 'hour', 'users.name as doctor', 'patients.name as paciente')
-                ->paginate(7);
-        } else {
-            //es Admin
+        $myString = $request->aux;
+        $myArray = explode('.', $myString);
 
-            $appointments = Appointment::join("dentists", "dentists.id", "=", "appointments.dentist_id")
-                ->join("patients", "patients.id", "=", "appointments.patient_id")
-                ->join("users", "users.id", "=", "dentists.user_id")
-                ->select('appointments.id', 'date', 'hour', 'users.name as doctor', 'patients.name as paciente')
-                ->paginate(7);
+        if (count($myArray) > 1) {
+            // Filtramos por
+            // nombre de paciente y fecha
+            // o
+            // Id de paciente y fecha 
+            if (auth()->user()->role_id != 1) {
+
+                if (auth()->user()->role_id == 2) {
+                    $appointments = Appointment::join("dentists", "dentists.id", "=", "appointments.dentist_id")
+                        ->join("patients", "patients.id", "=", "appointments.patient_id")
+                        ->join("users", "users.id", "=", "dentists.user_id")
+                        ->where([
+                            ['dentists.user_id', '=', auth()->user()->id],
+                            ['patients.name', 'LIKE', "%$myArray[0]%"],
+                            ['appointments.date', 'LIKE', "%$myArray[1]%"],
+                        ])
+                        ->orWhere([
+                            ['dentists.user_id', '=', auth()->user()->id],
+                            ['patients.dni', 'LIKE', "%$myArray[0]%"],
+                            ['appointments.date', 'LIKE', "%$myArray[1]%"],
+                        ])
+                        ->select('appointments.id', 'date', 'hour', 'users.name as doctor', 'patients.name as paciente')
+                        ->paginate(7);
+                } //Es Doctor
+                else {
+                    //es paciente
+                    $appointments = Appointment::join("dentists", "dentists.id", "=", "appointments.dentist_id")
+                        ->join("patients", "patients.id", "=", "appointments.patient_id")
+                        ->join("users", "users.id", "=", "dentists.user_id")
+                        ->where([
+                            ['patients.user_id', '=', auth()->user()->id],
+                            ['users.name', 'LIKE', "%$myArray[0]%"],
+                            ['appointments.date', 'LIKE', "%$myArray[1]%"],
+                        ])
+                        ->select('appointments.id', 'date', 'hour', 'users.name as doctor', 'patients.name as paciente')
+                        ->paginate(7);
+                }
+            } else {
+                //Es Admin
+                $appointments = Appointment::join("dentists", "dentists.id", "=", "appointments.dentist_id")
+                    ->join("patients", "patients.id", "=", "appointments.patient_id")
+                    ->join("users", "users.id", "=", "dentists.user_id")
+                    ->where([
+                        ['patients.name', 'LIKE', "%$myArray[0]%"],
+                        ['appointments.date', 'LIKE', "%$myArray[1]%"],
+                    ])
+                    ->orWhere([
+                        ['patients.dni', 'LIKE', "%$myArray[0]%"],
+                        ['appointments.date', 'LIKE', "%$myArray[1]%"],
+                    ])
+                    ->orWhere([
+                        ['users.name', 'LIKE', "%$myArray[0]%"],
+                        ['appointments.date', 'LIKE', "%$myArray[1]%"],
+                    ])
+                    ->select('appointments.id', 'date', 'hour', 'users.name as doctor', 'patients.name as paciente')
+                    ->paginate(7);
+            }
+        } else {
+            // no hay filtro
+
+            if (auth()->user()->role_id != 1) {
+                //Es doctor o paciente
+                $appointments = Appointment::join("dentists", "dentists.id", "=", "appointments.dentist_id")
+                    ->join("patients", "patients.id", "=", "appointments.patient_id")
+                    ->join("users", "users.id", "=", "dentists.user_id")
+                    ->where([
+                        ['patients.user_id', '=', auth()->user()->id]
+                    ])
+                    ->orWhere([
+                        ['dentists.user_id', '=', auth()->user()->id]
+                    ])
+                    ->select('appointments.id', 'date', 'hour', 'users.name as doctor', 'patients.name as paciente')
+                    ->paginate(7);
+            } else {
+                //es Admin
+
+                $appointments = Appointment::join("dentists", "dentists.id", "=", "appointments.dentist_id")
+                    ->join("patients", "patients.id", "=", "appointments.patient_id")
+                    ->join("users", "users.id", "=", "dentists.user_id")
+                    ->select('appointments.id', 'date', 'hour', 'users.name as doctor', 'patients.name as paciente')
+                    ->paginate(7);
+            }
         }
+
+
+
+
+
+
         return Inertia::render('Appointment/Index', compact("appointments"));
     }
 
@@ -53,8 +126,8 @@ class AppointmentController extends Controller
     public function create()
     {
         $patients = Patient::get();
-        $dentists = User::join('dentists','dentists.user_id','=','users.id')
-        ->get();
+        $dentists = User::join('dentists', 'dentists.user_id', '=', 'users.id')
+            ->get();
         $treatments = Treatment::get();
         $currentDate = Carbon::now()->toDateString();
 
@@ -87,7 +160,7 @@ class AppointmentController extends Controller
 
         if (count($cita) > 0) {
             $message = "El doctor ya tiene una cita asignada en ese horario";
-            return("ocupado");
+            return ("ocupado");
             //return redirect()->back()->with('status', $message);
         } else {
             $appointment = new Appointment();
@@ -132,11 +205,11 @@ class AppointmentController extends Controller
      */
     public function show($id)
     {
-        
+
         $appointment = Appointment::findOrFail($id);
-        $doctor=User::join('dentists','dentists.user_id','=','users.id')
-        ->where('dentists.id','=',$appointment->dentist_id)
-        ->get();
+        $doctor = User::join('dentists', 'dentists.user_id', '=', 'users.id')
+            ->where('dentists.id', '=', $appointment->dentist_id)
+            ->get();
         $appointment['dentist'] = $doctor[0];
         $appointment['patient'] = Patient::findOrFail($appointment->patient_id);
         $appointment['state'] = State::findOrFail($appointment->state_id);
@@ -161,8 +234,8 @@ class AppointmentController extends Controller
     {
         $patients = Patient::get();
 
-        $dentists = User::join('dentists','dentists.user_id','=','users.id')
-        ->get();
+        $dentists = User::join('dentists', 'dentists.user_id', '=', 'users.id')
+            ->get();
 
         $treatments = Treatment::get();
         $states = State::get();
@@ -208,7 +281,7 @@ class AppointmentController extends Controller
 
         if (count($cita) > 0) {
             $message = "El doctor ya tiene una cita asignada en ese horario";
-            return("ocupado");
+            return ("ocupado");
             //return redirect()->back()->with('status', $message);
         } else {
             $appointment = Appointment::findOrFail($id);

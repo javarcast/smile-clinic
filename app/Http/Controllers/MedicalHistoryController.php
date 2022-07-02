@@ -24,9 +24,19 @@ class MedicalHistoryController extends Controller
      */
     public function index()
     {
-        $histories = MedicalHistory::join("patients", "patients.id", "=", "medical_histories.patient_id")
-            ->select('medical_histories.id as id', 'medical_histories.updated_at as fecha', 'patients.id as pacienteID', 'patients.name as paciente')
-            ->paginate(70);
+        if (auth()->user()->rol_id == 3) {
+
+            $histories = MedicalHistory::join("patients", "patients.id", "=", "medical_histories.patient_id")
+                ->select('medical_histories.id as id', 'medical_histories.updated_at as fecha', 'patients.id as pacienteID', 'patients.name as paciente')
+                ->where([
+                    ['patients.user_id', '=', auth()->user()->id]
+                ])
+                ->paginate(70);
+        } else {
+            $histories = MedicalHistory::join("patients", "patients.id", "=", "medical_histories.patient_id")
+                ->select('medical_histories.id as id', 'medical_histories.updated_at as fecha', 'patients.id as pacienteID', 'patients.name as paciente')
+                ->paginate(70);
+        }
 
         return Inertia::render('MedicalHistory/Index', compact("histories"));
     }
@@ -86,7 +96,7 @@ class MedicalHistoryController extends Controller
 
                     $radiography = Radiography::where('name', '=', $imagen)
                         ->get();
-                    if (count($radiography)>0) {
+                    if (count($radiography) > 0) {
                         if (File::exists("images/radiografias/" . $radiography[0]->name)) {
                             File::delete("images/radiografias/" . $radiography[0]->name);
                             $radiography[0]->delete();

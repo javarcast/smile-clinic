@@ -6,7 +6,9 @@
                 <div class="flex justify-evenly gap-x-1">
                     <input v-if="$page.props.user.role_id === 1" type="text" class="form-input rounded-md shadow-sm"
                         placeholder="Buscar ..." v-model="q" />
-                    <input v-else type="text" class="form-input rounded-md shadow-sm" placeholder="Buscar Paciente..."
+                    <input v-if="$page.props.user.role_id === 2" type="text" class="form-input rounded-md shadow-sm" placeholder="Buscar Paciente..."
+                        v-model="q" />
+                         <input v-if="$page.props.user.role_id === 3" type="text" class="form-input rounded-md shadow-sm" placeholder="Buscar Doctor..."
                         v-model="q" />
                     <label class="flex items-center block text-left">
                         <span class="text-gray-700 pr-1">Buscar Fecha</span>

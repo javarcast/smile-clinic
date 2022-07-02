@@ -36,7 +36,7 @@ export default defineComponent({
           <h2 class="text-2xl md:text-3xl text-slate-800 font-bold">Historial</h2>
           <div class="flex">
             <input type="text" class="form-input rounded mr-2" placeholder="Buscar..." v-model="q" />
-            <Link :href="route('historial.create')" class="btn-primary btn-black"><i class="fa-solid fa-plus"></i>
+            <Link v-if="$page.props.user.role_id===1" :href="route('historial.create')" class="btn-primary btn-black"><i class="fa-solid fa-plus"></i>
             Crear Historial</Link>
           </div>
 
