@@ -11,9 +11,9 @@ const props = defineProps(["patients"]);
 const q = ref("");
 var aux = "";
 watch(q, (value) => {
-    q.value = value;
+    let auxQ = value;
     console.log("hola " + q.value);
-    //this.$inertia.replace(this.route("pacientes.index", {q:value} ));
+    //this.$inertia.replace(this.route("pacientes.index", { auxQ }));
 });
 </script>
 

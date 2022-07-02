@@ -35,7 +35,7 @@ export default defineComponent({
         <div class="flex justify-between treatment-options">
           <h2 class="text-2xl md:text-3xl text-slate-800 font-bold">Historial</h2>
           <div class="flex">
-            <input type="text" class="form-input rounded mr-2" placeholder="Buscar..." v-model="q" />
+            <input v-if="$page.props.user.role_id!==3" type="text" class="form-input rounded mr-2" placeholder="Buscar Paciente..." v-model="q" />
             <Link v-if="$page.props.user.role_id===1" :href="route('historial.create')" class="btn-primary btn-black"><i class="fa-solid fa-plus"></i>
             Crear Historial</Link>
           </div>

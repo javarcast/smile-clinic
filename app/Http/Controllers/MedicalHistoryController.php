@@ -11,6 +11,7 @@ use App\Models\PatientDisease;
 use App\Models\Radiography;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\File;
@@ -22,9 +23,9 @@ class MedicalHistoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        if (auth()->user()->rol_id == 3) {
+        if (auth()->user()->role_id == 3) {
 
             $histories = MedicalHistory::join("patients", "patients.id", "=", "medical_histories.patient_id")
                 ->select('medical_histories.id as id', 'medical_histories.updated_at as fecha', 'patients.id as pacienteID', 'patients.name as paciente')
@@ -34,7 +35,8 @@ class MedicalHistoryController extends Controller
                 ->paginate(70);
         } else {
             $histories = MedicalHistory::join("patients", "patients.id", "=", "medical_histories.patient_id")
-                ->select('medical_histories.id as id', 'medical_histories.updated_at as fecha', 'patients.id as pacienteID', 'patients.name as paciente')
+            ->where('patients.name','LIKE',"%$request->q%")    
+            ->select('medical_histories.id as id', 'medical_histories.updated_at as fecha', 'patients.id as pacienteID', 'patients.name as paciente')
                 ->paginate(70);
         }
 

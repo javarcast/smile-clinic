@@ -65,6 +65,7 @@ class AppointmentController extends Controller
                 }
             } else {
                 //Es Admin
+                
                 $appointments = Appointment::join("dentists", "dentists.id", "=", "appointments.dentist_id")
                     ->join("patients", "patients.id", "=", "appointments.patient_id")
                     ->join("users", "users.id", "=", "dentists.user_id")

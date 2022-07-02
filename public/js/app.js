@@ -42737,8 +42737,8 @@ __webpack_require__.r(__webpack_exports__);
     var q = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)("");
     var aux = "";
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.watch)(q, function (value) {
-      q.value = value;
-      console.log("hola " + q.value); //this.$inertia.replace(this.route("pacientes.index", {q:value} ));
+      var auxQ = value;
+      console.log("hola " + q.value); //this.$inertia.replace(this.route("pacientes.index", { auxQ }));
     });
     var __returned__ = {
       title: title,
@@ -51312,17 +51312,18 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_DashboardLayout, null, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [_ctx.$page.props.user.role_id !== 3 ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("input", {
+        key: 0,
         type: "text",
         "class": "form-input rounded mr-2",
-        placeholder: "Buscar...",
+        placeholder: "Buscar Paciente...",
         "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
           return _ctx.q = $event;
         })
       }, null, 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.q]]), _ctx.$page.props.user.role_id === 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Link, {
-        key: 0,
+      )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.q]]) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.$page.props.user.role_id === 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Link, {
+        key: 1,
         href: _ctx.route('historial.create'),
         "class": "btn-primary btn-black"
       }, {

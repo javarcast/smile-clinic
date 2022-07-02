@@ -27,7 +27,7 @@ class PatientsController extends Controller
     {
         $patients = Patient::all();
         // $patients = Patient::where('name', 'LIKE', "%$request->q%")->paginate(11);
-        if ($request->q) {
+        if ($request->auxQ) {
             return "hola";
         } else {
             return Inertia::render('Patient/Index', compact('patients'));
