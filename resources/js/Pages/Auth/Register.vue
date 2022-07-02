@@ -4,7 +4,7 @@
     <div class="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
         <!-- button go back to  -->
         <Link href="/">
-        <img class="go-back-to" src="../../../images/go-back-to.png" alt="">
+        <img class="go-back-to" src="" alt="">
         </Link>
     </div>
     <jet-registro-container>
