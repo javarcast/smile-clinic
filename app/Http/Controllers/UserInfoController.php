@@ -208,7 +208,7 @@ class UserInfoController extends Controller
             ])->save();
         }
         if($request['role_id']=== 2) {
-            if(!Dentist::findOrFail($request['id'])) {
+            if(!Dentist::Where('user_id','=', $request['id'])->get()) {
                 $dentist = new Dentist();
                 $specialty = Specialty::findOrFail($request['specialty_id']);
                 $dentist->user()->associate($user);
