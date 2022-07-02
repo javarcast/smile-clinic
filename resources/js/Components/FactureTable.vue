@@ -1,5 +1,5 @@
 <template>
-          <table class="mt-2 w-11/12 p-5 ml-2 divide-y divide-gray-200">
+          <table class=" w-11/12 p-5  divide-y divide-gray-200">
             <thead class="bg-gray-50">
               <tr>
                 <th
@@ -115,6 +115,8 @@
 
 <script setup>
   import { defineComponent,  computed, ref} from "vue";
+  import { defineProps } from "vue";
+
   const props = defineProps(["treatmentsSelected"]);
 
   

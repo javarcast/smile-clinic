@@ -6,7 +6,7 @@ use App\Http\Controllers\TreatmentController;
 
 use App\Http\Controllers\StadisticsController;
 use App\Http\Controllers\PageController;
-
+use App\Http\Controllers\AppointmentRequestController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -36,6 +36,7 @@ Route::resource('pacientes', PatientsController::class)->middleware(['role:1', '
 Route::resource('tratamientos', TreatmentController::class)->middleware(['role:1', 'auth:sanctum']);
 Route::resource('estadisticas', StadisticsController::class)->middleware(['role:1','auth:sanctum']);
 Route::get('calculadora',  [PageController::class, 'calculator'])->middleware(['role:1','auth:sanctum'])->name('calculadora');
+Route::resource('solicitudes', AppointmentRequestController::class)->middleware(['role:1','auth:sanctum']);
 
 
 Route::middleware([
