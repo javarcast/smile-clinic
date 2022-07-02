@@ -60,15 +60,27 @@ class UserInfoController extends Controller
     public function store(Request $request)
     {
 
-        Validator::make($request->all(), [
-            'id' => ['required', 'numeric', 'unique:users'],
-            'role_id' => ['required', 'numeric'],
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'address' => ['required', 'string'],
+        $message = [
+            'required' => 'El campo :attribute es requerido.',
+            'string' => 'El campo :attribute debe ser una cadena.',
+            'numeric' => 'El campo :attribute debe ser numerico.',
+            'email' => 'El campo :attribute debe ser un email',
+            'min' => 'El campo :attribute debe ser minimo :min',
+            'max' => 'El campo :attribute debe ser maximo :max',
+            'unique' => 'El valor del campo :attribute ya esta en uso', 
+            'confirmed' => 'El campo :attribute no coincide',
+        ];
+        $request->validate([
+
+            'name' => ['required', 'string'],
+            'email' => ['required', 'email', 'unique:users'],
             'phone_number' => ['required', 'string'],
-            'password' => $this->passwordRules(),
-        ])->validate();
+            'address' => ['required', 'string'],
+            'id' => ['required', 'numeric', 'unique:users'],
+            'photo' => 'nullable|mimes:jpg,jpeg,png|max:1024',
+            'role_id' => 'required|min:0|numeric',
+            'password'=> 'confirmed|min:8'
+        ],$message);
 
         if($request['role_id'] == 2) {
             Validator::make($request->all(), [
@@ -138,8 +150,9 @@ class UserInfoController extends Controller
     {
         $UserShow = User::findOrFail($id);
         $roles = Role::all();
+        $specialties = Specialty::all();
 
-        return Inertia::render('Users/Edit', compact('UserShow', 'roles'));
+        return Inertia::render('Users/Edit', compact('UserShow', 'roles', 'specialties'));
     }
 
     /**
@@ -151,26 +164,31 @@ class UserInfoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::findOrFail($id);
 
-        if($request['password']) {
-            Validator::make($request, [
-                'current_password' => ['required', 'string'],
-                'password' => $this->passwordRules(),
-            ])->after(function ($validator) use ($user, $request) {
-                if (! isset($request['current_password']) || ! Hash::check($request['current_password'], $user->password)) {
-                    $validator->errors()->add('current_password', __('The provided password does not match your current password.'));
-                }
-            });
-        }
-        Validator::make($request->all(), [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
-            'phone_number' => ['required', 'string'],
-            'address' => ['required', 'string'],
-            'id' => ['required', 'numeric', Rule::unique('users')->ignore($user->id)],
-            'photo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:1024'],
-        ]);
+        $user = User::findOrFail($id);
+        $message = [
+            'required' => 'El campo :attribute es requerido.',
+            'string' => 'El campo :attribute debe ser una cadena.',
+            'numeric' => 'El campo :attribute debe ser numerico.',
+            'email' => 'El campo :attribute debe ser un email',
+            'min' => 'El campo :attribute debe ser minimo :min',
+            'max' => 'El campo :attribute debe ser maximo :max',
+            'unique' => 'El valor del campo :attribute ya esta en uso', 
+            'confirmed' => 'El campo :attribute no coincide',
+        ];
+
+        $request->validate([
+
+                'name' => ['required', 'string'],
+                'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
+                'phone_number' => ['required', 'string'],
+                'address' => ['required', 'string'],
+                'password' => 'confirmed|min:8',
+                'id' => ['required', 'numeric', Rule::unique('users')->ignore($user->id)],
+                'photo' => 'nullable|mimes:jpg,jpeg,png|max:1024',
+                'role_id' => 'required|min:0|numeric',
+            ],$message);
+
 
 
         if($request['password']) {
@@ -193,15 +211,15 @@ class UserInfoController extends Controller
                 'role_id' => $request['role_id'],
             ])->save();
         }
-
         if($request['role_id']=== 2) {
-            $dentist = new Dentist();
-            $specialty = Specialty::findOrFail($request['specialty_id']);
+            if(!Dentist::findOrFail($request['id'])) {
+                $dentist = new Dentist();
+                $specialty = Specialty::findOrFail($request['specialty_id']);
+                $dentist->user()->associate($user);
+                $dentist->specialty()->associate($specialty);
 
-            $dentist->user()->associate($user);
-            $dentist->specialty()->associate($specialty);
-
-            $dentist->save();
+                $dentist->save();
+            }
         }
 
 

@@ -1,12 +1,13 @@
 <script setup>
 import { Link, useForm } from "@inertiajs/inertia-vue3";
-import { ref, provide} from "vue";
+import { ref, provide, onMounted} from "vue";
 import DashboardLayout from "@/Layouts/DashboardLayout.vue";
 import JetValidationErrors from "@/Jetstream/ValidationErrors.vue";
 import JetButton from "@/Jetstream/Button.vue";
 import JetInput from "@/Jetstream/Input.vue";
 import JetCheckbox from "@/Jetstream/Checkbox.vue";
 import JetLabel from "@/Jetstream/Label.vue";
+import FormErrors from "@/Components/FormErrors.vue";
 const title = ref("Agregar Usuario");
 provide("title", title);
 
@@ -27,13 +28,14 @@ const getIDNumber = () => {
   form.id = parseInt(form.id);
 };
 
-const props = defineProps(["roles", "specialties"]);
+const props = defineProps(["roles", "specialties", 'errors']);
 
 const submit = () => {
   getIDNumber();
-  form.post(route("usuarios.store"), {
-    onFinish: () => form.reset("password", "password_confirmation"),
-  });
+      form.post(route("usuarios.store"), {
+        onFinish: () => form.reset("password", "password_confirmation"),
+      });
+
 };
 </script>
 <template>
@@ -42,6 +44,7 @@ const submit = () => {
       <h2 class="text-2xl md:text-3xl text-slate-800 font-bold">Agregar Usuario</h2>
       <hr class="my-6" />
       <div class="mt-4 bg-slate-50 shadow-lg rounded-sm border border-slate-200 relative px-4 py-4">
+        <form-errors :errors="errors"></form-errors>
         <form @submit.prevent="submit" class="create-user">
           <div class="container-input">
             <label class="block font-medium text-sm text-gray-700">DNI</label>
