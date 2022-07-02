@@ -64,18 +64,20 @@ class UserInfoController extends Controller
             'required' => 'El campo :attribute es requerido.',
             'string' => 'El campo :attribute debe ser una cadena.',
             'numeric' => 'El campo :attribute debe ser numerico.',
-            'email' => 'El campo :attribute debe ser un email'
+            'email' => 'El campo :attribute debe ser un email',
+            'min' => 'El campo :attribute debe ser minimo :min',
+            'max' => 'El campo :attribute debe ser maximo :max'
         ];
+        $request->validate([
 
-        Validator::make($request->all(), [
-            'id' => ['required', 'numeric', 'unique:users'],
-            'role_id' => ['required', 'numeric'],
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'address' => ['required', 'string'],
+            'name' => ['required', 'string'],
+            'email' => ['required', 'email'],
             'phone_number' => ['required', 'string'],
-            'password' => $this->passwordRules(),
-        ], $message)->validate();
+            'address' => ['required', 'string'],
+            'id' => ['required', 'numeric'],
+            'photo' => 'nullable|mimes:jpg,jpeg,png|max:1024',
+            'role_id' => 'required|min:0|numeric'
+        ],$message);
 
         if($request['role_id'] == 2) {
             Validator::make($request->all(), [
@@ -178,14 +180,19 @@ class UserInfoController extends Controller
                 }
             });
         }
-        Validator::make($request->all(), [
-            'name' => ['required', 'string'],
-            'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
-            'phone_number' => ['required', 'string'],
-            'address' => ['required', 'string'],
-            'id' => ['required', 'numeric', Rule::unique('users')->ignore($user->id)],
-            'photo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:1024'],
-        ], $message);
+
+        $request->validate([
+
+                'name' => ['required', 'string'],
+                'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
+                'phone_number' => ['required', 'string'],
+                'address' => ['required', 'string'],
+                'id' => ['required', 'numeric', Rule::unique('users')->ignore($user->id)],
+                'photo' => 'nullable|mimes:jpg,jpeg,png|max:1024',
+                'role_id' => 'required|min:0'
+            ],$message);
+
+
 
         if($request['password']) {
             $user->forceFill([

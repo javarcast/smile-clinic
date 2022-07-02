@@ -1,6 +1,6 @@
 <script setup>
 import { Link, useForm } from "@inertiajs/inertia-vue3";
-import { ref, provide} from "vue";
+import { ref, provide, onMounted} from "vue";
 import DashboardLayout from "@/Layouts/DashboardLayout.vue";
 import JetValidationErrors from "@/Jetstream/ValidationErrors.vue";
 import JetButton from "@/Jetstream/Button.vue";
@@ -31,9 +31,10 @@ const props = defineProps(["roles", "specialties", 'errors']);
 
 const submit = () => {
   getIDNumber();
-  form.post(route("usuarios.store"), {
-    onFinish: () => form.reset("password", "password_confirmation"),
-  });
+      form.post(route("usuarios.store"), {
+        onFinish: () => form.reset("password", "password_confirmation"),
+      });
+
 };
 </script>
 <template>
