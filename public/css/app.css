@@ -1416,6 +1416,9 @@ select {
 .mt-0 {
   margin-top: 0px;
 }
+.mr-4 {
+  margin-right: 1rem;
+}
 .mb-2 {
   margin-bottom: 0.5rem;
 }
@@ -1524,20 +1527,32 @@ select {
 .w-20 {
   width: 5rem;
 }
+.w-1\/3 {
+  width: 33.333333%;
+}
+.w-2\/3 {
+  width: 66.666667%;
+}
+.w-1\/5 {
+  width: 20%;
+}
+.w-2\/5 {
+  width: 40%;
+}
+.w-11\/12 {
+  width: 91.666667%;
+}
+.w-9\/12 {
+  width: 75%;
+}
+.w-3\/12 {
+  width: 25%;
+}
 .w-64 {
   width: 16rem;
 }
 .w-2\/4 {
   width: 50%;
-}
-.w-3\/12 {
-  width: 25%;
-}
-.w-2\/3 {
-  width: 66.666667%;
-}
-.w-1\/3 {
-  width: 33.333333%;
 }
 .w-3\/5 {
   width: 60%;
@@ -1697,6 +1712,15 @@ select {
   margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(1rem * var(--tw-space-y-reverse));
 }
+.divide-y > :not([hidden]) ~ :not([hidden]) {
+  --tw-divide-y-reverse: 0;
+  border-top-width: calc(1px * calc(1 - var(--tw-divide-y-reverse)));
+  border-bottom-width: calc(1px * var(--tw-divide-y-reverse));
+}
+.divide-gray-200 > :not([hidden]) ~ :not([hidden]) {
+  --tw-divide-opacity: 1;
+  border-color: rgb(229 231 235 / var(--tw-divide-opacity));
+}
 .self-center {
   align-self: center;
 }
@@ -1809,13 +1833,13 @@ select {
   --tw-border-opacity: 1;
   border-color: rgb(156 163 175 / var(--tw-border-opacity));
 }
-.border-red-400 {
-  --tw-border-opacity: 1;
-  border-color: rgb(248 113 113 / var(--tw-border-opacity));
-}
 .border-slate-200 {
   --tw-border-opacity: 1;
   border-color: rgb(226 232 240 / var(--tw-border-opacity));
+}
+.border-red-400 {
+  --tw-border-opacity: 1;
+  border-color: rgb(248 113 113 / var(--tw-border-opacity));
 }
 .bg-white {
   --tw-bg-opacity: 1;
@@ -1865,13 +1889,13 @@ select {
   --tw-bg-opacity: 1;
   background-color: rgb(229 231 235 / var(--tw-bg-opacity));
 }
-.bg-red-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(239 68 68 / var(--tw-bg-opacity));
-}
 .bg-slate-50 {
   --tw-bg-opacity: 1;
   background-color: rgb(248 250 252 / var(--tw-bg-opacity));
+}
+.bg-red-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(239 68 68 / var(--tw-bg-opacity));
 }
 .bg-sc-blue {
   --tw-bg-opacity: 1;
@@ -1917,6 +1941,9 @@ select {
 }
 .p-6 {
   padding: 1.5rem;
+}
+.p-5 {
+  padding: 1.25rem;
 }
 .p-4 {
   padding: 1rem;
@@ -2023,11 +2050,11 @@ select {
 .pt-3 {
   padding-top: 0.75rem;
 }
-.pr-10 {
-  padding-right: 2.5rem;
-}
 .pl-4 {
   padding-left: 1rem;
+}
+.pr-10 {
+  padding-right: 2.5rem;
 }
 .pb-12 {
   padding-bottom: 3rem;
@@ -2176,10 +2203,6 @@ select {
   --tw-text-opacity: 1;
   color: rgb(209 213 219 / var(--tw-text-opacity));
 }
-.text-red-700 {
-  --tw-text-opacity: 1;
-  color: rgb(185 28 28 / var(--tw-text-opacity));
-}
 .text-slate-500 {
   --tw-text-opacity: 1;
   color: rgb(100 116 139 / var(--tw-text-opacity));
@@ -2187,6 +2210,10 @@ select {
 .text-blue-600 {
   --tw-text-opacity: 1;
   color: rgb(37 99 235 / var(--tw-text-opacity));
+}
+.text-red-700 {
+  --tw-text-opacity: 1;
+  color: rgb(185 28 28 / var(--tw-text-opacity));
 }
 .text-sc-white {
   --tw-text-opacity: 1;
@@ -2203,6 +2230,10 @@ select {
 .text-slate-800 {
   --tw-text-opacity: 1;
   color: rgb(30 41 59 / var(--tw-text-opacity));
+}
+.text-blue-900 {
+  --tw-text-opacity: 1;
+  color: rgb(30 58 138 / var(--tw-text-opacity));
 }
 .underline {
   -webkit-text-decoration-line: underline;
@@ -2367,7 +2398,6 @@ select {
     justify-content: flex-end;
 }
 .content-table-details{
-    width: 60%;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -2377,6 +2407,23 @@ select {
 }
 .logo-img{
     width: 23%;
+}
+.title-cal{
+    margin-bottom: 50px;
+}
+@media(max-width:767px){
+    .calculator, .col-patient, .col-mobile{
+        display: flex;
+        flex-direction: column;
+    }
+    .calculator .calculator-col, .col-edit, .create-paciente-col, .container-input{
+        width: 100%;
+        padding: 0;
+        margin-bottom: 10px;
+    }
+    .table-col{
+        overflow: scroll;
+    }
 }
 .after\:flex-1::after {
   content: var(--tw-content);
@@ -2526,6 +2573,9 @@ select {
 }
 .focus\:ring-opacity-50:focus {
   --tw-ring-opacity: 0.5;
+}
+.focus\:ring-opacity-25:focus {
+  --tw-ring-opacity: 0.25;
 }
 .active\:bg-gray-100:active {
   --tw-bg-opacity: 1;
@@ -2864,6 +2914,11 @@ select {
   .md\:text-3xl {
     font-size: 1.875rem;
     line-height: 2.25rem;
+  }
+
+  .md\:text-xl {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
   }
 }
 @media (min-width: 1024px) {

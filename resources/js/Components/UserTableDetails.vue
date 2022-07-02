@@ -1,7 +1,7 @@
 <script setup>
 
   const props = defineProps(["UserShow"]);
-
+  
 </script>
 <template>
   <table class="w-full table-details" >
