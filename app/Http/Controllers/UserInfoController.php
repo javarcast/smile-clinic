@@ -147,8 +147,9 @@ class UserInfoController extends Controller
     {
         $UserShow = User::findOrFail($id);
         $roles = Role::all();
+        $specialties = Specialty::all();
 
-        return Inertia::render('Users/Edit', compact('UserShow', 'roles'));
+        return Inertia::render('Users/Edit', compact('UserShow', 'roles', 'specialties'));
     }
 
     /**
@@ -207,13 +208,14 @@ class UserInfoController extends Controller
             ])->save();
         }
         if($request['role_id']=== 2) {
-            $dentist = new Dentist();
-            $specialty = Specialty::findOrFail($request['specialty_id']);
+            if(!Dentist::findOrFail($request['id'])) {
+                $dentist = new Dentist();
+                $specialty = Specialty::findOrFail($request['specialty_id']);
+                $dentist->user()->associate($user);
+                $dentist->specialty()->associate($specialty);
 
-            $dentist->user()->associate($user);
-            $dentist->specialty()->associate($specialty);
-
-            $dentist->save();
+                $dentist->save();
+            }
         }
 
 
