@@ -168,18 +168,9 @@ class UserInfoController extends Controller
             'numeric' => 'El campo :attribute debe ser numerico.',
             'email' => 'El campo :attribute debe ser un email',
             'min' => 'El campo :attribute debe ser minimo :min',
-            'max' => 'El campo :attribute debe ser maximo :max'
+            'max' => 'El campo :attribute debe ser maximo :max',
+            'confirmed' => 'El campo :attribute no coincide'
         ];
-        if($request['password']) {
-            Validator::make($request, [
-                'current_password' => ['required', 'string'],
-                'password' => $this->passwordRules(),
-            ])->after(function ($validator) use ($user, $request) {
-                if (! isset($request['current_password']) || ! Hash::check($request['current_password'], $user->password)) {
-                    $validator->errors()->add('current_password', __('The provided password does not match your current password.'));
-                }
-            });
-        }
 
         $request->validate([
 
@@ -187,6 +178,7 @@ class UserInfoController extends Controller
                 'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
                 'phone_number' => ['required', 'string'],
                 'address' => ['required', 'string'],
+                'password' => 'confirmed',
                 'id' => ['required', 'numeric', Rule::unique('users')->ignore($user->id)],
                 'photo' => 'nullable|mimes:jpg,jpeg,png|max:1024',
                 'role_id' => 'required|min:0'
