@@ -11,7 +11,7 @@
     </thead>
     <tbody>
 
-    <tr v-for="patient in props.patients" :key="patient.id" class="border-t border-b border-slate-200">
+    <tr v-for="patient in props.patients.data" :key="patient.id" class="border-t border-b border-slate-200">
       <td class="px-2 first:pl-5 last:pr-5 py-4 whitespace-nowrap text-left">
         {{ patient.dni }}
       </td>
