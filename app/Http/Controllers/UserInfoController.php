@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dentist;
 use Illuminate\Http\Request;
 
 use App\Models\User;
 use Inertia\Inertia;
 use App\Models\Role;
+use App\Models\Specialty;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -23,9 +25,11 @@ class UserInfoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::all();
+            $users = User::where('name', 'LIKE', "%$request->q%")
+            ->orWhere('id', 'LIKE', "%$request->q%")->paginate(11);
+
         foreach ($users as $key => &$user) {
             $user['role'] = $user->role();
         }
@@ -42,7 +46,9 @@ class UserInfoController extends Controller
     {
         $roles = Role::all();
 
-        return Inertia::render('Users/Create', compact('roles'));
+        $specialties = Specialty::all();
+
+        return Inertia::render('Users/Create', compact('roles', 'specialties'));
     }
 
     /**
@@ -64,6 +70,12 @@ class UserInfoController extends Controller
             'password' => $this->passwordRules(),
         ])->validate();
 
+        if($request['role_id'] == 2) {
+            Validator::make($request->all(), [
+                'specialty_id' => ['required', 'numeric', 'min:0'],
+            ])->validate();
+        }
+
         DB::beginTransaction();
         try {
             $role = Role::findOrFail($request['role_id']);
@@ -77,9 +89,22 @@ class UserInfoController extends Controller
             $user->role()->associate($role);
 
             $user->save();
+
+            if($role->id === 2) {
+                $dentist = new Dentist();
+                $specialty = Specialty::findOrFail($request['specialty_id']);
+
+                $dentist->user_id = $request['id'];
+                $dentist->specialty()->associate($specialty);
+
+                $dentist->save();
+            }
+
             DB::commit();
 
+
             $message = "Usuario ".$user->name." ha sido creado";
+
 
             return redirect()->route('usuarios.index')->with('status', $message);
 
@@ -167,6 +192,16 @@ class UserInfoController extends Controller
                 'email' => $request['email'],
                 'role_id' => $request['role_id'],
             ])->save();
+        }
+
+        if($request['role_id']=== 2) {
+            $dentist = new Dentist();
+            $specialty = Specialty::findOrFail($request['specialty_id']);
+
+            $dentist->user()->associate($user);
+            $dentist->specialty()->associate($specialty);
+
+            $dentist->save();
         }
 
 

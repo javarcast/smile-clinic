@@ -45,7 +45,7 @@ const logout = () => {
 
                                         <span v-else class="inline-flex rounded-md">
                                             <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition">
-                                                <img class="w-8 h-8 rounded-full mr-2" src="../../images/user.png" width="32" height="32" alt="Group 01" />
+                                                <img class="w-8 h-8 rounded-full mr-2" src="../../../public/images/user.png" width="32" height="32" alt="Group 01" />
                                                 {{ $page.props.user.name }}
 
                                                 <svg
@@ -63,11 +63,11 @@ const logout = () => {
                                     <template #content>
                                         <!-- Account Management -->
                                         <div class="block px-4 py-2 text-xs text-gray-400">
-                                            Manage Account
+                                            Cuenta
                                         </div>
 
                                         <JetDropdownLink :href="route('profile.show')">
-                                            Profile
+                                            Perfil
                                         </JetDropdownLink>
 
                                         <JetDropdownLink v-if="$page.props.jetstream.hasApiFeatures" :href="route('api-tokens.index')">
@@ -79,7 +79,7 @@ const logout = () => {
                                         <!-- Authentication -->
                                         <form @submit.prevent="logout">
                                             <JetDropdownLink as="button">
-                                                Log Out
+                                                Cerrar Sesión
                                             </JetDropdownLink>
                                         </form>
                                     </template>
