@@ -2,15 +2,17 @@
 import { ref, provide, watch } from "vue";
 import DashboardLayout from "@/Layouts/DashboardLayout.vue";
 import { Link } from "@inertiajs/inertia-vue3";
+import { Inertia } from '@inertiajs/inertia';
 import PatientTableList from "@/Components/PatientTableList.vue";
 
 const title = ref("Pacientes");
 provide("title", title);
 
 const props = defineProps(["patients"]);
-const q = "";
+const q = ref('');
 watch(q, () => {
-  this.$inertia.replace(this.route("pacientes.index", { q: value }));
+
+    Inertia.replace(route("pacientes.index", { q: q.value }));
 });
 </script>
 
