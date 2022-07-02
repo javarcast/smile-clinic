@@ -3,7 +3,10 @@
 use App\Http\Controllers\PatientsController;
 use App\Http\Controllers\UserInfoController;
 use App\Http\Controllers\TreatmentController;
+
 use App\Http\Controllers\StadisticsController;
+use App\Http\Controllers\PageController;
+
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -28,11 +31,12 @@ Route::get('/', function () {
     ]);
 });
 
-
 Route::resource('usuarios', UserInfoController::class)->middleware(['role:1', 'auth:sanctum']);
 Route::resource('pacientes', PatientsController::class)->middleware(['role:1', 'auth:sanctum']);
 Route::resource('tratamientos', TreatmentController::class)->middleware(['role:1', 'auth:sanctum']);
 Route::resource('estadisticas', StadisticsController::class)->middleware(['role:1','auth:sanctum']);
+Route::get('calculadora',  [PageController::class, 'calculator'])->middleware(['role:1','auth:sanctum'])->name('calculadora');
+
 
 Route::middleware([
     'auth:sanctum',
@@ -43,3 +47,5 @@ Route::middleware([
         return Inertia::render('Dashboard');
     })->name('dashboard');
 });
+
+

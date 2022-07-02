@@ -13,10 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('dentists', function (Blueprint $table) {
+        Schema::create('appointment_requests', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('specialty_id')->constrained('specialties');
-            $table->foreignId('user_id');
+            $table->longText('description');
+            $table->date('date_appointment');
+            $table->boolean('status')->default(false);
+            $table->foreignId('client_id')->constrained('users');
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dentists');
+        Schema::dropIfExists('appointment_requests');
     }
 };
