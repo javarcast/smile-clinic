@@ -150,8 +150,9 @@ class UserInfoController extends Controller
     {
         $UserShow = User::findOrFail($id);
         $roles = Role::all();
+        $specialties = Specialty::all();
 
-        return Inertia::render('Users/Edit', compact('UserShow', 'roles'));
+        return Inertia::render('Users/Edit', compact('UserShow', 'roles', 'specialties'));
     }
 
     /**
@@ -175,16 +176,6 @@ class UserInfoController extends Controller
             'unique' => 'El valor del campo :attribute ya esta en uso', 
             'confirmed' => 'El campo :attribute no coincide',
         ];
-        if($request['password']) {
-            Validator::make($request, [
-                'current_password' => ['required', 'string'],
-                'password' => $this->passwordRules(),
-            ])->after(function ($validator) use ($user, $request) {
-                if (! isset($request['current_password']) || ! Hash::check($request['current_password'], $user->password)) {
-                    $validator->errors()->add('current_password', __('The provided password does not match your current password.'));
-                }
-            });
-        }
 
         $request->validate([
 
@@ -192,10 +183,10 @@ class UserInfoController extends Controller
                 'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
                 'phone_number' => ['required', 'string'],
                 'address' => ['required', 'string'],
+                'password' => 'confirmed|min:8',
                 'id' => ['required', 'numeric', Rule::unique('users')->ignore($user->id)],
                 'photo' => 'nullable|mimes:jpg,jpeg,png|max:1024',
                 'role_id' => 'required|min:0|numeric',
-                'password'=> 'confirmed|min:8'
             ],$message);
 
 
@@ -221,13 +212,14 @@ class UserInfoController extends Controller
             ])->save();
         }
         if($request['role_id']=== 2) {
-            $dentist = new Dentist();
-            $specialty = Specialty::findOrFail($request['specialty_id']);
+            if(!Dentist::findOrFail($request['id'])) {
+                $dentist = new Dentist();
+                $specialty = Specialty::findOrFail($request['specialty_id']);
+                $dentist->user()->associate($user);
+                $dentist->specialty()->associate($specialty);
 
-            $dentist->user()->associate($user);
-            $dentist->specialty()->associate($specialty);
-
-            $dentist->save();
+                $dentist->save();
+            }
         }
 
 
