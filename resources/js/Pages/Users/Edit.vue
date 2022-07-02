@@ -1,5 +1,5 @@
 <script setup>
-
+import FormErrors from "@/Components/FormErrors.vue";
 import { Link, useForm } from "@inertiajs/inertia-vue3";
 import { ref, provide} from "vue";
 import DashboardLayout from "@/Layouts/DashboardLayout.vue";
@@ -34,6 +34,7 @@ import DashboardLayout from "@/Layouts/DashboardLayout.vue";
         <h2 class="text-2xl md:text-3xl text-slate-800 font-bold">Editar Usuario</h2>
         <hr class="my-6" />
         <div class="mt-4 bg-slate-50 shadow-lg rounded-sm border border-slate-200 relative px-4 py-4">
+          <form-errors :errors="errors"></form-errors>
           <form @submit.prevent="submit" class="create-user">
             <div class="container-input">
               <label class="block font-medium text-sm text-gray-700"
