@@ -7,6 +7,7 @@ use App\Models\Specialty;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use App\Models\Appointment;
 
 class DatabaseSeeder extends Seeder
 {
@@ -34,12 +35,15 @@ class DatabaseSeeder extends Seeder
             'id'=> '20624646',
         ]);
 
-       $this->call([RoleSeeder::class, StateSeeder::class,
-                    DiseaseTypeSeeder::class, TreatmentSeeder::class,
-                    DiseaseSeeder::class, MedicamentSeeder::class, PatientSeeder::class]);
-                    
-                    
-
-            $this->call([SpecialtySeeder::class]);
+       $this->call([RoleSeeder::class, 
+                    StateSeeder::class,
+                    DiseaseTypeSeeder::class, 
+                    TreatmentSeeder::class,
+                    DiseaseSeeder::class, 
+                    MedicamentSeeder::class, 
+                    PatientSeeder::class,
+                    SpecialtySeeder::class,
+                    DentistSeeder::class,
+                    AppointmentSeeder::class]);            
     }
 }
