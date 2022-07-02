@@ -27,9 +27,11 @@
 
                     </div>
                 </div>
-                <div class="w-2/3 pl-4 calculator-col table-col">
-                    <h3 class="text-2xl md:text-xl text-slate-800 font-bold text-center">Presupuesto</h3>
-                     <facture-table  :treatmentsSelected="getTreatments"></facture-table>
+                <div class="w-2/3 pl-4 calculator-col ">
+                    <h3 class="text-2xl md:text-xl text-slate-800 font-bold text-left  mb-4">Presupuesto</h3>
+                     <div class="table-col">
+                      <facture-table  :treatmentsSelected="getTreatments"></facture-table>
+                    </div>
                 </div>
             </div>
         </div>

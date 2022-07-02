@@ -4,6 +4,7 @@ use App\Http\Controllers\PatientsController;
 use App\Http\Controllers\UserInfoController;
 use App\Http\Controllers\TreatmentController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\AppointmentRequestController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -34,6 +35,7 @@ Route::resource('usuarios', UserInfoController::class);
 Route::resource('pacientes', PatientsController::class)->middleware('auth:sanctum');
 Route::resource('tratamientos', TreatmentController::class)
     ->middleware('auth:sanctum');
+Route::resource('solicitudes', AppointmentRequestController::class);
 
 
 Route::middleware([

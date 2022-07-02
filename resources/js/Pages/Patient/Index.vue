@@ -17,9 +17,9 @@ watch(q, () => {
 <template>
   <DashboardLayout>
     <div class="md:col-span-4 mt-1">
-      <div class="flex justify-between">
-        <h2 class="text-2xl md:text-3xl text-slate-800 font-bold">Pacientes</h2>
-        <div class="flex">
+      <div class="flex justify-between col-patient">
+        <h2 class="text-2xl md:text-3xl text-slate-800 font-bold ">Pacientes</h2>
+        <div class="flex ">
           <input
             type="text"
             class="form-input rounded mr-2"
@@ -38,7 +38,7 @@ watch(q, () => {
 
       <div>
         <hr class="my-6" />
-        <div class="flex flex-col justify-center mt-4">
+        <div class="flex flex-col justify-center mt-4 table-col">
          <patient-table-list :patients="patients" />
         </div>
       </div>

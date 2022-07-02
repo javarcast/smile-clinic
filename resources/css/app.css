@@ -55,7 +55,6 @@
     justify-content: flex-end;
 }
 .content-table-details{
-    width: 60%;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -70,11 +69,11 @@
     margin-bottom: 50px;
 }
 @media(max-width:767px){
-    .calculator{
+    .calculator, .col-patient, .col-mobile{
         display: flex;
         flex-direction: column;
     }
-    .calculator .calculator-col{
+    .calculator .calculator-col, .col-edit, .create-paciente-col, .container-input{
         width: 100%;
         padding: 0;
         margin-bottom: 10px;
