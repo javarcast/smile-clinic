@@ -60,6 +60,13 @@ class UserInfoController extends Controller
     public function store(Request $request)
     {
 
+        $message = [
+            'required' => 'El campo :attribute es requerido.',
+            'string' => 'El campo :attribute debe ser una cadena.',
+            'numeric' => 'El campo :attribute debe ser numerico.',
+            'email' => 'El campo :attribute debe ser un email'
+        ];
+
         Validator::make($request->all(), [
             'id' => ['required', 'numeric', 'unique:users'],
             'role_id' => ['required', 'numeric'],
@@ -68,7 +75,7 @@ class UserInfoController extends Controller
             'address' => ['required', 'string'],
             'phone_number' => ['required', 'string'],
             'password' => $this->passwordRules(),
-        ])->validate();
+        ], $message)->validate();
 
         if($request['role_id'] == 2) {
             Validator::make($request->all(), [
@@ -151,8 +158,16 @@ class UserInfoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::findOrFail($id);
 
+        $user = User::findOrFail($id);
+        $message = [
+            'required' => 'El campo :attribute es requerido.',
+            'string' => 'El campo :attribute debe ser una cadena.',
+            'numeric' => 'El campo :attribute debe ser numerico.',
+            'email' => 'El campo :attribute debe ser un email',
+            'min' => 'El campo :attribute debe ser minimo :min',
+            'max' => 'El campo :attribute debe ser maximo :max'
+        ];
         if($request['password']) {
             Validator::make($request, [
                 'current_password' => ['required', 'string'],
@@ -164,14 +179,13 @@ class UserInfoController extends Controller
             });
         }
         Validator::make($request->all(), [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
+            'name' => ['required', 'string'],
+            'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
             'phone_number' => ['required', 'string'],
             'address' => ['required', 'string'],
             'id' => ['required', 'numeric', Rule::unique('users')->ignore($user->id)],
             'photo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:1024'],
-        ]);
-
+        ], $message);
 
         if($request['password']) {
             $user->forceFill([
@@ -193,7 +207,6 @@ class UserInfoController extends Controller
                 'role_id' => $request['role_id'],
             ])->save();
         }
-
         if($request['role_id']=== 2) {
             $dentist = new Dentist();
             $specialty = Specialty::findOrFail($request['specialty_id']);

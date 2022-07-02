@@ -25,7 +25,7 @@ const allergyItem = ref("");
 const diseaseItem = ref("");
 const medicamentItem = ref("");
 
-const props = defineProps(["users", "medicaments", "diseases"]);
+const props = defineProps(["users", "medicaments", "diseases", "errors"]);
 
 const getAllergies = computed(() => {
   return props.diseases.filter((item) => (item.disease_type_id === 1 && !form.diseases.includes(item.id)));

@@ -50,10 +50,15 @@ class PatientsController extends Controller
      */
     public function store(Request $request)
     {
+        $message = [
+            'required' => 'El campo :attribute es requerido.',
+            'string' => 'El campo :attribute debe ser una cadena.',
+            'numeric' => 'El campo :attribute debe ser numerico.'
+        ];
         Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:255'],
             'user_id' => ['required', 'numeric']
-        ])->validate();
+        ], $message)->validate();
 
         if(isset($request['dni'])){
             Validator::make($request->all(), [
@@ -144,12 +149,17 @@ class PatientsController extends Controller
     public function update(Request $request,  $id)
     {
         $patient = Patient::findOrFail($id);
-
+        $message = [
+            'required' => 'El campo :attribute es requerido.',
+            'string' => 'El campo :attribute debe ser una cadena.',
+            'numeric' => 'El campo :attribute debe ser numerico.',
+            'min' => 'El campo :attribute debe ser mayor a :min'
+        ];
             Validator::make($request->all(), [
                 'dni' => ['required', 'numeric', Rule::unique('patients')->ignore($patient->id)],
                 'name' => ['required', 'string', 'max:255'],
-                'user_id' => ['required', 'numeric']
-            ])->validate();
+                'user_id' => ['required', 'numeric', 'min:0']
+            ], $message)->validate();
         DB::beginTransaction();
 
         try {

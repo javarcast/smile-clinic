@@ -27,7 +27,7 @@ const getIDNumber = () => {
   form.id = parseInt(form.id);
 };
 
-const props = defineProps(["roles", "specialties"]);
+const props = defineProps(["roles", "specialties", 'errors']);
 
 const submit = () => {
   getIDNumber();

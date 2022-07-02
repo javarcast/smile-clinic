@@ -7,7 +7,7 @@ import DashboardLayout from "@/Layouts/DashboardLayout.vue";
     const title = ref("Editar Usuario");
     provide("title", title);
 
-    const props = defineProps(["roles", "UserShow"]);
+    const props = defineProps(["roles", "UserShow", 'errors']);
 
     const form = useForm({
         name: props.UserShow.name,

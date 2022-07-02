@@ -19,6 +19,9 @@ watch(q, () => {
 <template>
   <DashboardLayout>
     <div class="md:col-span-4 mt-1">
+        <div v-if="attrs.errors">
+        {{errors}}
+        </div>
       <div class="flex justify-between">
         <h2 class="text-2xl md:text-3xl text-slate-800 font-bold">Pacientes</h2>
         <div class="flex">
