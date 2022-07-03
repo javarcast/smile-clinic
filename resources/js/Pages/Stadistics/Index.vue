@@ -5,21 +5,21 @@
                 <i class="far fa-user fa-2x text-lightblue" aria-hidden="true"></i>
                 <div class="card_inner">
                     <p class="text-primary-p">Número de Pacientes</p>
-                    <span class="font-bold text-title">XXX</span>
+                    <span class="font-bold text-title">{{nPatients}}</span>
                 </div>
             </div>
             <div class="card flex flex-col justify-around">
                 <i class="far fa-calendar-alt fa-2x text-red" aria-hidden="true"></i>
                 <div class="card_inner">
                     <p class="text-primary-p nCita">Número de Citas Registradas</p>
-                    <span class="font-bold text-title">XXXX</span>
+                    <span class="font-bold text-title">{{nAppointments}}</span>
                 </div>
             </div>
             <div class="card flex flex-col justify-around">
                 <i class="fas fa-user-md fa-2x text-green-600" aria-hidden="true"></i>
                 <div class="card_inner">
                     <p class="text-primary-p">Número de Odontólogos</p>
-                    <span class="font-bold text-title">XXXX</span>
+                    <span class="font-bold text-title">{{nDentist}}</span>
                 </div>
             </div>
         </div>
@@ -102,18 +102,31 @@ export default defineComponent({
     apexchart: VueApexCharts,
   },
   props: {
-    
+    nPatients: Number,
+    nDentist: Number,
+    nAppointments: Number,
+    st1n: Array,
+    st1v: Array,
+    endDate: Date,
+    initDate: Date,
+    cpdv: Array,
+    cpdn: Array,
   },
   watch: {
     q: function (value) {
       
     },
   },
+  methods: {
+    searchDate(){
+      this.$inertia.get(this.route("index", { dateStart: this.dateStart, dateEnd: this.dateEnd }));
+    }
+  },
   data: function() {
     return {
       chartOptions: {
         chart: {
-          id: "vuechart-example",
+          id: "Tratamiento",
         },
         xaxis: {
           categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998],
@@ -121,22 +134,24 @@ export default defineComponent({
       },
       series: [
         {
-          name: "series-1",
-          data: [30, 40, 35, 50, 49, 60, 70, 91],
+          name: "Tratamiento",
+          data: this.cpdn,
         },
       ],
       areaOptions: {
         chart: {
-          id: "vuechart-example",
+          id: "citasdias",
         },
         xaxis: {
           categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998],
         },
       },
+      dateStart: this.initDate,
+      dateEnd: this.endDate,
       areaSeries: [
         {
-          name: "series-1",
-          data: [30, 40, 35, 50, 49, 60, 70, 91],
+          name: "Citas Dias",
+          data: this.cpdv,
         },
       ],
       
