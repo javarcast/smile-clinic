@@ -1,7 +1,7 @@
 <template>
     <Head title="SmileClinic" />
     <div class="home">
-        <img class="img-logo-home" src="../../images/Logo-home.svg" alt="Logo-home" />
+        <img class="img-logo-home" src="../../../images/Logo-home.svg" alt="Logo-home" />
         <h2 class="text-gray-200 mb-6 home_p1 text-center">
             Contamos con un prestigioso equipo de especialistas en todas las
             áreas de la odontología, altamente calificados, idóneos y
