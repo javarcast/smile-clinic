@@ -38,7 +38,8 @@
               >
               <input
                 id="date_appointment"
-                type="date"
+                type="date" 
+                :min="currentDate"
                 v-model="form.date_appointment"
                 required
                 class="form-input w-full rounded bg-slate-50"
@@ -67,7 +68,7 @@
     import { ref, provide} from "vue";
     const title = ref("Crear Solicitud");
     provide("title", title);
-    const props = defineProps(["user"]);
+    const props = defineProps(["user", 'currentDate']);
 
     const form = useForm({
       description: "",

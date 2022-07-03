@@ -57,8 +57,9 @@ import DashboardLayout from "@/Layouts/DashboardLayout.vue";
               <div class="container-input w-full mb-4">
                 <label class="block font-medium text-sm text-gray-700">Fecha Cita</label>
                 <input
-                  type="text"
+                  type="date"
                   v-model="form.date_appointment"
+                  :min="currentDate"
                   required
                   class="form-input w-full rounded  bg-slate-50"
                   readonly
@@ -72,7 +73,7 @@ import DashboardLayout from "@/Layouts/DashboardLayout.vue";
                     v-model="form.status"
                     class="form-input w-full rounded bg-slate-50"
                   >
-                    <option selected value="-1">Selecciona un Estatus</option>
+                    <option selected value="-1">Selecciona un estatus</option>
                     <option value="0">Pendiente</option>
                     <option value="1">Completada</option>
                   </select>
