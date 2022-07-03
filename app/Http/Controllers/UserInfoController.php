@@ -122,8 +122,8 @@ class UserInfoController extends Controller
             foreach ($users as $key => &$user) {
                 $user['role'] = $user->role();
             }
-            return Inertia::render('Users/Index',compact("message", "users"));
-           // return redirect()->route('usuarios.index')->with('status', $message);
+            //return Inertia::render('Users/Index',compact("message", "users"));
+            return redirect()->route('usuarios.index')->with('status', $message);
 
         } catch( \Exception $e) {
             DB::rollBack();
