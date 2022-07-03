@@ -128,27 +128,54 @@ const submit = () => {
           relative
           px-4
           py-4
-        ">
+        "
+      >
         <form @submit.prevent="submit" class="create-paciente flex flex-wrap">
           <div class="w-2/3 flex flex-wrap pr-10 create-paciente-col">
             <div class="container-input w-1/2 pr-4">
               <label class="block font-medium text-sm text-gray-700">DNI</label>
+              <input
+                id="id"
+                type="text"
+                v-model="form.dni"
                 class="form-input w-full rounded bg-slate-50"
                 autocomplete="DNI"
                 required
               />
             </div>
             <div class="container-input w-1/2 pl-4">
-              <label class="block font-medium text-sm text-gray-700">Nombre</label>
+              <label class="block font-medium text-sm text-gray-700"
+                >Nombre</label
+              >
+              <input
+                id="name"
+                type="text"
+                v-model="form.name"
+                required
+                class="form-input w-full rounded bg-slate-50"
+              />
             </div>
             <div class="container-input mt-2 w-1/2 pr-4">
-              <label class="block font-medium text-sm text-gray-700">Email</label>
-              <input type="email" id="email" v-model="form.email" class="form-input w-full rounded bg-slate-50" />
+              <label class="block font-medium text-sm text-gray-700"
+                >Email</label
+              >
+              <input
+                type="email"
+                id="email"
+                v-model="form.email"
+                class="form-input w-full rounded bg-slate-50"
+              />
             </div>
             <div class="container-input mt-2 w-1/2 pl-4">
-              <label class="block font-medium text-sm text-gray-700">Nro. Telefonico</label>
-              <input type="text" id="phone_number" v-model="form.phone_number"
-                class="form-input w-full rounded bg-slate-50" />
+              <label class="block font-medium text-sm text-gray-700"
+                >Nro. Telefonico</label
+              >
+              <input
+                type="text"
+                id="phone_number"
+                v-model="form.phone_number"
+                class="form-input w-full rounded bg-slate-50"
+              />
             </div>
             <div class="container-input mt-2 w-full">
               <label class="block font-medium text-sm text-gray-700"
@@ -291,8 +318,12 @@ const submit = () => {
           </div>
           <div class="btn-opt mt-8">
             <button class="btn-primary btn-black mr-2">Crear</button>
-            <Link class="btn-primary btn-white shadow-lg ml-2" :href="route('pacientes.index')">
-            Cancelar</Link>
+            <Link
+              class="btn-primary btn-white shadow-lg ml-2"
+              :href="route('pacientes.index')"
+            >
+              Cancelar</Link
+            >
           </div>
         </form>
       </div>
