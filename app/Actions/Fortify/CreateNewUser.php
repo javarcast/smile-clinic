@@ -51,6 +51,9 @@ class CreateNewUser implements CreatesNewUsers
 
             $patient->name = $user->name;
             $patient->user_id = $input['id'];
+            $patient->dni = $input['id'];
+            $patient->email = $user->email;
+            $patient->phone_number = $user->phone_number;
             $patient->save();
 
             DB::commit();
