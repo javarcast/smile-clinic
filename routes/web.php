@@ -5,6 +5,8 @@ use App\Http\Controllers\UserInfoController;
 use App\Http\Controllers\TreatmentController;
 
 use App\Http\Controllers\StadisticsController;
+use App\Http\Controllers\MedicalHistoryController;
+use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\AppointmentRequestController;
 use Illuminate\Foundation\Application;
@@ -22,13 +24,20 @@ use Inertia\Inertia;
 |
 */
 
+// Route::get('/', function () {
+//     return Inertia::render('Welcome', [
+//         'canLogin' => Route::has('login'),
+//         'canRegister' => Route::has('register'),
+//         'laravelVersion' => Application::VERSION,
+//         'phpVersion' => PHP_VERSION,
+//     ]);
+// });
+
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+    return Inertia::render('Auth/Home',[
+                'canLogin' => Route::has('login'),
+                'canRegister' => Route::has('register'),
+            ]);
 });
 
 Route::resource('usuarios', UserInfoController::class)->middleware(['role:1', 'auth:sanctum']);
@@ -38,6 +47,8 @@ Route::resource('estadisticas', StadisticsController::class)->middleware(['role:
 Route::get('estadistica', [StadisticsController::class, 'data'])->middleware(['role:1','auth:sanctum'])->name('estadistica');
 Route::get('calculadora',  [PageController::class, 'calculator'])->middleware(['role:1','auth:sanctum'])->name('calculadora');
 Route::resource('solicitudes', AppointmentRequestController::class)->middleware(['auth:sanctum']);
+Route::resource('historial', MedicalHistoryController::class);
+Route::resource('citas', AppointmentController::class);
 
 
 Route::middleware([

@@ -62,6 +62,18 @@
               </Link>
             </li>
 
+            <li  class="flex justify-between pr-3 sm:px-2 mt-6 mb-6 truncate">
+              <Link :href="route('citas.index')" class="flex  items-end">
+                <img src="../../../public/images/cita.png" alt="icon users" class="icon-sidebar">
+                <span class="text-sm text-sc-white font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Citas</span>
+              </Link>
+            </li>
+            <li  class="flex justify-between pr-3 sm:px-2 mt-6 mb-6 truncate">
+              <Link :href="route('historial.index')" class="flex  items-end">
+                <img src="../../../public/images/history.png" alt="icon users" class="icon-sidebar">
+                <span class="text-sm text-sc-white font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Historias Clínicas</span>
+              </Link>
+            </li>
             <li class="flex justify-between pr-3 sm:px-2 mt-6 mb-6 truncate">
               <Link :href="route('calculadora')" class="flex  items-end">
                 <img src="../../../public/images/calculadora.png" alt="icon users" class="icon-sidebar">
@@ -78,9 +90,15 @@
               </Link>
             </li>
             <li  class="flex justify-between pr-3 sm:px-2 mt-6 mb-6 truncate">
-              <Link :href="'/'" class="flex  items-end">
+              <Link :href="route('citas.index')" class="flex  items-end">
                 <img src="../../../public/images/agenda.png" alt="icon users" class="icon-sidebar">
-                <span class="text-sm text-sc-white font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Ver Agenda</span>
+                <span class="text-sm text-sc-white font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Agenda</span>
+              </Link>
+            </li>
+            <li  class="flex justify-between pr-3 sm:px-2 mt-6 mb-6 truncate">
+              <Link :href="route('historial.index')" class="flex  items-end">
+                <img src="../../../public/images/history.png" alt="icon users" class="icon-sidebar">
+                <span class="text-sm text-sc-white font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Historias Clínicas</span>
               </Link>
             </li>
           </ul>
@@ -98,9 +116,15 @@
               </Link>
             </li>
             <li  class="flex justify-between pr-3 sm:px-2 mt-6 mb-6 truncate">
-              <Link :href="'/'" class="flex  items-end">
+              <Link :href="route('citas.index')" class="flex  items-end">
+                <img src="../../../public/images/cita.png" alt="icon users" class="icon-sidebar">
+                <span class="text-sm text-sc-white font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Citas</span>
+              </Link>
+            </li>
+            <li  class="flex justify-between pr-3 sm:px-2 mt-6 mb-6 truncate">
+              <Link :href="route('historial.index')" class="flex  items-end">
                 <img src="../../../public/images/history.png" alt="icon users" class="icon-sidebar">
-                <span class="text-sm text-sc-white font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Historial Clinico</span>
+                <span class="text-sm text-sc-white font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Historias Clínicas</span>
               </Link>
             </li>
 
