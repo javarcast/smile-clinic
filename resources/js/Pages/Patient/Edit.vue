@@ -2,10 +2,11 @@
 import { Link, useForm } from "@inertiajs/inertia-vue3";
 import { ref, provide, onMounted } from "vue";
 import DashboardLayout from "@/Layouts/DashboardLayout.vue";
+import FormErrors from "@/Components/FormErrors.vue";
 
 const title = ref("Editar Paciente");
 provide("title", title);
-const props = defineProps(["users", "patient"]);
+const props = defineProps(["users", "patient", "errors"]);
 const form = useForm({
   dni: "",
   name: "",
@@ -39,6 +40,7 @@ const submit = () => {
         Editar Paciente
       </h2>
       <hr class="my-6" />
+      <form-errors :errors="errors"></form-errors>
       <div
         class="
           flex
