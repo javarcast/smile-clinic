@@ -3,6 +3,7 @@
 namespace App\Actions\Fortify;
 
 use App\Models\User;
+use App\Models\Patient;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
@@ -10,6 +11,7 @@ use Laravel\Jetstream\Jetstream;
 
 use Illuminate\Support\Facades\DB;
 use App\Models\Role;
+use BaconQrCode\Renderer\Path\Path;
 
 class CreateNewUser implements CreatesNewUsers
 {
@@ -45,6 +47,12 @@ class CreateNewUser implements CreatesNewUsers
             $user->password = Hash::make($input['password']);
             $user->role()->associate($role);
             $user->save();
+            $patient = new Patient();
+
+            $patient->name = $user->name;
+            $patient->user_id = $input['id'];
+            $patient->save();
+
             DB::commit();
 
             return $user;
