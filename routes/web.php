@@ -42,6 +42,10 @@ Route::resource('historial', MedicalHistoryController::class);
 Route::resource('citas', AppointmentController::class);
 
 
+Route::resource('/citas/create', AppointmentController::class)->middleware(['role:1','auth:sanctum']);
+Route::resource('/historial.create', MedicalHistoryController::class)->middleware(['role:1','auth:sanctum']);
+
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
