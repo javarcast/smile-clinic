@@ -42958,12 +42958,9 @@ __webpack_require__.r(__webpack_exports__);
     cpdv: Array,
     cpdn: Array
   },
-  watch: {
-    q: function q(value) {}
-  },
   methods: {
     searchDate: function searchDate() {
-      this.$inertia.get(this.route("index", {
+      this.$inertia.get(this.route("estadistica", {
         dateStart: this.dateStart,
         dateEnd: this.dateEnd
       }));
@@ -42976,25 +42973,25 @@ __webpack_require__.r(__webpack_exports__);
           id: "Tratamiento"
         },
         xaxis: {
-          categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998]
+          categories: this.st1n
         }
       },
       series: [{
-        name: "Tratamiento",
-        data: this.cpdn
+        name: this.st1n,
+        data: this.st1v
       }],
       areaOptions: {
         chart: {
           id: "citasdias"
         },
         xaxis: {
-          categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998]
+          categories: this.cpdn
         }
       },
       dateStart: this.initDate,
       dateEnd: this.endDate,
       areaSeries: [{
-        name: "Citas Dias",
+        name: this.cpdvn,
         data: this.cpdv
       }]
     };
@@ -51815,18 +51812,22 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         width: "600",
         type: "bar",
         options: _ctx.chartOptions,
-        series: _ctx.series
+        series: _ctx.series,
+        names: _ctx.st1n,
+        values: _ctx.st1v
       }, null, 8
       /* PROPS */
-      , ["options", "series"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_30, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_apexchart, {
+      , ["options", "series", "names", "values"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_30, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_apexchart, {
         title: "Citas por día",
         width: "600",
         type: "area",
+        names: _ctx.cpdn,
+        values: _ctx.cpdv,
         options: _ctx.areaOptions,
         series: _ctx.areaSeries
       }, null, 8
       /* PROPS */
-      , ["options", "series"])])])])];
+      , ["names", "values", "options", "series"])])])])];
     }),
     _: 1
     /* STABLE */

@@ -65,6 +65,8 @@
                     type="bar"
                     :options="chartOptions"
                     :series="series"
+                    :names="st1n"
+                    :values="st1v"
                     ></apexchart>
                 </div>
             </div>
@@ -77,6 +79,8 @@
                     title="Citas por día"
                     width="600"
                     type="area"
+                    :names="cpdn"
+                    :values="cpdv"
                     :options="areaOptions"
                     :series="areaSeries"
                     ></apexchart>
@@ -112,14 +116,9 @@ export default defineComponent({
     cpdv: Array,
     cpdn: Array,
   },
-  watch: {
-    q: function (value) {
-      
-    },
-  },
   methods: {
     searchDate(){
-      this.$inertia.get(this.route("index", { dateStart: this.dateStart, dateEnd: this.dateEnd }));
+      this.$inertia.get(this.route("estadistica", { dateStart: this.dateStart, dateEnd: this.dateEnd }));
     }
   },
   data: function() {
@@ -129,13 +128,13 @@ export default defineComponent({
           id: "Tratamiento",
         },
         xaxis: {
-          categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998],
+          categories: this.st1n,
         },
       },
       series: [
         {
-          name: "Tratamiento",
-          data: this.cpdn,
+          name: this.st1n,
+          data: this.st1v,
         },
       ],
       areaOptions: {
@@ -143,14 +142,14 @@ export default defineComponent({
           id: "citasdias",
         },
         xaxis: {
-          categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998],
+          categories: this.cpdn,
         },
       },
       dateStart: this.initDate,
       dateEnd: this.endDate,
       areaSeries: [
         {
-          name: "Citas Dias",
+          name: this.cpdvn,
           data: this.cpdv,
         },
       ],

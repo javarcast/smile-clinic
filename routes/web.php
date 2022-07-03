@@ -35,6 +35,7 @@ Route::resource('usuarios', UserInfoController::class)->middleware(['role:1', 'a
 Route::resource('pacientes', PatientsController::class)->middleware(['role:1', 'auth:sanctum']);
 Route::resource('tratamientos', TreatmentController::class)->middleware(['role:1', 'auth:sanctum']);
 Route::resource('estadisticas', StadisticsController::class)->middleware(['role:1','auth:sanctum']);
+Route::get('estadistica', [StadisticsController::class, 'data'])->middleware(['role:1','auth:sanctum'])->name('estadistica');
 Route::get('calculadora',  [PageController::class, 'calculator'])->middleware(['role:1','auth:sanctum'])->name('calculadora');
 Route::resource('solicitudes', AppointmentRequestController::class)->middleware(['auth:sanctum']);
 
