@@ -4,7 +4,7 @@ import { Head, Link } from "@inertiajs/inertia-vue3";
 import UserTableDetails from "@/Components/UserTableDetails.vue";
 import DashboardLayout from "@/Layouts/DashboardLayout.vue";
 
-const props = defineProps(['UserShow']);
+const props = defineProps(['UserShow','status']);
 const title = ref("Ver Usuario");
 provide("title", title);
 
@@ -14,6 +14,7 @@ provide("title", title);
     <DashboardLayout>
       <div class="md:col-span-4 mt-1">
         <h2 class="text-2xl md:text-3xl text-slate-800 font-bold">Información de Usuario</h2>
+        <h1>{{status}}</h1>
         <hr class="my-6" />
         <div class="mt-4 bg-slate-50 shadow-lg rounded-sm border border-slate-200 relative px-4 py-4 content-table-details">
           

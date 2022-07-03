@@ -116,8 +116,13 @@ class UserInfoController extends Controller
 
 
             $message = "Usuario ".$user->name." ha sido creado";
+                $users = User::where('name', 'LIKE', "%$request->q%")
+                ->orWhere('id', 'LIKE', "%$request->q%")->paginate(11);
 
-
+            foreach ($users as $key => &$user) {
+                $user['role'] = $user->role();
+            }
+            //return Inertia::render('Users/Index',compact("message", "users"));
             return redirect()->route('usuarios.index')->with('status', $message);
 
         } catch( \Exception $e) {
@@ -212,7 +217,7 @@ class UserInfoController extends Controller
             ])->save();
         }
         if($request['role_id']=== 2) {
-            if(!Dentist::findOrFail($request['id'])) {
+            if(!Dentist::Where('user_id','=', $request['id'])->get()) {
                 $dentist = new Dentist();
                 $specialty = Specialty::findOrFail($request['specialty_id']);
                 $dentist->user()->associate($user);

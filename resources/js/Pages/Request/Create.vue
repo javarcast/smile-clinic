@@ -68,7 +68,7 @@
     import { ref, provide} from "vue";
     const title = ref("Crear Solicitud");
     provide("title", title);
-    const props = defineProps(["user"]);
+    const props = defineProps(["user", 'currentDate']);
 
     const form = useForm({
       description: "",

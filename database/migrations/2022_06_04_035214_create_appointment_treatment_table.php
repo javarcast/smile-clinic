@@ -14,6 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('appointment_treatment', function (Blueprint $table) {
+            $table->id();
             $table->double('price');
             $table->longText('observation');
             $table->foreignId('appointment_id')->constrained('appointments')
