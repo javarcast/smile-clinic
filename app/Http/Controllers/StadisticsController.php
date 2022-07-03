@@ -33,10 +33,6 @@ class StadisticsController extends Controller
        
         
         foreach ($aTs as $key => $aT) {
-            // echo '<pre>';
-            // var_dump($aT->number_of_treatments);
-            // echo '</pre>';
-            // var_dump('test');
             array_push($st1v,$aT->number_of_treatments);
             array_push($st1n,$aT->name);
         }
@@ -47,10 +43,6 @@ class StadisticsController extends Controller
                 ->get();
 
         foreach ($cPD as $key => $value) {
-            // echo '<pre>';
-            // var_dump($value);
-            // echo '</pre>';
-            // var_dump('test');
             array_push($cpdv,$value->number_of_appointment);
             array_push($cpdn,$value->date);
         }

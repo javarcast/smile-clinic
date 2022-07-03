@@ -152,12 +152,39 @@ p {
   .home{
     display: flex;
     flex-direction: column;
-    background-image: url("/smile-clinic/resources/images/Home.png");
-    background-size: contain;
+    align-items: center;
+    justify-content: center;
+    background-image: url(/images/Home.png);
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     height: 100vh;
-    width: 100%;
+  }
+  .img-logo-home{
+    margin-bottom: 25px;
+    width: 22rem;
+  }
+  .home_p1{
+    padding-left: 25rem;
+    padding-right: 25rem;
+  }
+  .home_p2{
+    padding-left: 21rem;
+    padding-right: 21rem;
+    margin-bottom: 25px;
+  }
+  .home_buttons{
+    width: 30%;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 32px;
+    margin-bottom: 32px;
+  }
+  
+  .home-button:hover{
+     background-color: white;
+     color: black;
+     cursor: pointer;
   }
 @media (max-width:350px) {
   .treatment-options{
