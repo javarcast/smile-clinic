@@ -41,10 +41,8 @@
                 <Link :href="route('login')" class="underline text-sm text-gray-600 hover:text-gray-900">
                 Ya estas Registrado?
                 </Link>
-
-                <jet-button @click="steps(1)" class="ml-4" :class="{ 'opacity-25': form.processing }">
-                    Siguiente Paso
-                </jet-button>
+                <input type="button" @click="steps(1)" class="ml-4 btn-primary btn-black" value="Siguiente Paso">
+                
             </div>
         </div>
         <div class="container2" v-show="flag == 1">
@@ -67,13 +65,10 @@
                 <Link :href="route('login')" class="underline text-sm text-gray-600 hover:text-gray-900">
                 Ya estas Registrado?
                 </Link>
-                <jet-button class="ml-4" @click="steps(-1)" :class="{ 'opacity-25': form.processing }"
-                    :disabled="form.processing">
-                    Atras
-                </jet-button>
-                <jet-button class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+               <input type="button" @click="steps(-1)" class="ml-4 btn-primary btn-black" value="Atras">
+                <button class="ml-4 btn-primary btn-black" >
                     Siguiente Paso
-                </jet-button>
+                </button>
             </div>
         </div>
     </form>
