@@ -8,7 +8,7 @@ import PatientTableList from "@/Components/PatientTableList.vue";
 const title = ref("Pacientes");
 provide("title", title);
 
-const props = defineProps(["patients"]);
+const props = defineProps(["patients", 'message']);
 const q = ref('');
 watch(q, () => {
 
@@ -18,6 +18,9 @@ watch(q, () => {
 
 <template>
   <DashboardLayout>
+    <div v-if="message">
+        {{message}}
+    </div>
     <div class="md:col-span-4 mt-1">
       <div class="flex justify-between col-patient">
         <h2 class="text-2xl md:text-3xl text-slate-800 font-bold ">Pacientes</h2>

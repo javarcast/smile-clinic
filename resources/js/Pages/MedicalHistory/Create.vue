@@ -40,7 +40,7 @@
                         </div>
                         <input type="button" class="
                   bg-gray-200
-                  w-1/12
+                 
                   hover:bg-blue-700 hover:text-white
                   rounded-md
                   text-black
@@ -48,7 +48,7 @@
                   ml-2
                   py-2
                   px-4
-                " @click="agregar" value="Agregar" />
+                " @click="agregar" value="Agregar Radiografia" />
                     </div>
                     <br /><br />
                     <table class="w-full text-center">

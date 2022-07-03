@@ -48,7 +48,7 @@ class AppointmentController extends Controller
                             ['appointments.date', 'LIKE', "%$myArray[1]%"],
                         ])
                         ->select('appointments.id', 'date', 'hour', 'users.name as doctor', 'patients.name as paciente')
-                        ->paginate(7);
+                        ->paginate(20);
                 } //Es Doctor
                 else {
                     //es paciente
@@ -61,7 +61,7 @@ class AppointmentController extends Controller
                             ['appointments.date', 'LIKE', "%$myArray[1]%"],
                         ])
                         ->select('appointments.id', 'date', 'hour', 'users.name as doctor', 'patients.name as paciente')
-                        ->paginate(7);
+                        ->paginate(20);
                 }
             } else {
                 //Es Admin
@@ -82,7 +82,7 @@ class AppointmentController extends Controller
                         ['appointments.date', 'LIKE', "%$myArray[1]%"],
                     ])
                     ->select('appointments.id', 'date', 'hour', 'users.name as doctor', 'patients.name as paciente')
-                    ->paginate(7);
+                    ->paginate(20);
             }
         } else {
             // no hay filtro
@@ -99,7 +99,7 @@ class AppointmentController extends Controller
                         ['dentists.user_id', '=', auth()->user()->id]
                     ])
                     ->select('appointments.id', 'date', 'hour', 'users.name as doctor', 'patients.name as paciente')
-                    ->paginate(7);
+                    ->paginate(20);
             } else {
                 //es Admin
 
@@ -107,7 +107,7 @@ class AppointmentController extends Controller
                     ->join("patients", "patients.id", "=", "appointments.patient_id")
                     ->join("users", "users.id", "=", "dentists.user_id")
                     ->select('appointments.id', 'date', 'hour', 'users.name as doctor', 'patients.name as paciente')
-                    ->paginate(7);
+                    ->paginate(20);
             }
         }
 
@@ -161,8 +161,8 @@ class AppointmentController extends Controller
 
         if (count($cita) > 0) {
             $message = "El doctor ya tiene una cita asignada en ese horario";
-            return ("ocupado");
-            //return redirect()->back()->with('status', $message);
+           
+            return redirect()->back()->with('status', $message);
         } else {
             $appointment = new Appointment();
             $appointment->date = $request->get('date');
@@ -193,7 +193,7 @@ class AppointmentController extends Controller
                 }
             }
 
-            $message = "La cita ha sido creado";
+            $message = "La cita ha sido creada con exito";
             return redirect()->route('citas.index')->with('status', $message);
         }
     }

@@ -58,7 +58,7 @@ class AppointmentRequestController extends Controller
             $appointment_request->save();
             DB::commit();
             $message = "La Solicitud ".$appointment_request->id." ha sido Creado";
-            return redirect()->route('solicitudes.index')->with('status', $message);
+            return redirect()->route('dashboard')->with('status', $message);
         }catch(\Exception $e) {
             DB::rollBack();
             return $e;

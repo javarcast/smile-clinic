@@ -3,6 +3,8 @@
 use App\Http\Controllers\PatientsController;
 use App\Http\Controllers\UserInfoController;
 use App\Http\Controllers\TreatmentController;
+
+use App\Http\Controllers\StadisticsController;
 use App\Http\Controllers\MedicalHistoryController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\PageController;
@@ -22,15 +24,6 @@ use Inertia\Inertia;
 |
 */
 
-// Route::get('/', function () {
-//     return Inertia::render('Welcome', [
-//         'canLogin' => Route::has('login'),
-//         'canRegister' => Route::has('register'),
-//         'laravelVersion' => Application::VERSION,
-//         'phpVersion' => PHP_VERSION,
-//     ]);
-// });
-
 Route::get('/', function () {
     return Inertia::render('Home',[
                 'canLogin' => Route::has('login'),
@@ -38,15 +31,15 @@ Route::get('/', function () {
             ]);
 });
 
+Route::resource('usuarios', UserInfoController::class)->middleware(['role:1', 'auth:sanctum']);
+Route::resource('pacientes', PatientsController::class)->middleware(['role:1', 'auth:sanctum']);
+Route::resource('tratamientos', TreatmentController::class)->middleware(['role:1', 'auth:sanctum']);
+Route::resource('estadisticas', StadisticsController::class)->middleware(['role:1','auth:sanctum']);
+Route::get('estadistica', [StadisticsController::class, 'data'])->middleware(['role:1','auth:sanctum'])->name('estadistica');
+Route::get('calculadora',  [PageController::class, 'calculator'])->middleware(['role:1','auth:sanctum'])->name('calculadora');
+Route::resource('solicitudes', AppointmentRequestController::class)->middleware(['auth:sanctum']);
 Route::resource('historial', MedicalHistoryController::class);
 Route::resource('citas', AppointmentController::class);
-Route::get('calculadora',  [PageController::class, 'calculator'])
-->middleware('auth:sanctum')->name('calculadora');
-Route::resource('usuarios', UserInfoController::class);
-Route::resource('pacientes', PatientsController::class)->middleware('auth:sanctum');
-Route::resource('tratamientos', TreatmentController::class)
-    ->middleware('auth:sanctum');
-Route::resource('solicitudes', AppointmentRequestController::class);
 
 
 Route::middleware([

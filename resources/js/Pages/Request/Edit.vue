@@ -72,9 +72,9 @@ import DashboardLayout from "@/Layouts/DashboardLayout.vue";
                     v-model="form.status"
                     class="form-input w-full rounded bg-slate-50"
                   >
-                    <option selected value="-1">Selecciona un Rol</option>
-                    <option value="0">No procesada</option>
-                    <option value="1">Procesada</option>
+                    <option selected value="-1">Selecciona un Estatus</option>
+                    <option value="0">Pendiente</option>
+                    <option value="1">Completada</option>
                   </select>
                 </label>
               </div>

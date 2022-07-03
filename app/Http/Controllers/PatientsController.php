@@ -53,7 +53,11 @@ class PatientsController extends Controller
         $message = [
             'required' => 'El campo :attribute es requerido.',
             'string' => 'El campo :attribute debe ser una cadena.',
-            'numeric' => 'El campo :attribute debe ser numerico.'
+            'numeric' => 'El campo :attribute debe ser numerico.',
+            'unique' => 'El valor del campo :attribute ya esta en uso.',
+            'min' => 'El campo :attribute debe ser minimo :min',
+            'max' => 'El campo :attribute debe ser maximo :max',
+            
         ];
         Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:255'],
@@ -63,7 +67,7 @@ class PatientsController extends Controller
         if (isset($request['dni'])) {
             Validator::make($request->all(), [
                 'dni' => ['numeric', 'unique:patients']
-            ])->validate();
+            ],$message)->validate();
         }
         DB::beginTransaction();
         try {
@@ -157,7 +161,9 @@ class PatientsController extends Controller
             'required' => 'El campo :attribute es requerido.',
             'string' => 'El campo :attribute debe ser una cadena.',
             'numeric' => 'El campo :attribute debe ser numerico.',
-            'min' => 'El campo :attribute debe ser mayor a :min'
+            'unique' => 'El valor del campo :attribute ya esta en uso.',
+            'min' => 'El campo :attribute debe ser minimo :min',
+            'max' => 'El campo :attribute debe ser maximo :max',
         ];
             Validator::make($request->all(), [
                 'dni' => ['required', 'numeric', Rule::unique('patients')->ignore($patient->id)],

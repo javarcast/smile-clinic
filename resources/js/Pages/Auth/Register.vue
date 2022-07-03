@@ -6,7 +6,7 @@
  <div class="flex items-center justify-between -ml-6 h-16 ">
         <!-- button go back to  -->
         <Link href="/">
-        <img class="go-back-to" src="../../../images/go-back-to.png" alt="">
+        <img class="go-back-to" src="" alt="">
         </Link>
     </div>
         <jet-validation-errors class="mb-4" />
