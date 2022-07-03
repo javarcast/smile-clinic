@@ -26,6 +26,7 @@
               <textarea
                 id="description"
                 rows="4"
+                required
                 v-model="form.description"
                 class="form-input w-full rounded bg-slate-50"
                 autocomplete="Descripción"
