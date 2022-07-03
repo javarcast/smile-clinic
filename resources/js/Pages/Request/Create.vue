@@ -38,7 +38,8 @@
               >
               <input
                 id="date_appointment"
-                type="date"
+                type="date" 
+                :min="currentDate"
                 v-model="form.date_appointment"
                 required
                 class="form-input w-full rounded bg-slate-50"
