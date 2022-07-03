@@ -8,6 +8,7 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
+use Carbon\Carbon;
 class AppointmentRequestController extends Controller
 {
     /**
@@ -31,7 +32,9 @@ class AppointmentRequestController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Request/Create');
+        $currentDate = Carbon::now()->toDateString();
+
+        return Inertia::render('Request/Create', compact('currentDate'));
     }
 
     /**
