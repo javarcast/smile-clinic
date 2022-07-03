@@ -18,14 +18,12 @@ class AppointmentFactory extends Factory
     {
         return [
            
-            'date'          => $this->faker->date('Y-m-d'),
-            'hour'          => $this->faker->time('H:i:s'),
+            'date'          => $this->faker->dateTimeThisMonth(),
+            'hour'          => '08:12:44',
             'total'         => $this->faker->randomElement([1,250,895,1540,4560]),
-            'state_id'      => $this->faker->randomElement([1,2,3,4]),
+            'state_id'      => $this->faker->randomElement([1,2,3]),
             'dentist_id'    => 1,
             'patient_id'    => $this->faker->randomElement([1, 2])
-          
-
         ];
     }
 }

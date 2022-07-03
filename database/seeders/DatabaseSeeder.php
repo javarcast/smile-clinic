@@ -37,6 +37,7 @@ class DatabaseSeeder extends Seeder
                     PatientSeeder::class,
                     SpecialtySeeder::class,
                     DentistSeeder::class,
-                    AppointmentSeeder::class]);            
+                    AppointmentSeeder::class,
+                    AppointmentTreatmentSeeder::class]);            
     }
 }
