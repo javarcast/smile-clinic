@@ -116,9 +116,14 @@ class UserInfoController extends Controller
 
 
             $message = "Usuario ".$user->name." ha sido creado";
+                $users = User::where('name', 'LIKE', "%$request->q%")
+                ->orWhere('id', 'LIKE', "%$request->q%")->paginate(11);
 
-
-            return redirect()->route('usuarios.index')->with('status', $message);
+            foreach ($users as $key => &$user) {
+                $user['role'] = $user->role();
+            }
+            return Inertia::render('Users/Index',compact("message", "users"));
+           // return redirect()->route('usuarios.index')->with('status', $message);
 
         } catch( \Exception $e) {
             DB::rollBack();
