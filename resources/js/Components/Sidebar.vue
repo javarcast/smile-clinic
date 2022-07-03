@@ -21,9 +21,16 @@
       <!-- Links -->
       <div>
         <!-- Pages group -->
-        <div>
-          <ul class="m-0">
-            <li v-if="$page.props.user.role_id===1" class="flex justify-between pr-3 sm:px-2 mt-6 mb-6 truncate">
+
+        <div >
+          <ul class="m-0" v-if="$page.props.user.role_id===1">
+            <li  class="flex justify-between pr-3 sm:px-2 mt-6 mb-6 truncate">
+              <Link :href="'/dashboard'" class="flex  items-end">
+                <img src="../../../public/images/dashboard.png" alt="icon users" class="icon-sidebar">
+                <span class="text-sm text-sc-white font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Dashboard</span>
+              </Link>
+            </li>
+            <li class="flex justify-between pr-3 sm:px-2 mt-6 mb-6 truncate">
               <Link :href="route('usuarios.index')" class="flex items-end sidebar-link">
                 <img src="../../../public/images/users.png" alt="icon users" class="icon-sidebar">
                 <span class="text-sm text-sc-white font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Usuarios</span>
@@ -35,16 +42,74 @@
                 <span class="text-sm text-sc-white font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Pacientes</span>
               </Link>
             </li>
-            <li v-if="$page.props.user.role_id===1" class="flex justify-between pr-3 sm:px-2 mt-6 mb-6 truncate" >
+            <li class="flex justify-between pr-3 sm:px-2 mt-6 mb-6 truncate" >
               <Link :href="route('tratamientos.index')" class="flex  items-end">
                 <img src="../../../public/images/tratamientos.png" alt="icon users" class="icon-sidebar">
                 <span class="text-sm text-sc-white font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Tratamientos</span>
               </Link>
             </li>
             <li class="flex justify-between pr-3 sm:px-2 mt-6 mb-6 truncate">
+              <Link :href="route('solicitudes.index')" class="flex  items-end">
+                <img src="../../../public/images/cita-medica.png" alt="icon users" class="icon-sidebar">
+                <span class="text-sm text-sc-white font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Solicitudes Cita Medicas</span>
+              </Link>
+            </li>
+            <li  class="flex justify-between pr-3 sm:px-2 mt-6 mb-6 truncate">
               <Link :href="route('citas.index')" class="flex  items-end">
                 <img src="../../../public/images/cita.png" alt="icon users" class="icon-sidebar">
-                <span class="text-sm text-sc-white font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Citas Medicas</span>
+                <span class="text-sm text-sc-white font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Citas</span>
+              </Link>
+            </li>
+            <li  class="flex justify-between pr-3 sm:px-2 mt-6 mb-6 truncate">
+              <Link :href="route('historial.index')" class="flex  items-end">
+                <img src="../../../public/images/cita-medica.png" alt="icon users" class="icon-sidebar">
+                <span class="text-sm text-sc-white font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Historias Clínicas</span>
+              </Link>
+            </li>
+            <li class="flex justify-between pr-3 sm:px-2 mt-6 mb-6 truncate">
+              <Link :href="route('calculadora')" class="flex  items-end">
+                <img src="../../../public/images/calculadora.png" alt="icon users" class="icon-sidebar">
+                <span class="text-sm text-sc-white font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Calculadora</span>
+              </Link>
+            </li>
+          </ul>
+          <ul class="m-0" v-if="$page.props.user.role_id===2">
+            <li  class="flex justify-between pr-3 sm:px-2 mt-6 mb-6 truncate">
+              <Link :href="'/dashboard'" class="flex  items-end">
+                <img src="../../../public/images/dashboard.png" alt="icon users" class="icon-sidebar">
+                <span class="text-sm text-sc-white font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Dashboard</span>
+              </Link>
+            </li>
+            <li  class="flex justify-between pr-3 sm:px-2 mt-6 mb-6 truncate">
+              <Link :href="route('citas.index')" class="flex  items-end">
+                <img src="../../../public/images/agenda.png" alt="icon users" class="icon-sidebar">
+                <span class="text-sm text-sc-white font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Agenda</span>
+              </Link>
+            </li>
+            <li  class="flex justify-between pr-3 sm:px-2 mt-6 mb-6 truncate">
+              <Link :href="route('historial.index')" class="flex  items-end">
+                <img src="../../../public/images/cita-medica.png" alt="icon users" class="icon-sidebar">
+                <span class="text-sm text-sc-white font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Historias Clínicas</span>
+              </Link>
+            </li>
+          </ul>
+          <ul class="m-0" v-if="$page.props.user.role_id===3">
+            <li  class="flex justify-between pr-3 sm:px-2 mt-6 mb-6 truncate">
+              <Link :href="'/dashboard'" class="flex  items-end">
+                <img src="../../../public/images/dashboard.png" alt="icon users" class="icon-sidebar">
+                <span class="text-sm text-sc-white font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Dashboard</span>
+              </Link>
+            </li>
+            <li  class="flex justify-between pr-3 sm:px-2 mt-6 mb-6 truncate">
+              <Link :href="route('solicitudes.create')" class="flex  items-end">
+                <img src="../../../public/images/cita-medica.png" alt="icon users" class="icon-sidebar">
+                <span class="text-sm text-sc-white font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Solicitar Citas Medicas</span>
+              </Link>
+            </li>
+            <li  class="flex justify-between pr-3 sm:px-2 mt-6 mb-6 truncate">
+              <Link :href="route('citas.index')" class="flex  items-end">
+                <img src="../../../public/images/cita.png" alt="icon users" class="icon-sidebar">
+                <span class="text-sm text-sc-white font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Citas</span>
               </Link>
             </li>
             <li  class="flex justify-between pr-3 sm:px-2 mt-6 mb-6 truncate">

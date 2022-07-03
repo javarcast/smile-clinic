@@ -7,7 +7,7 @@ import DashboardLayout from "@/Layouts/DashboardLayout.vue";
     const title = ref("Editar Usuario");
     provide("title", title);
 
-    const props = defineProps(["roles", "UserShow"]);
+    const props = defineProps(["roles", "UserShow", 'errors', 'specialties']);
 
     const form = useForm({
         name: props.UserShow.name,
@@ -18,6 +18,7 @@ import DashboardLayout from "@/Layouts/DashboardLayout.vue";
         role_id: props.UserShow.role_id,
         password: null,
         password_confirmation: null,
+        specialty_id: -1
     })
 
     const submit = () => {
@@ -123,6 +124,21 @@ import DashboardLayout from "@/Layouts/DashboardLayout.vue";
                 autocomplete="new-password"
               />
             </div>
+            <div v-if="form.role_id === 2" class="container-input">
+            <label class="block text-left w-full">
+              <span class="text-gray-700">Especialidad del Odontologo</span>
+              <select
+                required
+                v-model="form.specialty_id"
+                class="form-input w-full rounded bg-slate-50"
+              >
+                <option selected value="-1">Selecciona una Especialidad</option>
+                <option v-for="specialty in specialties" :key="specialty.id" :value="specialty.id">
+                  {{ specialty.name }}
+                </option>
+              </select>
+            </label>
+          </div>
             <div class="btn-opt">
               <button class="btn-primary btn-black mr-2">
                 Actualizar

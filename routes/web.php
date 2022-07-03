@@ -5,6 +5,8 @@ use App\Http\Controllers\UserInfoController;
 use App\Http\Controllers\TreatmentController;
 use App\Http\Controllers\MedicalHistoryController;
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\AppointmentRequestController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -38,10 +40,13 @@ Route::get('/', function () {
 
 Route::resource('historial', MedicalHistoryController::class);
 Route::resource('citas', AppointmentController::class);
-
-Route::resource('usuarios', UserInfoController::class)->middleware(['role:1', 'auth:sanctum']);
-Route::resource('pacientes', PatientsController::class)->middleware(['role:1', 'auth:sanctum']);
-Route::resource('tratamientos', TreatmentController::class)->middleware(['role:1', 'auth:sanctum']);
+Route::get('calculadora',  [PageController::class, 'calculator'])
+->middleware('auth:sanctum')->name('calculadora');
+Route::resource('usuarios', UserInfoController::class);
+Route::resource('pacientes', PatientsController::class)->middleware('auth:sanctum');
+Route::resource('tratamientos', TreatmentController::class)
+    ->middleware('auth:sanctum');
+Route::resource('solicitudes', AppointmentRequestController::class);
 
 
 Route::middleware([
@@ -53,3 +58,5 @@ Route::middleware([
         return Inertia::render('Dashboard');
     })->name('dashboard');
 });
+
+
