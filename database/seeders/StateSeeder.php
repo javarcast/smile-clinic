@@ -19,7 +19,6 @@ class StateSeeder extends Seeder
         $states = [
             ['name' => 'Cancelado'],
             ['name' => 'Pendiente'],
-            ['name'=> 'Pospuesta'],
             ['name'=> 'Completada']
         ];
 

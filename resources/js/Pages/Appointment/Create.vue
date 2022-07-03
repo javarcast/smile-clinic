@@ -45,7 +45,7 @@
                         </div>
                     </div>
                     <br />
-                    <div class="flex md:flex-row justify-between sm:flex-col">
+                    <!-- <div class="flex md:flex-row justify-between sm:flex-col">
                         <label class=" block text-left">
                             <span class="text-gray-700">Tratamiento</span>
                             <select v-model="form.treatment_id" class="form-select block mt-1 rounded-md shadow-sm"
@@ -128,7 +128,7 @@
                             <th></th>
                             <th></th>
                         </tfoot>
-                    </table>
+                    </table> -->
 
                     <button class="
                 bg-blue-500

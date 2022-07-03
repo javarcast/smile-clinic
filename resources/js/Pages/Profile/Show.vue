@@ -15,6 +15,9 @@
                                 <div class="sm:h-auto col-span-1 opcion-perfil menuDashboard ">
                                     <ul class="flex flex-col mt-5 ps-2">
                                         <li class="m-3 mt-10">
+                                            <button class="text-left w-full text-white p-3 my-0 mx-auto sidebar-link" @click="vista(0)"><i class="px-2 fa-solid fa-user text-light fa-lg mr-3"></i><span class="sm:contents hidden">Home</span></button>
+                                        </li>
+                                        <li class="m-3 ">
                                             <button class="text-left w-full text-white p-3 my-0 mx-auto sidebar-link" @click="vista(0)"><i class="px-2 fa-solid fa-user text-light fa-lg mr-3"></i><span class="sm:contents hidden">Editar
                                                 Perfil</span></button>
                                         </li>

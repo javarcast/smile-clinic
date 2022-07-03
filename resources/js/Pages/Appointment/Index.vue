@@ -22,7 +22,6 @@
                 </div>
             </div>
             <div>
-
                 <hr class="my-6" />
                 <div class="flex flex-col justify-center">
                     <table-list-appointment :appointments="appointments.data" />

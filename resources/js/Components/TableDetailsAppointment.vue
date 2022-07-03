@@ -33,7 +33,7 @@
         </div>
     </div>
     <br>
-    <table>
+    <table v-if="appointment.state.name==='Completada'">
         <thead>
             <tr>
                 <th class="border px-4 py-2">Tratamiento</th>
