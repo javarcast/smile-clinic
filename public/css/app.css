@@ -1327,11 +1327,6 @@ select {
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
 }
-<<<<<<< HEAD
-.mx-4 {
-  margin-left: 1rem;
-  margin-right: 1rem;
-=======
 .my-3 {
   margin-top: 0.75rem;
   margin-bottom: 0.75rem;
@@ -1339,7 +1334,6 @@ select {
 .my-2 {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
->>>>>>> eb8ff3e15711673e31f5d4b30bed170f88c92fd0
 }
 .ml-3 {
   margin-left: 0.75rem;
