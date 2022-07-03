@@ -183,7 +183,7 @@ class UserInfoController extends Controller
                 'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
                 'phone_number' => ['required', 'string'],
                 'address' => ['required', 'string'],
-                'password' => 'confirmed|min:8',
+                'password' => 'confirmed',
                 'id' => ['required', 'numeric', Rule::unique('users')->ignore($user->id)],
                 'photo' => 'nullable|mimes:jpg,jpeg,png|max:1024',
                 'role_id' => 'required|min:0|numeric',
@@ -221,10 +221,7 @@ class UserInfoController extends Controller
                 $dentist->save();
             }
         }
-
-
         $message = "Usuario ".$user->name." ha sido Actualizado";
-
         return redirect()->route('usuarios.show', ['usuario' => $user])->with('status', $message);
     }
 

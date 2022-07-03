@@ -3,10 +3,11 @@
 import { Link, useForm } from "@inertiajs/inertia-vue3";
 import { ref, provide, onMounted, computed } from "vue";
 import DashboardLayout from "@/Layouts/DashboardLayout.vue";
+import FormErrors from "@/Components/FormErrors.vue";
 
 const title = ref("Editar Paciente");
 provide("title", title);
-const props = defineProps(['users', 'patient', "medicaments", "diseases", 'medicament_patient', 'disease_patient']);
+const props = defineProps(["users", "patient", "errors"]);
 const form = useForm({
   dni: "",
   name: "",
@@ -122,9 +123,23 @@ const submit = () => {
     <div class="md:col-span-4 mt-1">
       <h2 class="text-2xl md:text-3xl text-slate-800 font-bold">Editar Paciente</h2>
       <hr class="my-6" />
-      <div class="mt-4 bg-slate-50 shadow-lg rounded-sm border border-slate-200 relative px-4 py-4">
-        <form @submit.prevent="submit" class="create-user">
-          <div class="w-2/3 flex flex-wrap pr-10">
+      <form-errors :errors="errors"></form-errors>
+      <div
+        class="
+          flex
+          justify-center
+          mt-4
+          bg-slate-50
+          shadow-lg
+          rounded-sm
+          border border-slate-200
+          relative
+          px-4
+          py-4
+        "
+      >
+        <form @submit.prevent="submit" class="flex flex-wrap w-2/3">
+          <div class="w-full flex flex-wrap">
             <div class="container-input w-1/2 pr-4">
               <label class="block font-medium text-sm text-gray-700">DNI</label>
               <input id="id" type="text" v-model="form.dni" class="form-input w-full rounded bg-slate-50"

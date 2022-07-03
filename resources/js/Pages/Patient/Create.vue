@@ -8,7 +8,9 @@ import JetInput from "@/Jetstream/Input.vue";
 import JetCheckbox from "@/Jetstream/Checkbox.vue";
 import JetLabel from "@/Jetstream/Label.vue";
 import { isReturnStatement } from "@babel/types";
+import FormErrors from "@/Components/FormErrors.vue";
 const title = ref("Agregar Paciente");
+
 provide("title", title);
 
 const form = useForm({
@@ -114,7 +116,9 @@ const submit = () => {
         Agregar Paciente
       </h2>
       <hr class="my-6" />
-      <div class="
+      <form-errors :errors="errors"></form-errors>
+      <div
+        class="
           flex
           mt-4
           bg-slate-50
@@ -129,12 +133,13 @@ const submit = () => {
           <div class="w-2/3 flex flex-wrap pr-10 create-paciente-col">
             <div class="container-input w-1/2 pr-4">
               <label class="block font-medium text-sm text-gray-700">DNI</label>
-              <input id="id" type="text" v-model="form.dni" class="form-input w-full rounded bg-slate-50"
-                autocomplete="DNI" />
+                class="form-input w-full rounded bg-slate-50"
+                autocomplete="DNI"
+                required
+              />
             </div>
             <div class="container-input w-1/2 pl-4">
               <label class="block font-medium text-sm text-gray-700">Nombre</label>
-              <input id="name" type="text" v-model="form.name" required class="form-input w-full rounded bg-slate-50" />
             </div>
             <div class="container-input mt-2 w-1/2 pr-4">
               <label class="block font-medium text-sm text-gray-700">Email</label>
