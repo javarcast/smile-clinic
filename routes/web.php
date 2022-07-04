@@ -42,7 +42,7 @@ Route::resource('historial', MedicalHistoryController::class);
 Route::resource('citas', AppointmentController::class);
 
 
-Route::post('/citas.create', [AppointmentController::class,'store'])->middleware(['role:1','auth:sanctum']);
+//Route::post('/citas.create', [AppointmentController::class,'store'])->middleware(['role:1','auth:sanctum']);
 //Route::post('/citas', [AppointmentController::class,'store'])->middleware(['role:1','auth:sanctum'])->name('/citas/create');
 //Route::post('/historial/create', MedicalHistoryController::class)->middleware(['role:1','auth:sanctum']);
 
