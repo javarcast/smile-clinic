@@ -24,6 +24,7 @@
                 <hr class="my-6" />
                 <div class="flex flex-col justify-center mt-4">
                     <table-list-treatment :treatments="treatments.data" />
+                    <pagination  :links="treatments.links" />
                 </div>
             </div>
         </div>
@@ -35,6 +36,7 @@ import { defineComponent } from "vue";
 import AppLayout from "@/Layouts/AppLayout.vue";
 import { Head, Link } from "@inertiajs/inertia-vue3";
 import TableListTreatment from "@/Components/TableListTreatment.vue";
+import Pagination from "@/Components/Pagination.vue";
 import DashboardLayout from "@/Layouts/DashboardLayout.vue";
 
 export default defineComponent({
@@ -44,6 +46,7 @@ export default defineComponent({
         Link,
         TableListTreatment,
         DashboardLayout,
+        Pagination
     },
     props: {
         treatments: Array,

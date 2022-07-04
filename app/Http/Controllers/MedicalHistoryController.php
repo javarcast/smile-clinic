@@ -32,12 +32,12 @@ class MedicalHistoryController extends Controller
                 ->where([
                     ['patients.user_id', '=', auth()->user()->id]
                 ])
-                ->paginate(70);
+                ->paginate(10);
         } else {
             $histories = MedicalHistory::join("patients", "patients.id", "=", "medical_histories.patient_id")
             ->where('patients.name','LIKE',"%$request->q%")    
             ->select('medical_histories.id as id', 'medical_histories.updated_at as fecha', 'patients.id as pacienteID', 'patients.name as paciente')
-                ->paginate(70);
+                ->paginate(10);
         }
 
         return Inertia::render('MedicalHistory/Index', compact("histories"));
@@ -138,18 +138,18 @@ class MedicalHistoryController extends Controller
             ->join("medicaments", "medicaments.id", "=", "medicament_patient.medicament_id")
             ->where('medical_histories.id', '=', $id)
             ->select('medicaments.name as name')
-            ->paginate(7);
+            ->paginate(10);
 
         $diseases = MedicalHistory::join("disease_patient", "disease_patient.patient_id", "=", "medical_histories.patient_id")
             ->join("diseases", "diseases.id", "=", "disease_patient.disease_id")
             ->where('medical_histories.id', '=', $id)
             ->select('diseases.name as enfermedad', 'diseases.disease_type_id as tipoEnfer')
-            ->paginate(7);
+            ->paginate(10);
 
         $radiographs = MedicalHistory::join("radiographs", "radiographs.medical_history_id", "=", "medical_histories.id")
             ->where('medical_histories.id', '=', $id)
             ->select('radiographs.name as name', 'radiographs.url as url', 'radiographs.type as type', 'medical_histories.updated_at as fecha')
-            ->paginate(7);
+            ->paginate(10);
 
 
         return Inertia::render('MedicalHistory/Show', compact('medicaments', 'diseases', 'radiographs'));
@@ -182,7 +182,7 @@ class MedicalHistoryController extends Controller
         $history = MedicalHistory::findOrFail($id);
         $radiographs = Radiography::where('medical_history_id', '=', $history->id)
             ->select('*')
-            ->paginate(7);
+            ->paginate(10);
 
         return Inertia::render('MedicalHistory/Edit', compact('radiographs', 'history', 'patients'));
     }

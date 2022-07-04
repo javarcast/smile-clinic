@@ -12,8 +12,9 @@ class TreatmentController extends Controller
     public function index(request $request)
     {
         $treatments = Treatment::where('name', 'LIKE', "%$request->q%")
-        ->orWhere('description', 'LIKE', "%$request->q%")->paginate(11);
+        ->orWhere('description', 'LIKE', "%$request->q%")->paginate(10);
 
+       
         return Inertia::render('Treatment/Index',compact("treatments"));
     }
 

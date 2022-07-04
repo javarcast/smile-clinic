@@ -4,6 +4,7 @@ import AppLayout from "@/Layouts/AppLayout.vue";
 import { Head, Link } from "@inertiajs/inertia-vue3";
 import TableListHistory from "@/Components/TableListHistory.vue";
 import DashboardLayout from "@/Layouts/DashboardLayout.vue";
+import Pagination from "@/Components/Pagination.vue";
 
 export default defineComponent({
   components: {
@@ -12,6 +13,7 @@ export default defineComponent({
     Link,
     TableListHistory,
     DashboardLayout,
+    Pagination
   },
   props: {
     histories: Array,
@@ -45,6 +47,7 @@ export default defineComponent({
           <hr class="my-6" />
           <div class="flex flex-col justify-center mt-4">
             <table-list-history :histories="histories.data" />
+              <pagination  :links="histories.links" />
           </div>
         </div>
     </div>

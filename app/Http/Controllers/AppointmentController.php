@@ -47,8 +47,10 @@ class AppointmentController extends Controller
                             ['patients.dni', 'LIKE', "%$myArray[0]%"],
                             ['appointments.date', 'LIKE', "%$myArray[1]%"],
                         ])
+                        ->orderBy('date', 'DESC')
+                        ->orderBy('hour', 'DESC')
                         ->select('appointments.id', 'date', 'hour', 'users.name as doctor', 'patients.name as paciente')
-                        ->paginate(20);
+                        ->paginate(10);
                 } //Es Doctor
                 else {
                     //es paciente
@@ -60,12 +62,14 @@ class AppointmentController extends Controller
                             ['users.name', 'LIKE', "%$myArray[0]%"],
                             ['appointments.date', 'LIKE', "%$myArray[1]%"],
                         ])
+                        ->orderBy('date', 'DESC')
+                        ->orderBy('hour', 'DESC')
                         ->select('appointments.id', 'date', 'hour', 'users.name as doctor', 'patients.name as paciente')
-                        ->paginate(20);
+                        ->paginate(10);
                 }
             } else {
                 //Es Admin
-                
+
                 $appointments = Appointment::join("dentists", "dentists.id", "=", "appointments.dentist_id")
                     ->join("patients", "patients.id", "=", "appointments.patient_id")
                     ->join("users", "users.id", "=", "dentists.user_id")
@@ -81,8 +85,10 @@ class AppointmentController extends Controller
                         ['users.name', 'LIKE', "%$myArray[0]%"],
                         ['appointments.date', 'LIKE', "%$myArray[1]%"],
                     ])
+                    ->orderBy('date', 'DESC')
+                    ->orderBy('hour', 'DESC')
                     ->select('appointments.id', 'date', 'hour', 'users.name as doctor', 'patients.name as paciente')
-                    ->paginate(20);
+                    ->paginate(10);
             }
         } else {
             // no hay filtro
@@ -98,22 +104,22 @@ class AppointmentController extends Controller
                     ->orWhere([
                         ['dentists.user_id', '=', auth()->user()->id]
                     ])
+                    ->orderBy('date', 'DESC')
+                    ->orderBy('hour', 'DESC')
                     ->select('appointments.id', 'date', 'hour', 'users.name as doctor', 'patients.name as paciente')
-                    ->paginate(20);
+                    ->paginate(10);
             } else {
                 //es Admin
 
                 $appointments = Appointment::join("dentists", "dentists.id", "=", "appointments.dentist_id")
                     ->join("patients", "patients.id", "=", "appointments.patient_id")
                     ->join("users", "users.id", "=", "dentists.user_id")
+                    ->orderBy('date', 'DESC')
+                    ->orderBy('hour', 'DESC')
                     ->select('appointments.id', 'date', 'hour', 'users.name as doctor', 'patients.name as paciente')
-                    ->paginate(20);
+                    ->paginate(10);
             }
         }
-
-
-
-
 
 
         return Inertia::render('Appointment/Index', compact("appointments"));
@@ -161,7 +167,7 @@ class AppointmentController extends Controller
 
         if (count($cita) > 0) {
             $message = "El doctor ya tiene una cita asignada en ese horario";
-           
+
             return redirect()->back()->with('status', $message);
         } else {
             $appointment = new Appointment();
