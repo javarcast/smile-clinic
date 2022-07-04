@@ -18,6 +18,19 @@ use Illuminate\Support\Facades\File;
 
 class MedicalHistoryController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('role:1')
+            ->only([
+                'destroy',
+                'store',
+                'update',
+                'create',
+                'edit'
+            ]);
+    }
+    
     /**
      * Display a listing of the resource.
      *

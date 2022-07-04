@@ -16,6 +16,19 @@ use Carbon\Carbon;
 
 class AppointmentController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('role:1')
+            ->only([
+                'destroy',
+                'store',
+                'update',
+                'create',
+                'edit'
+            ]);
+    }
+
     /**
      * Display a listing of the resource.
      *
