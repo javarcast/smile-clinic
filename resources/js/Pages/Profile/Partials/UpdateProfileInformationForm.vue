@@ -2,7 +2,7 @@
     <jet-form-section @submitted="updateProfileInformation">
         <template #form>
             <!-- Profile Photo -->
-           
+
             <div class="flex sm:flex-row flex-col">
                 <!-- DNI -->
                 <div class="sm:w-2/4 w-4/5 m-1 self-center">
@@ -46,10 +46,12 @@
             <jet-action-message :on="form.recentlySuccessful" class="mr-3">
                 Actualizado.
             </jet-action-message>
-
-            <jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+             <Link :href="'/dashboard'" class="ml-4 btn-primary btn-black">
+               Cancelar
+                </Link>
+            <button class="ml-4 btn-primary btn-black" :disabled="form.processing">
                 Actualizar
-            </jet-button>
+            </button>
         </template>
     </jet-form-section>
 </template>
@@ -63,6 +65,7 @@ import JetInputError from '@/Jetstream/InputError.vue'
 import JetLabel from '@/Jetstream/Label.vue'
 import JetActionMessage from '@/Jetstream/ActionMessage.vue'
 import JetSecondaryButton from '@/Jetstream/SecondaryButton.vue'
+import { Head, Link, useForm, } from '@inertiajs/inertia-vue3';
 
 export default defineComponent({
     components: {
@@ -73,6 +76,7 @@ export default defineComponent({
         JetInputError,
         JetLabel,
         JetSecondaryButton,
+        Link
     },
 
     props: ['user'],
