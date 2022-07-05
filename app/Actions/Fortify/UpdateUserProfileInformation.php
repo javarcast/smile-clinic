@@ -6,7 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Laravel\Fortify\Contracts\UpdatesUserProfileInformation;
-
+use Inertia\Inertia;
 class UpdateUserProfileInformation implements UpdatesUserProfileInformation
 {
     /**
@@ -43,6 +43,7 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
                 'name' => $input['name'],
                 'email' => $input['email'],
             ])->save();
+            //return redirect('/dashboard'); intenté con esto pero no, tampoco con back
         }
     }
 

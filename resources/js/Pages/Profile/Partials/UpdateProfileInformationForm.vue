@@ -2,33 +2,7 @@
     <jet-form-section @submitted="updateProfileInformation">
         <template #form>
             <!-- Profile Photo -->
-            <div class="items-center flex flex-col" v-if="$page.props.jetstream.managesProfilePhotos">
-                <!-- Profile Photo File Input -->
-                <input type="file" class="hidden" ref="photo" @change="updatePhotoPreview">
-
-                <!-- Current Profile Photo -->
-                <div class="mt-2" v-show="!photoPreview">
-                    <img :src="user.profile_photo_url" :alt="user.name" class="rounded-full h-20 w-20 object-cover">
-                </div>
-
-                <!-- New Profile Photo Preview -->
-                <div class="mt-2" v-show="photoPreview">
-                    <span class="block rounded-full w-20 h-20 bg-cover bg-no-repeat bg-center"
-                        :style="'background-image: url(\'' + photoPreview + '\');'">
-                    </span>
-                </div>
-
-                <jet-secondary-button class="mt-2" type="button" @click.prevent="selectNewPhoto">
-                    Selecciona una Foto
-                </jet-secondary-button>
-
-                <jet-secondary-button type="button" class="mt-2" @click.prevent="deletePhoto"
-                    v-if="user.profile_photo_path">
-                    Eliminar Foto
-                </jet-secondary-button>
-
-                <jet-input-error :message="form.errors.photo" class="mt-2" />
-            </div>
+           
             <div class="flex sm:flex-row flex-col">
                 <!-- DNI -->
                 <div class="sm:w-2/4 w-4/5 m-1 self-center">
