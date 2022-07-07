@@ -35,8 +35,8 @@ class MedicalHistoryController extends Controller
                 ->paginate(10);
         } else {
             $histories = MedicalHistory::join("patients", "patients.id", "=", "medical_histories.patient_id")
-            ->where('patients.name','LIKE',"%$request->q%")    
-            ->select('medical_histories.id as id', 'medical_histories.updated_at as fecha', 'patients.id as pacienteID', 'patients.name as paciente')
+                ->where('patients.name', 'LIKE', "%$request->q%")
+                ->select('medical_histories.id as id', 'medical_histories.updated_at as fecha', 'patients.id as pacienteID', 'patients.name as paciente')
                 ->paginate(10);
         }
 
@@ -62,6 +62,12 @@ class MedicalHistoryController extends Controller
     public function store(Request $request)
     {
         if ($request->pirate == 0) {
+            $request->validate([
+                'patient_id' => 'required|numeric',
+                'imagenes' => 'required',
+            ]);
+
+
             $historial = new MedicalHistory();
             $historial->patient_id = $request->get('patient_id');
 
@@ -84,9 +90,13 @@ class MedicalHistoryController extends Controller
                 $message = "Historia Creada";
                 return redirect()->route('historial.index')->with('status', $message);
             }
+        
         } else {
             //pirate update
             echo ($request->historia_id);
+            $request->validate([
+                'patient_id' => 'required|numeric',
+            ]);
             $history = MedicalHistory::findOrFail($request->historia_id);
             $history->patient_id = $request->patient_id;
             $history->update();
