@@ -93,10 +93,11 @@ class MedicalHistoryController extends Controller
         
         } else {
             //pirate update
-            echo ($request->historia_id);
             $request->validate([
                 'patient_id' => 'required|numeric',
+                'files' => 'required',
             ]);
+
             $history = MedicalHistory::findOrFail($request->historia_id);
             $history->patient_id = $request->patient_id;
             $history->update();
