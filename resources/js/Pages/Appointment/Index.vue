@@ -25,6 +25,7 @@
                 <hr class="my-6" />
                 <div class="flex flex-col justify-center">
                     <table-list-appointment :appointments="appointments.data" />
+                    <pagination  :links="appointments.links" />
                 </div>
             </div>
 
@@ -37,6 +38,7 @@ import AppLayout from "@/Layouts/AppLayout.vue";
 import { Head, Link } from "@inertiajs/inertia-vue3";
 import TableListAppointment from "@/Components/TableListAppointment.vue";
 import DashboardLayout from "@/Layouts/DashboardLayout.vue";
+import Pagination from "@/Components/Pagination.vue";
 
 export default defineComponent({
     components: {
@@ -45,6 +47,7 @@ export default defineComponent({
         Link,
         TableListAppointment,
         DashboardLayout,
+        Pagination
     },
     props: {
         appointments: Array,

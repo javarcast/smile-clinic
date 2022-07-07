@@ -5,14 +5,14 @@
     <div
       id="sidebar"
       ref="sidebar"
-      class="flex flex-col absolute z-40 left-0 top-0 lg:static lg:left-auto lg:top-auto lg:translate-x-0 transform h-screen overflow-y-scroll lg:overflow-y-auto no-scrollbar w-64 lg:w-20 lg:sidebar-expanded:!w-64 2xl:!w-64 shrink-0 bg-sc-blue p-4 transition-all duration-200 ease-in-out"
-      :class="sidebarOpen ? 'translate-x-0' : '-translate-x-64'"
+      class="flex flex-col absolute z-40 left-0  'translate-x-0' top-0 lg:static lg:left-auto lg:top-auto lg:translate-x-0 transform h-screen overflow-y-scroll lg:overflow-y-auto no-scrollbar w-64 lg:w-20 lg:sidebar-expanded:!w-64 2xl:!w-64 shrink-0 bg-sc-blue p-4 transition-all duration-200 ease-in-out"
+      
     >
 
       <!-- Sidebar header -->
       <div class="flex justify-between mb-10 pr-3 sm:px-2 truncate">
         <!-- Logo -->
-          <Link :href="'/'" class="flex logo-dashboard">
+          <Link :href="'/dashboard'" class="flex logo-dashboard">
             <img src="../../../public/images/logo3.png" alt="icon logo" class="icon-logo">
             <img src="../../../public/images/logo.png" alt="text logo" class="text-logo lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
         </Link>

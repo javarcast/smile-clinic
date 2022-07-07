@@ -25,7 +25,7 @@ class PatientsController extends Controller
      */
     public function index(Request $request)
     {
-        $patients = Patient::where('name', 'LIKE', "%$request->q%")->orWhere('id', 'LIKE', "%$request->q%")->paginate(11);
+        $patients = Patient::where('name', 'LIKE', "%$request->q%")->orWhere('id', 'LIKE', "%$request->q%")->paginate(5);
         return Inertia::render('Patient/Index', compact('patients'));
     }
 
