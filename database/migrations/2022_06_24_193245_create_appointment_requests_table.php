@@ -18,7 +18,7 @@ return new class extends Migration
             $table->longText('description');
             $table->date('date_appointment');
             $table->boolean('status')->default(false);
-            $table->foreignId('client_id')->constrained('users');
+            $table->foreignId('client_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -68,7 +68,7 @@ class UserInfoController extends Controller
             'email' => 'El campo :attribute debe ser un email',
             'min' => 'El campo :attribute debe ser minimo :min',
             'max' => 'El campo :attribute debe ser maximo :max',
-            'unique' => 'El valor del campo :attribute ya esta en uso', 
+            'unique' => 'El valor del campo :attribute ya esta en uso',
             'confirmed' => 'El campo :attribute no coincide',
         ];
         $request->validate([
@@ -118,7 +118,8 @@ class UserInfoController extends Controller
                 $patient->dni = $request['id'];
                 $patient->email = $user->email;
                 $patient->name = $user->name;
-
+                $patient->user_id = $request['id'];
+                $patient->phone_number = $user->phone_number;
                 $patient->save();
             }
 
@@ -188,7 +189,7 @@ class UserInfoController extends Controller
             'email' => 'El campo :attribute debe ser un email',
             'min' => 'El campo :attribute debe ser minimo :min',
             'max' => 'El campo :attribute debe ser maximo :max',
-            'unique' => 'El valor del campo :attribute ya esta en uso', 
+            'unique' => 'El valor del campo :attribute ya esta en uso',
             'confirmed' => 'El campo :attribute no coincide',
         ];
 
