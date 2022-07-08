@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dentist;
+use App\Models\Patient;
 use Illuminate\Http\Request;
 
 use App\Models\User;
@@ -107,6 +108,15 @@ class UserInfoController extends Controller
                 $dentist->specialty()->associate($specialty);
 
                 $dentist->save();
+            }
+
+            if($role->id === 3) {
+                $patient = new Patient();
+                $patient->dni = $request['id'];
+                $patient->email = $user->email;
+                $patient->name = $user->name;
+
+                $patient->save();
             }
 
             DB::commit();
