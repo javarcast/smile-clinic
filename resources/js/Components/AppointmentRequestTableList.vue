@@ -19,7 +19,7 @@
       </td>
       <td class="px-2 first:pl-5 last:pr-5 py-4  text-left w-1/5">
         
-        {{ request.status ? 'Procesada' : 'No Procesada'}} 
+        {{ request.status ? 'Completada' : 'Pendiente'}} 
       </td>
       <td class="px-2 first:pl-5 last:pr-5 py-4  text-center">
         <Link :href="route('solicitudes.show', request.id)"><i class="far fa-eye text-green-600"></i> </Link>

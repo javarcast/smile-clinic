@@ -5,14 +5,14 @@
     <div
       id="sidebar"
       ref="sidebar"
-      class="flex flex-col absolute z-40 left-0 top-0 lg:static lg:left-auto lg:top-auto lg:translate-x-0 transform h-screen overflow-y-scroll lg:overflow-y-auto no-scrollbar w-64 lg:w-20 lg:sidebar-expanded:!w-64 2xl:!w-64 shrink-0 bg-sc-blue p-4 transition-all duration-200 ease-in-out"
-      :class="sidebarOpen ? 'translate-x-0' : '-translate-x-64'"
+      class="flex flex-col absolute z-40 left-0  'translate-x-0' top-0 lg:static lg:left-auto lg:top-auto lg:translate-x-0 transform h-screen overflow-y-scroll lg:overflow-y-auto no-scrollbar w-64 lg:w-20 lg:sidebar-expanded:!w-64 2xl:!w-64 shrink-0 bg-sc-blue p-4 transition-all duration-200 ease-in-out"
+      
     >
 
       <!-- Sidebar header -->
       <div class="flex justify-between mb-10 pr-3 sm:px-2 truncate">
         <!-- Logo -->
-          <Link :href="'/'" class="flex logo-dashboard">
+          <Link :href="'/dashboard'" class="flex logo-dashboard">
             <img src="../../../public/images/logo3.png" alt="icon logo" class="icon-logo">
             <img src="../../../public/images/logo.png" alt="text logo" class="text-logo lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
         </Link>
@@ -54,12 +54,33 @@
                 <span class="text-sm text-sc-white font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Solicitudes Cita Medicas</span>
               </Link>
             </li>
+
+            <li v-if="$page.props.user.role_id===1" class="flex justify-between pr-3 sm:px-2 mt-6 mb-6 truncate">
+              <Link :href="route('estadisticas.index')" class="flex  items-end">
+                <img src="../../../public/images/stadistics-icon.png" alt="icon stadistics" class="icon-sidebar">
+                <span class="text-sm text-sc-white font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Estadisticas</span>
+              </Link>
+            </li>
+
+            <li  class="flex justify-between pr-3 sm:px-2 mt-6 mb-6 truncate">
+              <Link :href="route('citas.index')" class="flex  items-end">
+                <img src="../../../public/images/cita.png" alt="icon users" class="icon-sidebar">
+                <span class="text-sm text-sc-white font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Citas</span>
+              </Link>
+            </li>
+            <li  class="flex justify-between pr-3 sm:px-2 mt-6 mb-6 truncate">
+              <Link :href="route('historial.index')" class="flex  items-end">
+                <img src="../../../public/images/history.png" alt="icon users" class="icon-sidebar">
+                <span class="text-sm text-sc-white font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Historias Clínicas</span>
+              </Link>
+            </li>
             <li class="flex justify-between pr-3 sm:px-2 mt-6 mb-6 truncate">
               <Link :href="route('calculadora')" class="flex  items-end">
                 <img src="../../../public/images/calculadora.png" alt="icon users" class="icon-sidebar">
                 <span class="text-sm text-sc-white font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Calculadora</span>
               </Link>
             </li>
+            
           </ul>
           <ul class="m-0" v-if="$page.props.user.role_id===2">
             <li  class="flex justify-between pr-3 sm:px-2 mt-6 mb-6 truncate">
@@ -69,9 +90,15 @@
               </Link>
             </li>
             <li  class="flex justify-between pr-3 sm:px-2 mt-6 mb-6 truncate">
-              <Link :href="'/'" class="flex  items-end">
+              <Link :href="route('citas.index')" class="flex  items-end">
                 <img src="../../../public/images/agenda.png" alt="icon users" class="icon-sidebar">
-                <span class="text-sm text-sc-white font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Ver Agenda</span>
+                <span class="text-sm text-sc-white font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Agenda</span>
+              </Link>
+            </li>
+            <li  class="flex justify-between pr-3 sm:px-2 mt-6 mb-6 truncate">
+              <Link :href="route('historial.index')" class="flex  items-end">
+                <img src="../../../public/images/history.png" alt="icon users" class="icon-sidebar">
+                <span class="text-sm text-sc-white font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Historias Clínicas</span>
               </Link>
             </li>
           </ul>
@@ -89,11 +116,18 @@
               </Link>
             </li>
             <li  class="flex justify-between pr-3 sm:px-2 mt-6 mb-6 truncate">
-              <Link :href="'/'" class="flex  items-end">
-                <img src="../../../public/images/history.png" alt="icon users" class="icon-sidebar">
-                <span class="text-sm text-sc-white font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Historial Clinico</span>
+              <Link :href="route('citas.index')" class="flex  items-end">
+                <img src="../../../public/images/cita.png" alt="icon users" class="icon-sidebar">
+                <span class="text-sm text-sc-white font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Citas</span>
               </Link>
             </li>
+            <li  class="flex justify-between pr-3 sm:px-2 mt-6 mb-6 truncate">
+              <Link :href="route('historial.index')" class="flex  items-end">
+                <img src="../../../public/images/history.png" alt="icon users" class="icon-sidebar">
+                <span class="text-sm text-sc-white font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Historias Clínicas</span>
+              </Link>
+            </li>
+
 
             <!-- first link -->
 

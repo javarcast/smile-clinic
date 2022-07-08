@@ -16,8 +16,9 @@ class DiseaseSeeder extends Seeder
     public function run()
     {
         $diseases = [
-            ['name' => 'Anticonvulsivos', 'disease_type_id' => 1],
-            ['name' => 'Insulina', 'disease_type_id' => 1],
+            ['name' => 'AINE', 'disease_type_id' => 1],
+            ['name' => 'Insulina NPH', 'disease_type_id' => 1],
+            ['name' => 'Insulina Cristalina', 'disease_type_id' => 1],
             ['name' => 'Penicilina', 'disease_type_id' => 1],
             ['name' => 'Sulfamidas', 'disease_type_id' => 1],
             ['name' => 'Diabetes', 'disease_type_id' => 2],

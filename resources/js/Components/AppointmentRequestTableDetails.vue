@@ -15,7 +15,7 @@
         </tr>
         <tr class="container-table">
             <th class="border px-4 py-2 w-1/3"> Estatus</th>
-            <td class="border px-4 py-2 w-2/3">{{ appointment_request.status ? 'Procesada' : 'No Procesada' }}</td>
+            <td class="border px-4 py-2 w-2/3">{{ appointment_request.status ? 'Completada' : 'Pendiente' }}</td>
         </tr>
     </tbody>
   </table>
