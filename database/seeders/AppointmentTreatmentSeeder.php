@@ -4,12 +4,9 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Appointment;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
+use App\Models\AppointmentTreatment;
 
-class AppointmentSeeder extends Seeder
+class AppointmentTreatmentSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -18,7 +15,6 @@ class AppointmentSeeder extends Seeder
      */
     public function run()
     {
-        Appointment::factory(50)->create();
-
+        AppointmentTreatment::factory(50)->create();
     }
 }
