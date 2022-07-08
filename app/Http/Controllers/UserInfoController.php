@@ -67,17 +67,20 @@ class UserInfoController extends Controller
             'numeric' => 'El campo :attribute debe ser numerico.',
             'email' => 'El campo :attribute debe ser un email',
             'min' => 'El campo :attribute debe ser minimo :min',
-            'max' => 'El campo :attribute debe ser maximo :max'
+            'max' => 'El campo :attribute debe ser maximo :max',
+            'unique' => 'El valor del campo :attribute ya esta en uso', 
+            'confirmed' => 'El campo :attribute no coincide',
         ];
         $request->validate([
 
             'name' => ['required', 'string'],
-            'email' => ['required', 'email'],
+            'email' => ['required', 'email', 'unique:users'],
             'phone_number' => ['required', 'string'],
             'address' => ['required', 'string'],
-            'id' => ['required', 'numeric'],
+            'id' => ['required', 'numeric', 'unique:users'],
             'photo' => 'nullable|mimes:jpg,jpeg,png|max:1024',
-            'role_id' => 'required|min:0|numeric'
+            'role_id' => 'required|min:0|numeric',
+            'password'=> 'confirmed|min:8'
         ],$message);
 
         if($request['role_id'] == 2) {
@@ -123,8 +126,13 @@ class UserInfoController extends Controller
 
 
             $message = "Usuario ".$user->name." ha sido creado";
+                $users = User::where('name', 'LIKE', "%$request->q%")
+                ->orWhere('id', 'LIKE', "%$request->q%")->paginate(11);
 
-
+            foreach ($users as $key => &$user) {
+                $user['role'] = $user->role();
+            }
+            //return Inertia::render('Users/Index',compact("message", "users"));
             return redirect()->route('usuarios.index')->with('status', $message);
 
         } catch( \Exception $e) {
@@ -180,7 +188,8 @@ class UserInfoController extends Controller
             'email' => 'El campo :attribute debe ser un email',
             'min' => 'El campo :attribute debe ser minimo :min',
             'max' => 'El campo :attribute debe ser maximo :max',
-            'confirmed' => 'El campo :attribute no coincide'
+            'unique' => 'El valor del campo :attribute ya esta en uso', 
+            'confirmed' => 'El campo :attribute no coincide',
         ];
 
         $request->validate([
@@ -192,7 +201,7 @@ class UserInfoController extends Controller
                 'password' => 'confirmed',
                 'id' => ['required', 'numeric', Rule::unique('users')->ignore($user->id)],
                 'photo' => 'nullable|mimes:jpg,jpeg,png|max:1024',
-                'role_id' => 'required|min:0'
+                'role_id' => 'required|min:0|numeric',
             ],$message);
 
 
@@ -227,10 +236,7 @@ class UserInfoController extends Controller
                 $dentist->save();
             }
         }
-
-
         $message = "Usuario ".$user->name." ha sido Actualizado";
-
         return redirect()->route('usuarios.show', ['usuario' => $user])->with('status', $message);
     }
 

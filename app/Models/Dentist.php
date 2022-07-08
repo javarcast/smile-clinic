@@ -11,7 +11,8 @@ class Dentist extends Model
 
     protected $fillable = [
         'user_id',
-        'specialty_id'
+        'specialty_id',
+        'name'
     ];
 
     public function specialty() {

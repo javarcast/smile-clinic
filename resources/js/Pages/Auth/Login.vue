@@ -85,9 +85,9 @@ const submit = () => {
                         </label>
                     </div>
                     <div class="flex items-center justify-end mt-4">
-                        <!-- <Link v-if="canResetPassword" :href="route('password.request')" class="underline text-sm text-gray-600 hover:text-gray-900">
+                        <Link v-if="canResetPassword" :href="route('password.request')" class="underline text-sm text-gray-600 hover:text-gray-900 mr-4">
                             ¿Olvidó su contraseña?
-                        </Link> -->
+                        </Link>
 
                         <button class="btn-primary btn-black" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                             Ingresar

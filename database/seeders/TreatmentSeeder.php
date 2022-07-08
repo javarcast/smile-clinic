@@ -16,12 +16,12 @@ class TreatmentSeeder extends Seeder
     public function run()
     {
         $treatments = [
-            ['name' => 'Limpieza dental', 'price' => 40.00, 'description' => 'Limpieza dental'],
-            ['name' => 'Profilaxis', 'price' => 40.00, 'description' => 'Profilaxis'],
-            ['name' => 'Aclaramiento dental', 'price' => 80.00, 'description' => 'Aclaramiento dental'],
-            ['name' => 'Endodoncia de Molar', 'price' => 200.00, 'description' => 'Comprende del diente 11 al 18'],
-            ['name' => 'Endodoncia de premolar', 'price' => 180.00, 'description' => 'Comprende del diente 21 al 28'],
-            ['name' => 'Endodoncia de Canino o Incisivos', 'price' => 140.00, 'description' => 'Comprende del diente 31 al 38'],
+            ['name' => 'Profilaxis', 'price' => 40.00, 'description' => 'Limpieza dental'],
+            ['name' => 'Restauración MOD', 'price' => 40.00, 'description' => 'Área Mesial Oclusal Distal'],
+            ['name' => 'Restauracion Distal', 'price' => 80.00, 'description' => 'Área Distal'],
+            ['name' => 'Restauracion Mesial', 'price' => 80.00, 'description' => 'Área Mesial'],
+            ['name' => 'Endodoncia', 'price' => 200.00, 'description' => 'Comprende incisivos caninos premolares molares'],
+            ['name' => 'Retratamiento Endodontico', 'price' => 180.00, 'description' => 'Comprende incisivos caninos premolares molares'],
             ['name' => 'Restauración en poste de fibra de vidrio', 'price' => 120.00, 'description' => 'COmprende del diente 41 al 48'],
             ['name' => 'Cirujía de levantamiento del seno maxilar', 'price' => 300.00, 'description' => 'Cirujia para levantar el sexo maxilar'],
             ['name' => 'Cirujía plastica periodontal', 'price' => 1300.00, 'description' => 'Cirujia plastica del periodontal'],

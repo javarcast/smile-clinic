@@ -16,10 +16,13 @@ class MedicamentSeeder extends Seeder
     public function run()
     {
         $medicaments = [
-            ['name' => 'Aspirina'],
             ['name' => 'Penicilina'],
-            ['name' => 'Antidepresivos'],
-            ['name' => 'Insulina'],
+            ['name' => 'Antidepresivo'],
+            ['name' => 'Anticoagulante'],
+            ['name' => 'Hipertensivo'],
+            ['name' => 'Analgésicos'],
+            ['name' => 'Antipiréticos'],
+            ['name' => 'Antialérgicos'],
         ];
 
         foreach ($medicaments as $medicament) {

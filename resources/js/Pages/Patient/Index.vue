@@ -4,7 +4,7 @@ import DashboardLayout from "@/Layouts/DashboardLayout.vue";
 import { Link } from "@inertiajs/inertia-vue3";
 import { Inertia } from '@inertiajs/inertia';
 import PatientTableList from "@/Components/PatientTableList.vue";
-
+import Pagination from "@/Components/Pagination.vue";
 const title = ref("Pacientes");
 provide("title", title);
 
@@ -45,6 +45,7 @@ watch(q, () => {
         <hr class="my-6" />
         <div class="flex flex-col justify-center mt-4 table-col">
          <patient-table-list :patients="patients" />
+          <pagination  :links="patients.links" />
         </div>
       </div>
     </div>

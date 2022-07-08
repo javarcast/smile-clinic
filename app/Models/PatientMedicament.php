@@ -11,4 +11,9 @@ class PatientMedicament extends Model
 
     protected $table="medicament_patient";
 
+    protected $fillable = [
+        'patient_id',
+        'medicament_id',
+    ];
+
 }
