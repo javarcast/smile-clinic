@@ -118,7 +118,8 @@ class UserInfoController extends Controller
                 $patient->dni = $request['id'];
                 $patient->email = $user->email;
                 $patient->name = $user->name;
-
+                $patient->user_id = $request['id'];
+                $patient->phone_number = $user->phone_number;
                 $patient->save();
             }
 
