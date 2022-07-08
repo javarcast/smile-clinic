@@ -1490,8 +1490,6 @@ select {
 .-mt-px {
   margin-top: -1px;
 }
-<<<<<<< HEAD
-=======
 .-mb-1 {
   margin-bottom: -0.25rem;
 }
@@ -1501,7 +1499,6 @@ select {
 .mb-1 {
   margin-bottom: 0.25rem;
 }
->>>>>>> wladimir-dev
 .mb-10 {
   margin-bottom: 2.5rem;
 }
