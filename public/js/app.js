@@ -45857,7 +45857,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var _hoisted_1 = {
-  "class": "flex justify-between mb-10 pr-3 sm:px-2 truncate"
+  "class": "flex justify-between pr-3 sm:px-2 truncate"
 };
 
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {

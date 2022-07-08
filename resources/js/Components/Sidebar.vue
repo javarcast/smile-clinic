@@ -10,7 +10,7 @@
     >
 
       <!-- Sidebar header -->
-      <div class="flex justify-between mb-10 pr-3 sm:px-2 truncate">
+      <div class="flex justify-between  pr-3 sm:px-2 truncate">
         <!-- Logo -->
           <Link :href="'/'" class="flex logo-dashboard">
             <img src="../../../public/images/logo3.png" alt="icon logo" class="icon-logo">
